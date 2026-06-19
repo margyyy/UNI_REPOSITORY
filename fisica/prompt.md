@@ -1,0 +1,2 @@
+voglio trasofrmare i miei appuntii che trovi nella cartella reference chiamati fisica.pdf, leggi attentamente il pdf e interpreta in modo corretto le immagini che vedi. gli appunti li scriverai in typst, dove per i disegni userai cetz (la documentazione per fare i disegni in modo impeccabile la trovi in doc_typ. avrai a disposizione delle box per le definizioni e cose importanti da segnare. questi appunti servono come materiale di studio in preparazione all'esame di fisica.
+i disegni devono essere i piu fedeli possibile e fai diagramma delle forze quando bisogna farli
