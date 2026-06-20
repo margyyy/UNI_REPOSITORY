@@ -1265,12 +1265,16 @@ $ m vec(g)+vec(F)+vec(N)=vec(0) quad arrow quad N=m g+F. $
   // componenti del peso parallela e normale
   line((3.0, 1.67), (1.9, 1.08), stroke: (paint: gold, thickness: 1.2pt, dash: "dashed"), mark: (end: ">"))
   line((3.0, 1.67), (3.7, 0.37), stroke: (paint: gold, thickness: 1.2pt, dash: "dashed"), mark: (end: ">"))
+  line((0.95, 1.72), (1.62, 2.08), stroke: 0.8pt + ink, mark: (end: ">"))
+  line((0.95, 1.72), (0.60, 2.38), stroke: 0.8pt + ink, mark: (end: ">"))
   arc((1.15, 0.35), start: 0deg, stop: 28deg, radius: 0.6, stroke: 1pt + blue)
   axis-label((1.2, 0.58), [$theta$], placement: "south")
+  axis-label((1.66, 2.10), [$x$], placement: "west")
+  axis-label((0.55, 2.42), [$y$], placement: "east")
   axis-label((3.16, 0.55), [$m vec(g)$], placement: "west")
   axis-label((2.08, 3.2), [$vec(N)$], placement: "east")
-  axis-label((1.8, 1.0), [$m g sin theta$], placement: "east")
-  axis-label((3.85, 0.33), [$m g cos theta$], placement: "west")
+  axis-label((1.65, 1.28), [$m g sin theta$], placement: "east")
+  axis-label((4.05, 0.55), [$m g cos theta$], placement: "west")
   // diagramma di corpo libero isolato
   circle((7.2, 1.55), radius: 0.09, fill: ink, stroke: none)
   line((7.2, 1.55), (6.35, 3.05), stroke: 1.5pt + green, mark: (end: ">"))
@@ -1376,10 +1380,14 @@ Una forza $vec(F)$ tira un blocco di massa $m$ formando un angolo $theta$ con un
   rect((2.35, 0.65), (3.65, 1.75), fill: rgb("#edf3f8"), stroke: 1pt + ink)
   circle((3.0, 1.2), radius: 0.06, fill: ink, stroke: none)
   line((3.0, 1.2), (4.75, 2.45), stroke: 1.6pt + blue, mark: (end: ">"))
+  line((3.0, 1.2), (4.45, 1.2), stroke: (paint: blue, thickness: 1.05pt, dash: "dashed"), mark: (end: ">"))
+  line((4.45, 1.2), (4.45, 2.23), stroke: (paint: blue, thickness: 1.05pt, dash: "dashed"), mark: (end: ">"))
   line((3.0, 1.2), (3.0, 2.55), stroke: 1.5pt + green, mark: (end: ">"))
   line((3.0, 1.2), (3.0, 0.05), stroke: 1.5pt + red, mark: (end: ">"))
   arc((3.75, 1.2), start: 0deg, stop: 35deg, radius: 0.75, stroke: 1pt + gold)
   axis-label((4.82, 2.5), [$vec(F)$], placement: "west")
+  axis-label((3.78, 1.02), [$F cos theta$], placement: "north")
+  axis-label((4.60, 1.75), [$F sin theta$], placement: "west")
   axis-label((3.18, 2.5), [$vec(N)$], placement: "west")
   axis-label((3.18, 0.12), [$m vec(g)$], placement: "west")
   axis-label((3.66, 1.47), [$theta$], placement: "south")
@@ -1387,9 +1395,13 @@ Una forza $vec(F)$ tira un blocco di massa $m$ formando un angolo $theta$ con un
   // diagramma delle forze isolato, a destra
   circle((7.1, 1.25), radius: 0.09, fill: ink, stroke: none)
   line((7.1, 1.25), (8.55, 2.3), stroke: 1.6pt + blue, mark: (end: ">"))
+  line((7.1, 1.25), (8.28, 1.25), stroke: (paint: blue, thickness: 1.0pt, dash: "dashed"), mark: (end: ">"))
+  line((8.28, 1.25), (8.28, 2.1), stroke: (paint: blue, thickness: 1.0pt, dash: "dashed"), mark: (end: ">"))
   line((7.1, 1.25), (7.1, 2.65), stroke: 1.5pt + green, mark: (end: ">"))
   line((7.1, 1.25), (7.1, -0.05), stroke: 1.5pt + red, mark: (end: ">"))
   axis-label((8.62, 2.35), [$vec(F)$], placement: "west")
+  axis-label((7.78, 1.05), [$F_x$], placement: "north")
+  axis-label((8.43, 1.72), [$F_y$], placement: "west")
   axis-label((6.9, 2.58), [$vec(N)$], placement: "east")
   axis-label((7.3, 0.05), [$m vec(g)$], placement: "west")
 })))
@@ -1516,21 +1528,27 @@ L'attrito radente è la forza tangenziale che nasce al contatto tra due superfic
   axis-label((6.85, 1.85), [$m vec(g)$], placement: "west")
 })))
 
-Nel caso orizzontale con una forza applicata $F$:
+Nel caso orizzontale scegliamo $x$ parallelo al piano verso destra e $y$ verticale verso l'alto. La forza applicata $vec(F)$ e l'attrito sono lungo $x$; peso e normale sono lungo $y$.
+
+Lungo $y$ il corpo non accelera, quindi
 
 $ N-m g=0 quad arrow quad N=m g. $
 
-Se il blocco è in quiete, l'attrito statico compensa la forza applicata finché
+Lungo $x$, se il blocco è in quiete, l'attrito statico compensa la forza applicata: $F_"attr,s"=F$. Questa condizione può valere solo finché
 
 $ F <= mu_s m g. $
 
-Se il corpo scivola verso destra, l'attrito dinamico è verso sinistra e
+Se il corpo scivola verso destra, l'attrito dinamico è verso sinistra. L'equazione lungo $x$ diventa
 
 $ F-mu_d m g=m a quad arrow quad a=(F-mu_d m g)/m. $
 
 == Forza inclinata e attrito
 
-Se la forza applicata forma un angolo $theta$ sopra l'orizzontale, la componente verticale alleggerisce il contatto e quindi riduce l'attrito massimo.
+Se la forza applicata forma un angolo $theta$ sopra l'orizzontale, prima si scompone $vec(F)$ lungo gli assi scelti:
+
+$ F_x=F cos theta, quad F_y=F sin theta. $
+
+La componente $F_y$ è verso l'alto, quindi alleggerisce il contatto e riduce la normale; di conseguenza riduce anche l'attrito massimo.
 
 #align(center, graph-card([Forza inclinata con attrito], cetz.canvas({
   import cetz.draw: *
@@ -1544,6 +1562,8 @@ Se la forza applicata forma un angolo $theta$ sopra l'orizzontale, la componente
   line((2.9, 1.1), (2.9, -0.1), stroke: 1.45pt + red, mark: (end: ">"))
   line((2.9, 1.1), (4.05, 1.1), stroke: (paint: grid-color, thickness: 0.8pt, dash: "dashed"))
   line((4.05, 1.1), (4.05, 1.88), stroke: (paint: grid-color, thickness: 0.8pt, dash: "dashed"))
+  line((2.9, 1.1), (4.05, 1.1), stroke: (paint: blue, thickness: 1.05pt, dash: "dashed"), mark: (end: ">"))
+  line((4.05, 1.1), (4.05, 1.88), stroke: (paint: blue, thickness: 1.05pt, dash: "dashed"), mark: (end: ">"))
   arc((3.55, 1.1), start: 0deg, stop: 34deg, radius: 0.62, stroke: 0.9pt + gold)
   axis-label((4.52, 2.2), [$vec(F)$], placement: "west")
   axis-label((1.58, 1.15), [$vec(F)_"attr"$], placement: "east")
@@ -1553,28 +1573,112 @@ Se la forza applicata forma un angolo $theta$ sopra l'orizzontale, la componente
   // corpo libero
   circle((6.1, 1.15), radius: 0.08, fill: ink, stroke: none)
   line((6.1, 1.15), (7.25, 1.92), stroke: 1.45pt + blue, mark: (end: ">"))
+  line((6.1, 1.15), (7.02, 1.15), stroke: (paint: blue, thickness: 1.0pt, dash: "dashed"), mark: (end: ">"))
+  line((7.02, 1.15), (7.02, 1.77), stroke: (paint: blue, thickness: 1.0pt, dash: "dashed"), mark: (end: ">"))
   line((6.1, 1.15), (5.12, 1.15), stroke: 1.45pt + red, mark: (end: ">"))
   line((6.1, 1.15), (6.1, 2.35), stroke: 1.4pt + green, mark: (end: ">"))
   line((6.1, 1.15), (6.1, 0.0), stroke: 1.4pt + red, mark: (end: ">"))
   axis-label((7.3, 1.96), [$vec(F)$], placement: "west")
+  axis-label((6.56, 0.88), [$F_x$], placement: "north")
+  axis-label((7.18, 1.62), [$F_y$], placement: "west")
   axis-label((5.05, 1.2), [$vec(F)_"attr"$], placement: "east")
 })))
 
-Le equazioni sono
+Con $x$ orizzontale verso destra e $y$ verticale verso l'alto, lungo $y$ non c'è accelerazione:
 
 $ N+F sin theta-m g=0 quad arrow quad N=m g-F sin theta, $
 
-e, in quiete,
+Lungo $x$, in quiete l'attrito statico deve equilibrare la componente orizzontale della forza:
 
 $ F cos theta <= mu_s (m g-F sin theta). $
 
-Se il corpo è in moto verso destra,
+Se il corpo è in moto verso destra, l'attrito è dinamico e ha verso opposto al moto:
 
 $ F cos theta-mu_d (m g-F sin theta)=m a_x, $
 
 cioè
 
 $ a_x=(F cos theta-mu_d (m g-F sin theta))/m. $
+
+== Esempio: piano inclinato scabro
+
+Consideriamo un blocco su un piano inclinato scabro di angolo $theta$. Scegliamo $x$ parallelo al piano verso valle e $y$ perpendicolare al piano verso l'esterno. Il peso si scompone in:
+
+$ m g sin theta quad "lungo " x " verso valle", $
+$ m g cos theta quad "lungo " y " verso il piano". $
+
+L'attrito è parallelo al piano e si oppone alla tendenza al moto. Se il blocco tende a scendere, l'attrito è verso monte.
+
+#align(center, graph-card([Piano inclinato scabro: componenti e attrito], cetz.canvas({
+  import cetz.draw: *
+  line((0.55, 0.45), (5.25, 3.0), stroke: 1.45pt + ink)
+  line((0.55, 0.45), (5.25, 0.45), stroke: 0.9pt + grid-color)
+  for s in range(0, 9) {
+    line((0.75 + s*0.45, 0.56 + s*0.245), (0.98 + s*0.45, 0.38 + s*0.245), stroke: 0.5pt + ink)
+  }
+  rect((2.35, 1.35), (3.05, 1.95), fill: rgb("#edf3f8"), stroke: 0.9pt + ink)
+  circle((2.7, 1.65), radius: 0.07, fill: ink, stroke: none)
+  line((2.7, 1.65), (3.75, 2.22), stroke: 1.35pt + red, mark: (end: ">"))
+  line((2.7, 1.65), (2.05, 2.75), stroke: 1.35pt + green, mark: (end: ">"))
+  line((2.7, 1.65), (2.7, 0.4), stroke: 1.35pt + red, mark: (end: ">"))
+  line((2.7, 1.65), (1.62, 1.06), stroke: (paint: gold, thickness: 1.0pt, dash: "dashed"), mark: (end: ">"))
+  line((2.7, 1.65), (3.32, 0.55), stroke: (paint: gold, thickness: 1.0pt, dash: "dashed"), mark: (end: ">"))
+  line((1.05, 1.3), (1.75, 1.68), stroke: 0.8pt + ink, mark: (end: ">"))
+  line((1.05, 1.3), (0.66, 1.98), stroke: 0.8pt + ink, mark: (end: ">"))
+  arc((1.02, 0.45), start: 0deg, stop: 28deg, radius: 0.58, stroke: 0.9pt + gold)
+  axis-label((1.05, 0.68), [$theta$], placement: "south")
+  axis-label((1.78, 1.7), [$x$], placement: "west")
+  axis-label((0.62, 2.0), [$y$], placement: "east")
+  axis-label((3.82, 2.25), [$vec(F)_"attr"$], placement: "west")
+  axis-label((1.95, 2.78), [$vec(N)$], placement: "east")
+  axis-label((2.92, 0.5), [$m vec(g)$], placement: "west")
+  axis-label((1.52, 1.02), [$m g sin theta$], placement: "east")
+  axis-label((3.42, 0.58), [$m g cos theta$], placement: "west")
+  // corpo libero
+  circle((7.15, 1.55), radius: 0.08, fill: ink, stroke: none)
+  line((7.15, 1.55), (8.05, 2.05), stroke: 0.8pt + ink, mark: (end: ">"))
+  line((7.15, 1.55), (6.65, 2.38), stroke: 0.8pt + ink, mark: (end: ">"))
+  line((7.15, 1.55), (8.18, 2.1), stroke: 1.35pt + red, mark: (end: ">"))
+  line((7.15, 1.55), (6.48, 2.65), stroke: 1.35pt + green, mark: (end: ">"))
+  line((7.15, 1.55), (7.15, 0.35), stroke: 1.35pt + red, mark: (end: ">"))
+  line((7.15, 1.55), (6.12, 0.98), stroke: (paint: gold, thickness: 1.0pt, dash: "dashed"), mark: (end: ">"))
+  line((7.15, 1.55), (7.78, 0.5), stroke: (paint: gold, thickness: 1.0pt, dash: "dashed"), mark: (end: ">"))
+  axis-label((8.2, 2.12), [$vec(F)_"attr"$], placement: "west")
+  axis-label((6.38, 2.68), [$vec(N)$], placement: "east")
+  axis-label((7.35, 0.45), [$m vec(g)$], placement: "west")
+  axis-label((6.0, 0.92), [$m g sin theta$], placement: "east")
+  axis-label((7.9, 0.5), [$m g cos theta$], placement: "west")
+})))
+
+Lungo $y$ il blocco non si stacca dal piano:
+
+$ N-m g cos theta=0 quad arrow quad N=m g cos theta. $
+
+Lungo $x$ bisogna distinguere quiete e moto.
+
+Se il blocco resta fermo, l'attrito è statico e deve bilanciare la componente del peso lungo il piano:
+
+$ m g sin theta-F_"attr,s"=0, quad F_"attr,s"=m g sin theta. $
+
+Questo è possibile solo se
+
+$ m g sin theta <= mu_s N=mu_s m g cos theta, $
+
+cioè
+
+$ tan theta <= mu_s. $
+
+Se invece il blocco scivola verso valle, l'attrito è dinamico:
+
+$ F_"attr,d"=mu_d N=mu_d m g cos theta. $
+
+L'equazione lungo $x$ diventa
+
+$ m g sin theta-mu_d m g cos theta=m a, $
+
+quindi
+
+$ a=g(sin theta-mu_d cos theta). $
 
 = Sistemi con più corpi
 
@@ -1679,7 +1783,7 @@ $ a=((m_1-m_2) g)/(m_1+m_2), quad T=(2m_1 m_2 g)/(m_1+m_2). $
 
 == Piano inclinato con massa sospesa
 
-Nel caso degli appunti, $m_1$ è su un piano liscio inclinato di $theta$ e $m_2$ è sospesa. Se $m_2$ scende, $m_1$ sale lungo il piano.
+Nel caso degli appunti, $m_1$ è su un piano liscio inclinato di $theta$ e $m_2$ è sospesa. Se $m_2$ scende, $m_1$ sale lungo il piano. Per $m_1$ conviene usare assi locali: $x$ parallelo al piano verso l'alto e $y$ perpendicolare al piano verso l'esterno.
 
 #align(center, graph-card([Piano inclinato e massa sospesa], cetz.canvas({
   import cetz.draw: *
@@ -1705,15 +1809,28 @@ Nel caso degli appunti, $m_1$ è su un piano liscio inclinato di $theta$ e $m_2$
   axis-label((4.42, 0.05), [$m_2 vec(g)$], placement: "west")
   // diagrammi isolati
   circle((6.25, 1.55), radius: 0.08, fill: ink, stroke: none)
+  line((6.25, 1.55), (7.05, 2.05), stroke: 0.8pt + ink, mark: (end: ">"))
+  line((6.25, 1.55), (5.75, 2.35), stroke: 0.8pt + ink, mark: (end: ">"))
   line((6.25, 1.55), (7.25, 2.2), stroke: 1.35pt + blue, mark: (end: ">"))
   line((6.25, 1.55), (5.6, 2.65), stroke: 1.35pt + green, mark: (end: ">"))
   line((6.25, 1.55), (6.25, 0.35), stroke: 1.35pt + red, mark: (end: ">"))
+  line((6.25, 1.55), (5.35, 0.98), stroke: (paint: gold, thickness: 1.0pt, dash: "dashed"), mark: (end: ">"))
+  line((6.25, 1.55), (6.88, 0.52), stroke: (paint: gold, thickness: 1.0pt, dash: "dashed"), mark: (end: ">"))
+  axis-label((7.1, 2.08), [$x$], placement: "west")
+  axis-label((5.68, 2.38), [$y$], placement: "east")
+  axis-label((5.85, 0.86), [$m_1 g sin theta$], placement: "north")
+  axis-label((7.05, 0.62), [$m_1 g cos theta$], placement: "west")
   circle((8.6, 1.55), radius: 0.08, fill: ink, stroke: none)
   line((8.6, 1.55), (8.6, 2.65), stroke: 1.35pt + blue, mark: (end: ">"))
   line((8.6, 1.55), (8.6, 0.35), stroke: 1.35pt + red, mark: (end: ">"))
 })))
 
-Le equazioni lungo le direzioni di moto sono
+Per $m_1$ il peso si scompone in:
+
+$ m_1 g sin theta quad "lungo il piano verso valle", $
+$ m_1 g cos theta quad "perpendicolare al piano verso l'interno". $
+
+Lungo $y$ non c'è accelerazione, quindi $N=m_1 g cos theta$. Le equazioni lungo le direzioni di moto sono invece
 
 $ T-m_1 g sin theta=m_1 a, $
 $ m_2 g-T=m_2 a. $
@@ -1782,11 +1899,16 @@ Nel pendolo conico una massa ruota con velocità costante su una circonferenza o
   circle((6.0, 1.55), radius: 0.08, fill: ink, stroke: none)
   line((6.0, 1.55), (6.85, 2.75), stroke: 1.5pt + blue, mark: (end: ">"))
   line((6.0, 1.55), (6.0, 0.25), stroke: 1.5pt + red, mark: (end: ">"))
-  line((6.0, 1.55), (6.75, 1.55), stroke: (paint: grid-color, thickness: 0.9pt, dash: "dashed"))
-  line((6.75, 1.55), (6.75, 2.6), stroke: (paint: grid-color, thickness: 0.9pt, dash: "dashed"))
+  line((6.0, 1.55), (6.75, 1.55), stroke: (paint: blue, thickness: 1.05pt, dash: "dashed"), mark: (end: ">"))
+  line((6.75, 1.55), (6.75, 2.6), stroke: (paint: blue, thickness: 1.05pt, dash: "dashed"), mark: (end: ">"))
+  line((5.85, 1.55), (7.05, 1.55), stroke: 0.75pt + ink, mark: (end: ">"))
+  line((6.0, 1.35), (6.0, 2.75), stroke: 0.75pt + ink, mark: (end: ">"))
   axis-label((6.9, 2.78), [$vec(T)$], placement: "west")
   axis-label((6.18, 0.35), [$m vec(g)$], placement: "west")
   axis-label((6.72, 1.35), [$T sin theta$], placement: "north")
+  axis-label((6.92, 2.08), [$T cos theta$], placement: "west")
+  axis-label((7.08, 1.55), [$x$], placement: "west")
+  axis-label((6.0, 2.82), [$y$], placement: "south")
 })))
 
 Scegliendo $x$ radiale verso il centro e $y$ verticale:
@@ -1902,7 +2024,9 @@ $ L=F s. $
 
 == Esempio: blocco su piano inclinato liscio
 
-Un blocco sale lungo un piano inclinato liscio per uno spostamento $s$, con velocità costante. La risultante è nulla, quindi la forza esterna lungo il piano compensa la componente del peso.
+Un blocco sale lungo un piano inclinato liscio per uno spostamento $s$, con velocità costante. Usiamo $x$ parallelo al piano verso l'alto e $y$ perpendicolare al piano verso l'esterno. Il peso si scompone in $m g sin theta$ lungo il piano verso il basso e $m g cos theta$ lungo la normale entrante.
+
+Poiché $v$ è costante, la risultante è nulla: la forza esterna lungo il piano compensa la componente tangenziale del peso.
 
 #align(center, graph-card([Lavoro su piano inclinato liscio], cetz.canvas({
   import cetz.draw: *
@@ -1913,20 +2037,28 @@ Un blocco sale lungo un piano inclinato liscio per uno spostamento $s$, con velo
   line((2.7, 1.54), (3.85, 2.15), stroke: 1.45pt + blue, mark: (end: ">"))
   line((2.7, 1.54), (2.05, 2.62), stroke: 1.35pt + green, mark: (end: ">"))
   line((2.7, 1.54), (2.7, 0.35), stroke: 1.35pt + red, mark: (end: ">"))
+  line((2.7, 1.54), (1.8, 1.05), stroke: (paint: gold, thickness: 1.0pt, dash: "dashed"), mark: (end: ">"))
+  line((2.7, 1.54), (3.28, 0.46), stroke: (paint: gold, thickness: 1.0pt, dash: "dashed"), mark: (end: ">"))
   line((2.0, 0.9), (4.35, 2.14), stroke: 1pt + gold, mark: (end: ">"))
   line((3.95, 0.45), (3.95, 2.22), stroke: (paint: grid-color, thickness: 0.8pt, dash: "dashed"))
   arc((1.05, 0.45), start: 0deg, stop: 28deg, radius: 0.6, stroke: 0.9pt + gold)
   axis-label((1.1, 0.68), [$theta$], placement: "south")
   axis-label((3.92, 2.2), [$vec(F)$], placement: "west")
   axis-label((1.95, 2.68), [$vec(N)$], placement: "east")
-  axis-label((2.9, 0.45), [$m vec(g)$], placement: "west")
+  axis-label((2.86, 0.20), [$m vec(g)$], placement: "west")
+  axis-label((1.65, 1.10), [$m g sin theta$], placement: "east")
+  axis-label((3.55, 0.72), [$m g cos theta$], placement: "west")
   axis-label((3.35, 1.35), [$s$], placement: "north")
   axis-label((4.1, 1.27), [$h=s sin theta$], placement: "west")
 })))
 
-Con $v$ costante, $sum vec(F)=vec(0)$:
+Con $v$ costante, $sum vec(F)=vec(0)$. Lungo $y$:
 
-$ N=m g cos theta, quad F-m g sin theta=0. $
+$ N-m g cos theta=0. $
+
+Lungo $x$:
+
+$ F-m g sin theta=0. $
 
 Il lavoro della forza esterna è
 
