@@ -2063,3 +2063,400 @@ $ F-m g sin theta=0. $
 Il lavoro della forza esterna è
 
 $ L=F s=m g sin theta, s=m g h. $
+
+== Lavoro della forza elastica
+
+Per una molla ideale lungo l'asse $x$ vale
+
+$ F_"el"(x)=-k x. $
+
+Il lavoro tra due posizioni $x_A$ e $x_B$ è
+
+$ L_"el"=integral_(x_A)^(x_B) (-k x) dif x
+  =-1/2 k (x_B^2-x_A^2). $
+
+#align(center, graph-card([Lavoro della forza elastica], cetz.canvas({
+  import cetz.draw: *
+  // compressione da 0 a x
+  line((0.55, 1.15), (0.55, 2.45), stroke: 1.2pt + ink)
+  for y in range(0, 4) { line((0.34, 1.18 + y*0.31), (0.55, 1.38 + y*0.31), stroke: 0.55pt + ink) }
+  line(
+    (0.55, 1.8), (0.82, 1.8),
+    (0.95, 2.03), (1.2, 1.57), (1.45, 2.03), (1.7, 1.57),
+    (1.95, 2.03), (2.2, 1.57), (2.45, 2.03), (2.65, 1.8),
+    stroke: 1.2pt + blue,
+  )
+  rect((2.65, 1.45), (3.25, 2.15), fill: rgb("#edf3f8"), stroke: 0.9pt + ink)
+  line((3.25, 1.8), (2.25, 1.8), stroke: 1.35pt + red, mark: (end: ">"))
+  line((0.55, 1.02), (3.25, 1.02), stroke: 0.8pt + grid-color, mark: (end: ">"))
+  axis-label((3.32, 1.04), [$x$], placement: "west")
+  axis-label((2.2, 2.24), [$vec(F)_"el"$], placement: "south")
+  axis-label((2.05, 0.82), [da $0$ a $x$: $L_"el"<0$], placement: "north")
+  // ritorno verso equilibrio
+  line((4.65, 1.15), (4.65, 2.45), stroke: 1.2pt + ink)
+  for y in range(0, 4) { line((4.44, 1.18 + y*0.31), (4.65, 1.38 + y*0.31), stroke: 0.55pt + ink) }
+  line(
+    (4.65, 1.8), (4.92, 1.8),
+    (5.05, 2.03), (5.3, 1.57), (5.55, 2.03), (5.8, 1.57),
+    (6.05, 2.03), (6.3, 1.57), (6.55, 2.03), (6.75, 1.8),
+    stroke: 1.2pt + blue,
+  )
+  rect((6.75, 1.45), (7.35, 2.15), fill: rgb("#edf3f8"), stroke: 0.9pt + ink)
+  line((7.05, 1.8), (6.0, 1.8), stroke: 1.35pt + red, mark: (end: ">"))
+  line((7.05, 2.3), (6.05, 2.3), stroke: 1.05pt + green, mark: (end: ">"))
+  axis-label((6.02, 2.36), [$vec(v)$], placement: "east")
+  axis-label((5.98, 1.55), [$vec(F)_"el"$], placement: "east")
+  axis-label((6.25, 0.82), [da $x$ a $0$: $L_"el">0$], placement: "north")
+})))
+
+In particolare:
+
+$ L_(0 arrow x)=-1/2 k x^2, quad L_(x arrow 0)=+1/2 k x^2. $
+
+Il segno dipende dal verso dello spostamento rispetto alla forza elastica: quando la molla riporta il corpo verso l'equilibrio, il lavoro è positivo.
+
+== Lavoro della forza peso
+
+La forza peso è $m vec(g)$ e, vicino alla superficie terrestre, è costante e verticale verso il basso. Se l'asse $y$ è verso l'alto,
+
+$ vec(F)_p=-m g hat(u)_y. $
+
+Per uno spostamento qualunque da $A$ a $B$:
+
+$ L_p=integral_A^B vec(F)_p dot dif vec(s)
+  =-m g (y_B-y_A)=m g (y_A-y_B). $
+
+#align(center, graph-card([Il lavoro del peso dipende solo dalla quota], cetz.canvas({
+  import cetz.draw: *
+  line((0.65, 0.45), (0.65, 3.2), stroke: 0.8pt + ink, mark: (end: ">"))
+  axis-label((0.45, 3.18), [$y$], placement: "east")
+  circle((1.55, 2.65), radius: 0.08, fill: ink, stroke: none)
+  circle((5.2, 1.05), radius: 0.08, fill: ink, stroke: none)
+  catmull((1.55, 2.65), (2.0, 1.95), (3.25, 1.75), (4.15, 1.15), (5.2, 1.05), stroke: 1.2pt + blue)
+  line((1.55, 2.65), (1.55, 1.95), stroke: 1.2pt + red, mark: (end: ">"))
+  line((3.25, 1.75), (3.25, 1.05), stroke: 1.2pt + red, mark: (end: ">"))
+  line((5.2, 1.05), (5.2, 0.35), stroke: 1.2pt + red, mark: (end: ">"))
+  line((1.1, 2.65), (5.5, 2.65), stroke: (paint: grid-color, thickness: 0.8pt, dash: "dashed"))
+  line((1.1, 1.05), (5.5, 1.05), stroke: (paint: grid-color, thickness: 0.8pt, dash: "dashed"))
+  axis-label((1.42, 2.82), [$A$], placement: "south")
+  axis-label((5.35, 1.16), [$B$], placement: "south")
+  axis-label((3.45, 2.85), [$y_A$], placement: "south")
+  axis-label((3.45, 1.25), [$y_B$], placement: "south")
+  axis-label((3.55, 1.7), [$m vec(g)$], placement: "west")
+})))
+
+Se il corpo scende, $y_B<y_A$ e il peso compie lavoro positivo; se sale, il lavoro del peso è negativo. Peso e forza elastica sono esempi di forze il cui lavoro non dipende dal percorso, ma solo dagli estremi.
+
+== Potenza
+
+La potenza misura quanto rapidamente viene compiuto lavoro:
+
+#blue-box([Potenza])[
+  $ P=(dif L)/(dif t). $
+
+  L'unità di misura è il watt:
+
+  $ 1 "W"=1 "J/s". $
+]
+
+Se la forza è applicata a un punto che si muove con velocità $vec(v)$,
+
+$ P=vec(F) dot (dif vec(s))/(dif t)=vec(F) dot vec(v). $
+
+= Energia cinetica
+
+L'energia cinetica è l'energia associata al moto:
+
+#blue-box([Energia cinetica])[
+  $ E_k=1/2 m v^2. $
+]
+
+Partendo dalla seconda legge, $vec(F)_"tot"=m dif vec(v)/dif t$, il lavoro elementare della risultante è
+
+$ dif L=vec(F)_"tot" dot dif vec(s)
+  =m (dif vec(v))/(dif t) dot dif vec(s)
+  =m vec(v) dot dif vec(v). $
+
+Integrando tra $A$ e $B$:
+
+$ L_"tot"=integral_A^B dif L
+  =1/2 m v_B^2-1/2 m v_A^2
+  =Delta E_k. $
+
+#yellow-box([Teorema dell'energia cinetica])[
+  Il lavoro della risultante delle forze applicate a un punto materiale è uguale alla variazione della sua energia cinetica:
+
+  $ L_"tot"=Delta E_k. $
+]
+
+== Esempio: caduta libera
+
+Un corpo cade da fermo da un'altezza $h$, trascurando l'attrito dell'aria. Il solo lavoro è quello della forza peso:
+
+$ L_p=m g h. $
+
+Poiché $v_0=0$, l'energia cinetica iniziale è nulla. Dal teorema dell'energia cinetica:
+
+$ m g h=1/2 m v_f^2, $
+
+da cui
+
+$ v_f=sqrt(2 g h). $
+
+== Esempio: compressione di una molla
+
+Un blocco di massa $m$ arriva con velocità $v$ contro una molla ideale di costante elastica $k$ su un piano liscio. Alla massima compressione la velocità è nulla.
+
+#align(center, graph-card([Compressione massima di una molla], cetz.canvas({
+  import cetz.draw: *
+  line((0.6, 0.65), (6.7, 0.65), stroke: 1.2pt + ink)
+  for x in range(0, 13) { line((0.65 + x*0.46, 0.65), (0.85 + x*0.46, 0.45), stroke: 0.5pt + ink) }
+  line((5.15, 0.65), (5.15, 2.25), stroke: 1.2pt + ink)
+  for y in range(0, 5) { line((5.15, 0.75 + y*0.28), (5.38, 0.93 + y*0.28), stroke: 0.5pt + ink) }
+  rect((1.1, 0.65), (1.85, 1.35), fill: rgb("#edf3f8"), stroke: 0.9pt + ink)
+  line((1.85, 1.0), (3.0, 1.0), stroke: 1.25pt + green, mark: (end: ">"))
+  line(
+    (4.05, 1.0), (4.28, 1.0),
+    (4.38, 1.18), (4.56, 0.82), (4.74, 1.18), (4.92, 0.82),
+    (5.1, 1.0),
+    stroke: 1.2pt + blue,
+  )
+  rect((3.45, 0.65), (4.05, 1.35), fill: rgb("#edf3f8"), stroke: 0.9pt + ink)
+  line((3.75, 1.0), (2.85, 1.0), stroke: 1.25pt + red, mark: (end: ">"))
+  line((3.45, 0.4), (5.15, 0.4), stroke: 0.9pt + gold)
+  axis-label((3.05, 1.05), [$vec(v)$], placement: "west")
+  axis-label((2.8, 1.05), [$vec(F)_"el"$], placement: "east")
+  axis-label((4.3, 0.22), [$x_"max"$], placement: "north")
+  axis-label((1.45, 1.55), [$v$], placement: "south")
+  axis-label((3.82, 1.55), [$v=0$], placement: "south")
+})))
+
+Il lavoro della molla è
+
+$ L_"el"=-1/2 k x_"max"^2. $
+
+Per il teorema dell'energia cinetica,
+
+$ -1/2 k x_"max"^2=0-1/2 m v^2, $
+
+quindi
+
+$ x_"max"=v sqrt(m/k). $
+
+== Lavoro della forza di attrito
+
+Per attrito dinamico su una superficie con normale costante,
+
+$ F_"attr"=mu_d N $
+
+e il verso è sempre opposto allo spostamento relativo. Se il corpo percorre una lunghezza $s$,
+
+$ L_"attr"=-mu_d N s. $
+
+#yellow-box([Attrito e percorso])[
+  Il lavoro dell'attrito dipende dalla lunghezza del percorso seguito. Per questo l'attrito non è una forza conservativa.
+]
+
+#align(center, graph-card([Lavoro negativo dell'attrito], cetz.canvas({
+  import cetz.draw: *
+  line((0.75, 0.75), (6.4, 0.75), stroke: 1.2pt + ink)
+  for x in range(0, 12) { line((0.8 + x*0.45, 0.75), (1.0 + x*0.45, 0.55), stroke: 0.5pt + ink) }
+  rect((2.25, 0.75), (3.05, 1.45), fill: rgb("#edf3f8"), stroke: 0.9pt + ink)
+  line((2.65, 1.1), (3.75, 1.1), stroke: 1.3pt + green, mark: (end: ">"))
+  line((2.65, 1.1), (1.55, 1.1), stroke: 1.3pt + red, mark: (end: ">"))
+  line((2.65, 1.1), (2.65, 2.05), stroke: 1.2pt + green, mark: (end: ">"))
+  line((2.65, 1.1), (2.65, 0.1), stroke: 1.2pt + red, mark: (end: ">"))
+  axis-label((3.82, 1.15), [$vec(v)$], placement: "west")
+  axis-label((1.48, 1.15), [$vec(F)_"attr"$], placement: "east")
+  axis-label((2.85, 1.98), [$vec(N)$], placement: "west")
+  axis-label((2.85, 0.2), [$m vec(g)$], placement: "west")
+  line((3.15, 0.38), (5.6, 0.38), stroke: 0.9pt + gold, mark: (end: ">"))
+  axis-label((4.4, 0.18), [$s$], placement: "north")
+})))
+
+= Forze conservative
+
+Una forza è *conservativa* se il lavoro totale lungo ogni percorso chiuso è nullo:
+
+$ integral_"ciclo" vec(F) dot dif vec(s)=0. $
+
+Equivalentemente, il lavoro tra due punti $A$ e $B$ non dipende dal percorso scelto, ma solo dagli estremi:
+
+$ integral_A^B vec(F) dot dif vec(s) quad "è lo stesso per ogni percorso da " A " a " B. $
+
+#align(center, graph-card([Forza conservativa: ciclo nullo e percorsi equivalenti], cetz.canvas({
+  import cetz.draw: *
+  // ciclo
+  circle((1.6, 2.0), radius: 0.95, stroke: 1.2pt + ink)
+  arc((1.6, 2.0), start: 220deg, stop: 30deg, radius: 0.95, stroke: 1.3pt + blue, mark: (end: ">"))
+  axis-label((1.6, 0.72), [$L_"ciclo"=0$], placement: "north")
+  // due percorsi
+  circle((4.1, 1.15), radius: 0.07, fill: ink, stroke: none)
+  circle((7.15, 1.15), radius: 0.07, fill: ink, stroke: none)
+  catmull((4.1, 1.15), (4.8, 2.25), (6.0, 2.4), (7.15, 1.15), stroke: 1.2pt + green, mark: (end: ">"))
+  catmull((4.1, 1.15), (5.0, 0.75), (6.0, 0.65), (7.15, 1.15), stroke: 1.2pt + gold, mark: (end: ">"))
+  axis-label((3.95, 1.0), [$A$], placement: "east")
+  axis-label((7.3, 1.0), [$B$], placement: "west")
+  axis-label((5.65, 2.55), [percorso 1], placement: "south")
+  axis-label((5.65, 0.55), [percorso 2], placement: "north")
+})))
+
+La forza peso e la forza elastica sono conservative. L'attrito dinamico non lo è.
+
+== Energia potenziale
+
+Per una forza conservativa esiste una funzione di stato, detta energia potenziale $E_p$, tale che
+
+$ L_(A B)=-Delta E_p=E_p(A)-E_p(B). $
+
+Le energie potenziali più usate in questi appunti sono:
+
+$ E_(p,g)=m g y, quad E_(p,"el")=1/2 k x^2. $
+
+La quota zero e la posizione $x=0$ sono scelte di riferimento: cambiare lo zero dell'energia potenziale non cambia la fisica, perché contano le variazioni.
+
+== Energia meccanica
+
+Definiamo l'energia meccanica come
+
+$ E=E_k+E_p. $
+
+Dal teorema dell'energia cinetica:
+
+$ L_"tot"=Delta E_k. $
+
+Se agiscono solo forze conservative, allora $L_"tot"=-Delta E_p$, quindi
+
+$ Delta E_k+Delta E_p=0, $
+
+cioè
+
+$ E_k+E_p="costante". $
+
+#green-box([Conservazione dell'energia meccanica])[
+  Se le uniche forze che compiono lavoro sono conservative, l'energia meccanica si conserva:
+
+  $ E_A=E_B. $
+]
+
+== Esempio: scambio tra energia potenziale e cinetica
+
+In assenza di attrito, durante una discesa la perdita di energia potenziale gravitazionale diventa energia cinetica:
+
+$ m g h=1/2 m v^2 quad arrow quad v=sqrt(2 g h). $
+
+Per una molla su piano liscio, l'energia elastica può trasformarsi in energia cinetica:
+
+$ 1/2 k x^2=1/2 m v^2. $
+
+#align(center, graph-card([Scambio tra $E_p$ ed $E_k$], cetz.canvas({
+  import cetz.draw: *
+  // gravità
+  line(
+    (0.75, 0.55), (0.90, 1.17), (1.05, 1.68), (1.20, 2.07),
+    (1.35, 2.35), (1.50, 2.52), (1.65, 2.58), (1.80, 2.52),
+    (1.95, 2.35), (2.10, 2.07), (2.25, 1.68), (2.40, 1.17),
+    (2.55, 0.55),
+    stroke: 1.25pt + ink,
+  )
+  circle((1.65, 2.58), radius: 0.09, fill: ink, stroke: none)
+  circle((2.14, 1.96), radius: 0.09, fill: ink, stroke: none)
+  circle((2.55, 0.55), radius: 0.09, fill: ink, stroke: none)
+  axis-label((1.56, 2.86), [$E_p$ max, $E_k=0$], placement: "south")
+  axis-label((2.30, 2.02), [$E_p+E_k$], placement: "west")
+  axis-label((2.72, 0.68), [$E_p=0$], placement: "west")
+  // molla
+  line((5.05, 0.55), (5.05, 2.7), stroke: 1.1pt + ink)
+  for y in range(0, 6) { line((4.82, 0.65 + y*0.32), (5.05, 0.85 + y*0.32), stroke: 0.5pt + ink) }
+  line(
+    (5.05, 1.55), (5.28, 1.55),
+    (5.4, 1.75), (5.62, 1.35), (5.84, 1.75), (6.06, 1.35),
+    (6.28, 1.75), (6.5, 1.35), (6.72, 1.55),
+    stroke: 1.2pt + blue,
+  )
+  rect((6.72, 1.2), (7.35, 1.9), fill: rgb("#edf3f8"), stroke: 0.9pt + ink)
+  line((7.35, 1.55), (8.15, 1.55), stroke: 1.25pt + green, mark: (end: ">"))
+  axis-label((6.55, 0.88), [$1/2 k x^2$], placement: "north")
+  axis-label((8.2, 1.6), [$vec(v)$], placement: "west")
+})))
+
+= Forze non conservative
+
+Se agiscono anche forze non conservative, separiamo il lavoro totale:
+
+$ L_"tot"=L_"cons"+L_"non cons". $
+
+Poiché $L_"tot"=Delta E_k$ e $L_"cons"=-Delta E_p$,
+
+$ L_"non cons"=Delta E_k+Delta E_p=Delta E. $
+
+#yellow-box([Bilancio dell'energia meccanica])[
+  Il lavoro delle forze non conservative è uguale alla variazione dell'energia meccanica:
+
+  $ L_"non cons"=Delta E_"meccanica". $
+]
+
+Per l'attrito dinamico su un tratto scabro orizzontale,
+
+$ L_"attr"=-mu_d m g s, $
+
+quindi l'energia meccanica diminuisce.
+
+== Esempio: guida senza attrito e tratto scabro
+
+Nel tratto senza attrito la gravità è conservativa, quindi l'energia meccanica resta costante. Se un corpo parte da $A$ con velocità nulla e quota $h_A$, allora in un punto $B$ di quota $h_B$:
+
+$ m g h_A=1/2 m v_B^2+m g h_B. $
+
+Se $h_B=h_A$, allora $v_B=0$; se il corpo arriva al fondo con quota zero,
+
+$ v=sqrt(2 g h_A). $
+
+Se invece la velocità iniziale in $A$ non è nulla,
+
+$ 1/2 m v_A^2+m g h_A=m g h_B $
+
+quando il corpo si ferma in $B$, e quindi
+
+$ h_B=h_A+v_A^2/(2g). $
+
+Su un tratto orizzontale scabro $P Q$ di lunghezza $s_(P Q)$:
+
+$ Delta E= L_"attr"=-mu_d m g s_(P Q). $
+
+Poiché su quel tratto non cambia l'energia potenziale,
+
+$ 1/2 m v_Q^2-1/2 m v_P^2=-mu_d m g s_(P Q). $
+
+#align(center, graph-card([Energia meccanica con e senza attrito], cetz.canvas({
+  import cetz.draw: *
+  // guida liscia
+  line((0.55, 2.8), (2.8, 0.75), stroke: 1.3pt + ink)
+  line((2.8, 0.75), (4.4, 0.75), stroke: 1.3pt + ink)
+  for x in range(0, 5) { line((2.92 + x*0.30, 0.75), (3.08 + x*0.30, 0.55), stroke: 0.5pt + ink) }
+  line((4.4, 0.75), (5.35, 2.65), stroke: 1.3pt + ink)
+  circle((0.85, 2.52), radius: 0.1, fill: ink, stroke: none)
+  circle((2.8, 0.75), radius: 0.08, fill: ink, stroke: none)
+  circle((4.4, 0.75), radius: 0.08, fill: ink, stroke: none)
+  circle((5.1, 2.35), radius: 0.1, fill: ink, stroke: none)
+  line((0.85, 2.52), (0.85, 0.75), stroke: 0.9pt + gold, mark: (end: ">"))
+  axis-label((0.68, 2.75), [$A$], placement: "east")
+  axis-label((2.8, 0.55), [$P$], placement: "north")
+  axis-label((4.4, 0.55), [$Q$], placement: "north")
+  axis-label((5.25, 2.55), [$B$], placement: "west")
+  axis-label((1.05, 1.72), [$h_A$], placement: "west")
+  axis-label((1.75, 1.85), [liscio], placement: "south")
+  axis-label((3.6, 0.48), [scabro], placement: "north")
+  // tratto scabro
+  line((6.4, 0.75), (9.2, 0.75), stroke: 1.3pt + ink)
+  for x in range(0, 7) { line((6.45 + x*0.4, 0.75), (6.63 + x*0.4, 0.55), stroke: 0.5pt + ink) }
+  circle((6.75, 0.75), radius: 0.08, fill: ink, stroke: none)
+  circle((8.95, 0.75), radius: 0.08, fill: ink, stroke: none)
+  line((6.75, 0.45), (8.95, 0.45), stroke: 0.9pt + gold, mark: (end: ">"))
+  line((7.75, 1.05), (6.65, 1.05), stroke: 1.25pt + red, mark: (end: ">"))
+  axis-label((6.7, 0.35), [$P$], placement: "north")
+  axis-label((8.95, 0.35), [$Q$], placement: "north")
+  axis-label((7.85, 0.25), [$s_(P Q)$], placement: "north")
+  axis-label((6.55, 1.1), [$vec(F)_"attr"$], placement: "east")
+  axis-label((7.8, 1.45), [$Delta E<0$], placement: "south")
+})))
