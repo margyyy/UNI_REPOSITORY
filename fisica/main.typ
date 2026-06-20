@@ -2460,3 +2460,276 @@ $ 1/2 m v_Q^2-1/2 m v_P^2=-mu_d m g s_(P Q). $
   axis-label((6.55, 1.1), [$vec(F)_"attr"$], placement: "east")
   axis-label((7.8, 1.45), [$Delta E<0$], placement: "south")
 })))
+
+== Esempio: piano inclinato scabro con energia
+
+Consideriamo un corpo che parte da fermo da quota $h$ e scende lungo un piano inclinato scabro di angolo $theta$. La lunghezza percorsa sul piano è
+
+$ Delta s=h/sin theta. $
+
+La normale vale $N=m g cos theta$, quindi il lavoro dell'attrito dinamico è
+
+$ L_"attr"=-mu_d N Delta s=-mu_d m g cos theta h/sin theta=-mu_d m g h/tan theta. $
+
+Il bilancio dell'energia meccanica diventa
+
+$ L_"attr"=Delta E=1/2 m v_f^2-m g h. $
+
+Sostituendo il lavoro dell'attrito:
+
+$ -mu_d m g h/tan theta=1/2 m v_f^2-m g h, $
+
+da cui
+
+$ v_f^2=2 g h (1-mu_d/tan theta). $
+
+#yellow-box([Condizione fisica])[
+  La formula ha senso solo se il termine tra parentesi è non negativo e se il corpo riesce effettivamente a scivolare lungo il piano. L'attrito sottrae energia meccanica, quindi la velocità finale è minore del caso liscio $sqrt(2 g h)$.
+]
+
+#align(center, graph-card([Piano inclinato scabro: energia e forze], cetz.canvas({
+  import cetz.draw: *
+  line((0.65, 0.55), (7.55, 0.55), stroke: 1pt + ink)
+  line((1.05, 0.55), (6.20, 3.55), stroke: 1.35pt + ink)
+  for i in range(0, 15) {
+    line((1.16 + i*0.32, 0.64 + i*0.19), (1.36 + i*0.32, 0.37 + i*0.19), stroke: 0.45pt + ink)
+  }
+  line((6.20, 3.55), (6.20, 0.55), stroke: 0.85pt + gold, mark: (end: ">"))
+  axis-label((6.42, 2.10), [$h$], placement: "west")
+  arc((1.05, 0.55), start: 0deg, stop: 30deg, radius: 0.92, stroke: 0.8pt + ink)
+  axis-label((1.95, 0.83), [$theta$], placement: "west")
+  circle((3.65, 2.05), radius: 0.14, fill: ink, stroke: none)
+
+  // Assi locali e forze reali
+  line((3.65, 2.05), (5.02, 2.85), stroke: 1.25pt + green, mark: (end: ">"))
+  line((3.65, 2.05), (2.46, 1.36), stroke: 1.25pt + red, mark: (end: ">"))
+  line((3.65, 2.05), (2.83, 3.46), stroke: 1.25pt + blue, mark: (end: ">"))
+  line((3.65, 2.05), (3.65, 0.50), stroke: 1.25pt + red, mark: (end: ">"))
+
+  // Componenti del peso, separate dalle etichette principali
+  line((3.65, 2.05), (4.45, 0.67), stroke: 0.95pt + red, mark: (end: ">"))
+  line((3.65, 2.05), (2.52, 1.39), stroke: 0.95pt + red, mark: (end: ">"))
+  line((4.45, 0.67), (3.33, 0.02), stroke: 0.55pt + rgb("#b7c0c6"))
+  line((2.52, 1.39), (3.33, 0.02), stroke: 0.55pt + rgb("#b7c0c6"))
+
+  axis-label((5.14, 2.93), [$vec(v)$], placement: "west")
+  axis-label((2.30, 1.28), [$vec(F)_"attr"$], placement: "east")
+  axis-label((2.70, 3.62), [$vec(N)$], placement: "south")
+  axis-label((3.86, 0.55), [$m vec(g)$], placement: "west")
+  axis-label((4.85, 0.80), [$m g cos theta$], placement: "west")
+  axis-label((2.26, 1.62), [$m g sin theta$], placement: "east")
+  line((1.22, 0.25), (6.02, 3.05), stroke: 0.8pt + gold, mark: (end: ">"))
+  axis-label((3.95, 3.32), [$Delta s=h/sin theta$], placement: "south")
+})))
+
+= Momento angolare
+
+Il *momento angolare* di una particella rispetto a un polo fisso $O$ è definito come
+
+$ vec(ell)_O=vec(r) times vec(p)=vec(r) times m vec(v). $
+
+Il vettore $vec(r)$ va dal polo $O$ alla particella. L'unità di misura è $"kg m"^2"/s"$, equivalente a $"N m s"$.
+
+#align(center, graph-card([Momento angolare rispetto a $O$], cetz.canvas({
+  import cetz.draw: *
+  circle((1.0, 0.8), radius: 0.07, fill: ink, stroke: none)
+  axis-label((0.85, 0.62), [$O$], placement: "east")
+  circle((3.25, 2.0), radius: 0.13, fill: ink, stroke: none)
+  line((1.0, 0.8), (3.25, 2.0), stroke: 1.2pt + blue, mark: (end: ">"))
+  line((3.25, 2.0), (4.55, 2.55), stroke: 1.2pt + green, mark: (end: ">"))
+  axis-label((2.05, 1.55), [$vec(r)$], placement: "south")
+  axis-label((4.62, 2.62), [$vec(p)=m vec(v)$], placement: "west")
+  axis-label((2.65, 0.72), [$vec(ell)_O=vec(r) times vec(p)$], placement: "north")
+})))
+
+== Momento delle forze
+
+Il *momento della forza* rispetto allo stesso polo è
+
+$ vec(tau)_O=vec(r) times vec(F). $
+
+Misura l'efficacia della forza nel produrre una rotazione intorno a $O$ e si misura in newton per metro.
+
+#align(center, graph-card([Momento di una forza], cetz.canvas({
+  import cetz.draw: *
+  circle((1.0, 0.75), radius: 0.07, fill: ink, stroke: none)
+  axis-label((0.85, 0.58), [$O$], placement: "east")
+  circle((3.25, 1.75), radius: 0.12, fill: ink, stroke: none)
+  line((1.0, 0.75), (3.25, 1.75), stroke: 1.2pt + blue, mark: (end: ">"))
+  line((3.25, 1.75), (4.05, 2.85), stroke: 1.2pt + red, mark: (end: ">"))
+  axis-label((2.06, 1.40), [$vec(r)$], placement: "south")
+  axis-label((4.12, 2.92), [$vec(F)$], placement: "west")
+  axis-label((2.75, 0.62), [$vec(tau)_O=vec(r) times vec(F)$], placement: "north")
+})))
+
+== Teorema del momento angolare
+
+Per una particella osservata da un polo fisso in un sistema inerziale:
+
+#purple-box([Teorema del momento angolare])[
+  $ (dif vec(ell)_O)/(dif t)=vec(tau)_O. $
+]
+
+Infatti
+
+$ (dif vec(ell)_O)/(dif t)
+  =(dif vec(r))/(dif t) times vec(p)+vec(r) times (dif vec(p))/(dif t)
+  =vec(v) times m vec(v)+vec(r) times vec(F)
+  =vec(tau)_O, $
+
+perché $vec(v) times m vec(v)=vec(0)$.
+
+Per un sistema di particelle conta il momento totale delle forze esterne. Se la risultante dei momenti esterni è nulla,
+
+$ sum vec(tau)_"ext"=vec(0) quad arrow quad vec(ell)_"tot"="costante". $
+
+Analogamente, se la risultante delle forze esterne è nulla,
+
+$ sum vec(F)_"ext"=vec(0) quad arrow quad vec(P)_"tot"="costante". $
+
+== Momento dell'impulso
+
+Il teorema dell'impulso già visto per la quantità di moto si scrive
+
+$ vec(J)=integral_(t_1)^(t_2) vec(F) dif t=Delta vec(p). $
+
+Per il momento angolare:
+
+$ integral_(t_1)^(t_2) vec(tau)_O dif t=Delta vec(ell)_O. $
+
+Se durante l'urto il vettore $vec(r)$ rispetto al polo può essere considerato costante,
+
+$ integral_(t_1)^(t_2) (vec(r) times vec(F)) dif t
+  =vec(r) times integral_(t_1)^(t_2) vec(F) dif t
+  =vec(r) times vec(J). $
+
+= Pendolo semplice
+
+Un pendolo semplice è formato da una massa puntiforme $m$ appesa a un filo ideale di lunghezza $ell$. Le forze sono la tensione $vec(T)$ del filo e il peso $m vec(g)$.
+
+#align(center, graph-card([Pendolo semplice: forze e componenti], cetz.canvas({
+  import cetz.draw: *
+  // Pendolo reale: solo forze vere, senza componenti.
+  line((0.55, 3.95), (2.75, 3.95), stroke: 1.1pt + ink)
+  for i in range(0, 5) {
+    line((0.75 + i*0.42, 4.05), (1.05 + i*0.42, 4.25), stroke: 0.75pt + ink)
+  }
+  circle((1.65, 3.95), radius: 0.07, fill: ink, stroke: none)
+  line((1.65, 3.95), (1.65, 1.05), stroke: (paint: ink, thickness: 0.75pt, dash: "dashed"))
+  line((1.65, 3.95), (3.03, 1.20), stroke: 1.2pt + ink)
+  arc((1.65, 3.95), start: 270deg, stop: 297deg, radius: 0.72, stroke: 0.8pt + ink)
+  arc((1.65, 1.05), start: 252deg, stop: 318deg, radius: 1.54, stroke: (paint: gold, thickness: 0.95pt, dash: "dashed"))
+  circle((3.03, 1.20), radius: 0.17, fill: ink, stroke: none)
+  line((3.03, 1.20), (2.42, 2.42), stroke: 1.25pt + blue, mark: (end: ">"))
+  line((3.03, 1.20), (3.03, 0.25), stroke: 1.25pt + red, mark: (end: ">"))
+  axis-label((1.90, 3.22), [$theta$], placement: "west")
+  axis-label((2.45, 2.72), [$ell$], placement: "west")
+  axis-label((2.32, 2.55), [$vec(T)$], placement: "east")
+  axis-label((3.22, 0.34), [$m vec(g)$], placement: "west")
+
+  // Diagramma delle forze: la massa è isolata dal filo.
+  axis-label((6.55, 4.00), [diagramma forze], placement: "south")
+  circle((6.65, 2.35), radius: 0.11, fill: ink, stroke: none)
+  line((6.65, 2.35), (5.78, 3.45), stroke: 1.35pt + blue, mark: (end: ">"))
+  line((6.65, 2.35), (6.65, 1.02), stroke: 1.35pt + red, mark: (end: ">"))
+  axis-label((5.72, 3.52), [$vec(T)$], placement: "east")
+  axis-label((6.85, 1.12), [$m vec(g)$], placement: "west")
+
+  // Scomposizione del peso sugli assi locali.
+  circle((2.15, -0.72), radius: 0.13, fill: ink, stroke: none)
+  arc((1.10, -0.12), start: 215deg, stop: 320deg, radius: 1.18, stroke: (paint: ink, thickness: 0.85pt, dash: "dashed"))
+  line((2.15, -0.72), (1.38, 0.33), stroke: 0.95pt + ink, mark: (end: ">"))
+  line((2.15, -0.72), (3.10, 0.00), stroke: 0.95pt + ink, mark: (end: ">"))
+  line((2.15, -0.72), (2.15, -1.82), stroke: 1.15pt + red, mark: (end: ">"))
+  line((2.15, -0.72), (1.24, -1.42), stroke: 1.05pt + red, mark: (end: ">"))
+  line((2.15, -0.72), (2.82, -1.62), stroke: 1.05pt + red, mark: (end: ">"))
+  arc((2.15, -1.26), start: 270deg, stop: 306deg, radius: 0.28, stroke: 0.7pt + ink)
+  axis-label((1.30, 0.40), [$y$ radiale], placement: "east")
+  axis-label((3.18, 0.05), [$x$ tangenziale], placement: "west")
+  axis-label((2.34, -1.78), [$m vec(g)$], placement: "west")
+  axis-label((0.98, -1.42), [$m g sin theta$], placement: "east")
+  axis-label((2.92, -1.60), [$m g cos theta$], placement: "west")
+  axis-label((2.36, -1.34), [$theta$], placement: "west")
+})))
+
+Scomponiamo il moto lungo due direzioni locali:
+
+- asse *radiale* $y$, lungo il filo verso il punto di sospensione;
+- asse *tangenziale* $x$, lungo l'arco di traiettoria.
+
+Le accelerazioni sono
+
+$ a_y=v^2/ell, quad a_x=ell (dif^2 theta)/(dif t^2). $
+
+Lungo la direzione radiale:
+
+$ T-m g cos theta=m v^2/ell. $
+
+Lungo la direzione tangenziale:
+
+$ -m g sin theta=m ell (dif^2 theta)/(dif t^2). $
+
+Dividendo per $m ell$ si ottiene l'equazione differenziale del pendolo:
+
+$ (dif^2 theta)/(dif t^2)+g/ell sin theta=0. $
+
+== Piccole oscillazioni
+
+Per angoli piccoli, misurati in radianti,
+
+$ sin theta approx theta. $
+
+L'equazione del pendolo diventa quella di un oscillatore armonico:
+
+$ (dif^2 theta)/(dif t^2)+g/ell theta=0. $
+
+Confrontando con $theta''+omega^2 theta=0$:
+
+$ omega^2=g/ell, quad omega=sqrt(g/ell). $
+
+Il periodo delle piccole oscillazioni è
+
+#green-box([Periodo del pendolo semplice])[
+  $ T_"periodo"=2 pi/omega=2 pi sqrt(ell/g). $
+]
+
+La legge oraria può essere scritta nella forma
+
+$ theta(t)=theta_0 sin(omega t+phi). $
+
+#yellow-box([Isocronismo delle piccole oscillazioni])[
+  Nel limite di piccoli angoli il periodo non dipende dall'ampiezza iniziale, ma solo da $ell$ e da $g$.
+]
+
+= Dinamica dei sistemi di punti materiali
+
+Un sistema di punti materiali è un insieme di particelle considerate insieme. Le forze agenti su una particella del sistema si dividono in:
+
+- *forze esterne*, dovute a corpi esterni al sistema;
+- *forze interne*, dovute all'interazione con le altre particelle del sistema.
+
+Le forze interne possono essere elastiche, gravitazionali, elettriche, magnetiche, dovute a deformazioni o attriti; possono quindi essere conservative oppure non conservative.
+
+Per la particella $i$:
+
+$ vec(F)_(i,"tot")=vec(F)_i^"ext"+vec(F)_i^"int"=m_i vec(a)_i. $
+
+#align(center, graph-card([Sistema di punti materiali], cetz.canvas({
+  import cetz.draw: *
+  circle((2.0, 1.65), radius: 1.2, stroke: 1.15pt + ink)
+  axis-label((1.02, 2.85), [sistema], placement: "south")
+  circle((1.45, 1.35), radius: 0.08, fill: ink, stroke: none)
+  circle((2.15, 2.05), radius: 0.08, fill: ink, stroke: none)
+  circle((2.62, 1.42), radius: 0.08, fill: ink, stroke: none)
+  circle((1.85, 1.05), radius: 0.11, fill: ink, stroke: none)
+  axis-label((1.98, 1.16), [$m_i$], placement: "west")
+  line((1.85, 1.05), (1.35, 1.62), stroke: 1.1pt + green, mark: (end: ">"))
+  line((1.85, 1.05), (2.35, 1.74), stroke: 1.1pt + green, mark: (end: ">"))
+  line((1.85, 1.05), (1.70, 0.30), stroke: 1.15pt + red, mark: (end: ">"))
+  axis-label((1.22, 1.70), [$vec(F)^"int"$], placement: "east")
+  axis-label((2.44, 1.84), [$vec(F)^"int"$], placement: "west")
+  axis-label((1.62, 0.25), [$vec(F)^"ext"$], placement: "east")
+  axis-label((5.25, 2.50), [interne: tra punti del sistema], placement: "west")
+  axis-label((5.25, 1.90), [esterne: dall'ambiente], placement: "west")
+  axis-label((5.25, 1.30), [$vec(F)_(i,"tot")=vec(F)_i^"ext"+vec(F)_i^"int"$], placement: "west")
+})))
