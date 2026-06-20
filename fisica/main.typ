@@ -2733,3 +2733,770 @@ $ vec(F)_(i,"tot")=vec(F)_i^"ext"+vec(F)_i^"int"=m_i vec(a)_i. $
   axis-label((5.25, 1.90), [esterne: dall'ambiente], placement: "west")
   axis-label((5.25, 1.30), [$vec(F)_(i,"tot")=vec(F)_i^"ext"+vec(F)_i^"int"$], placement: "west")
 })))
+
+== Risultante delle forze interne
+
+Per ogni coppia di particelle $i,j$ vale il principio di azione e reazione:
+
+$ vec(F)_(i j)=-vec(F)_(j i). $
+
+Le forze interne si cancellano a coppie nella somma su tutto il sistema, quindi
+
+#green-box([Risultante interna nulla])[
+  $ vec(R)^"int"=sum_i vec(F)_i^"int"=vec(0). $
+]
+
+Questo non significa che le forze interne non esistano: possono deformare il sistema, produrre attrito interno o cambiare l'energia interna. Significa solo che non accelerano il centro di massa del sistema nel suo insieme.
+
+#align(center, graph-card([Forze interne: cancellazione a coppie], cetz.canvas({
+  import cetz.draw: *
+  circle((1.55, 1.35), radius: 0.13, fill: ink, stroke: none)
+  circle((4.55, 1.35), radius: 0.13, fill: ink, stroke: none)
+  line((1.55, 1.35), (2.95, 1.35), stroke: 1.2pt + green, mark: (end: ">"))
+  line((4.55, 1.35), (3.15, 1.35), stroke: 1.2pt + green, mark: (end: ">"))
+  axis-label((1.42, 1.08), [$m_i$], placement: "north")
+  axis-label((4.68, 1.08), [$m_j$], placement: "north")
+  axis-label((2.28, 1.58), [$vec(F)_(j i)$], placement: "south")
+  axis-label((3.82, 1.58), [$vec(F)_(i j)$], placement: "south")
+  axis-label((3.05, 0.65), [$vec(F)_(i j)=-vec(F)_(j i)$], placement: "north")
+})))
+
+== Grandezze della singola particella
+
+Per ogni particella $i$ del sistema si definiscono:
+
+$ vec(r)_i quad vec(v)_i quad vec(a)_i=(vec(F)_i)/(m_i). $
+
+La quantità di moto, il momento angolare rispetto al polo $O$ e l'energia cinetica della particella sono:
+
+$ vec(p)_i=m_i vec(v)_i, $
+
+$ vec(ell)_i=vec(r)_i times m_i vec(v)_i, $
+
+$ E_(k,i)=1/2 m_i v_i^2. $
+
+Le corrispondenti grandezze del sistema sono le somme sulle particelle:
+
+$ vec(P)=sum_i m_i vec(v)_i, quad
+   vec(ell)=sum_i vec(r)_i times m_i vec(v)_i, quad
+   E_k=sum_i 1/2 m_i v_i^2. $
+
+== Centro di massa
+
+La massa totale del sistema è
+
+$ M=sum_i m_i. $
+
+Il *centro di massa* è il punto geometrico definito da
+
+#blue-box([Centro di massa])[
+  $ vec(r)_"CM"=(sum_i m_i vec(r)_i)/(sum_i m_i)=(1/M) sum_i m_i vec(r)_i. $
+]
+
+Derivando rispetto al tempo:
+
+$ vec(v)_"CM"=(dif vec(r)_"CM")/(dif t)
+  =(1/M) sum_i m_i vec(v)_i
+  =vec(P)/M. $
+
+Quindi la quantità di moto totale del sistema può essere scritta come
+
+$ vec(P)=M vec(v)_"CM". $
+
+#align(center, graph-card([Centro di massa e velocità del sistema], cetz.canvas({
+  import cetz.draw: *
+  circle((2.25, 1.65), radius: 1.25, stroke: 1.1pt + ink)
+  for p in ((1.60, 1.30), (1.95, 2.25), (2.45, 1.95), (2.80, 1.20), (1.45, 1.80), (2.22, 0.95)) {
+    circle(p, radius: 0.07, fill: ink, stroke: none)
+  }
+  circle((2.20, 1.58), radius: 0.11, fill: red, stroke: none)
+  line((2.20, 1.58), (3.45, 1.58), stroke: 1.2pt + blue, mark: (end: ">"))
+  axis-label((2.02, 1.38), [CM], placement: "north")
+  axis-label((3.52, 1.63), [$vec(v)_"CM"$], placement: "west")
+  axis-label((5.45, 2.25), [$vec(r)_"CM"=(1/M) sum_i m_i vec(r)_i$], placement: "west")
+  axis-label((5.45, 1.45), [$vec(P)=M vec(v)_"CM"$], placement: "west")
+})))
+
+== Teorema del moto del centro di massa
+
+Derivando ancora:
+
+$ vec(a)_"CM"=(1/M) sum_i m_i vec(a)_i
+  =(1/M) sum_i (vec(F)_i^"int"+vec(F)_i^"ext"). $
+
+Poiché $sum_i vec(F)_i^"int"=vec(0)$, resta solo la risultante delle forze esterne:
+
+#purple-box([Moto del centro di massa])[
+  $ M vec(a)_"CM"=vec(R)^"ext"=(dif vec(P))/(dif t). $
+]
+
+Il moto del centro di massa è determinato soltanto dalle forze esterne. Le forze interne possono cambiare il moto relativo delle parti, ma non il moto complessivo del centro di massa.
+
+== Esempio: frammentazione in caduta
+
+Se un corpo esplode o si frammenta mentre cade, i pezzi possono seguire traiettorie diverse per effetto delle forze interne. Tuttavia, se l'unica forza esterna è il peso totale,
+
+$ M vec(a)_"CM"=sum_i m_i vec(g)=M vec(g), $
+
+quindi il centro di massa segue la stessa traiettoria che avrebbe seguito il corpo se non si fosse frammentato.
+
+#align(center, graph-card([Il centro di massa segue il moto imposto dalle forze esterne], cetz.canvas({
+  import cetz.draw: *
+  line((0.75, 3.00), (1.25, 2.55), (1.80, 2.12), (2.45, 1.72), (3.25, 1.35), (4.10, 1.08), stroke: (paint: ink, thickness: 1.0pt, dash: "dashed"), mark: (end: ">"))
+  line((1.25, 2.55), (1.65, 2.90), (2.25, 3.02), (2.95, 2.86), stroke: 1.0pt + green, mark: (end: ">"))
+  line((1.25, 2.55), (1.35, 2.00), (1.80, 1.38), (2.50, 0.92), stroke: 1.0pt + green, mark: (end: ">"))
+  line((1.25, 2.55), (1.95, 2.45), (2.78, 2.18), (3.55, 1.78), stroke: 1.0pt + green, mark: (end: ">"))
+  circle((1.25, 2.55), radius: 0.09, fill: ink, stroke: none)
+  circle((2.45, 1.72), radius: 0.09, fill: red, stroke: none)
+  line((3.85, 2.95), (3.85, 2.15), stroke: 1.2pt + red, mark: (end: ">"))
+  axis-label((2.62, 1.82), [CM], placement: "west")
+  axis-label((3.95, 2.22), [$M vec(g)$], placement: "west")
+  axis-label((2.25, 0.58), [traiettorie dei frammenti], placement: "north")
+  axis-label((4.55, 1.05), [traiettoria del CM], placement: "west")
+})))
+
+== Conservazione della quantità di moto
+
+Se il sistema è isolato rispetto alle traslazioni, cioè se la risultante delle forze esterne è nulla,
+
+$ vec(R)^"ext"=vec(0), $
+
+allora
+
+#green-box([Quantità di moto totale conservata])[
+  $ (dif vec(P))/(dif t)=vec(0) quad arrow quad vec(P)="costante". $
+]
+
+Poiché $vec(P)=M vec(v)_"CM"$, per massa totale costante:
+
+$ vec(v)_"CM"="costante", quad vec(a)_"CM"=vec(0). $
+
+== Momento angolare del sistema
+
+Rispetto a un polo $O$, il momento angolare totale del sistema è
+
+$ vec(ell)_O=sum_i vec(r)_i times m_i vec(v)_i. $
+
+Se il polo $O$ è fisso in un sistema inerziale, allora
+
+$ (dif vec(ell)_O)/(dif t)=sum_i vec(r)_i times m_i vec(a)_i
+  =sum_i vec(r)_i times (vec(F)_i^"ext"+vec(F)_i^"int"). $
+
+Il momento totale delle forze interne è nullo quando le forze interne sono centrali, cioè dirette lungo la congiungente tra le due particelle. Infatti, per una coppia $i,j$:
+
+$ vec(r)_i times vec(F)_(i j)+vec(r)_j times vec(F)_(j i)
+  =(vec(r)_i-vec(r)_j) times vec(F)_(i j)=vec(0). $
+
+Rimane quindi il momento delle sole forze esterne:
+
+#purple-box([Momento angolare di un sistema, polo fisso])[
+  $ (dif vec(ell)_O)/(dif t)=vec(tau)^"ext"_O. $
+]
+
+Se $vec(tau)^"ext"_O=vec(0)$, allora
+
+$ vec(ell)_O="costante". $
+
+#align(center, graph-card([Momento angolare rispetto a un polo fisso], cetz.canvas({
+  import cetz.draw: *
+  // Sistema visto da un polo fisso esterno, come nella reference.
+  line((0.75, 0.35), (1.35, 0.35), stroke: 1.0pt + ink, mark: (end: ">"))
+  line((0.75, 0.35), (0.75, 0.95), stroke: 1.0pt + ink, mark: (end: ">"))
+  circle((0.75, 0.35), radius: 0.08, fill: ink, stroke: none)
+  axis-label((0.52, 0.12), [$O$], placement: "east")
+
+  circle((3.65, 2.25), radius: 1.62, stroke: (paint: ink, thickness: 1.25pt, dash: "dashed"))
+  circle((2.70, 2.08), radius: 0.10, fill: ink, stroke: none)
+  axis-label((2.88, 2.25), [$P_1$], placement: "west")
+  line((0.75, 0.35), (2.70, 2.08), stroke: 1.35pt + ink, mark: (end: ">"))
+  axis-label((1.55, 1.35), [$vec(r)_1$], placement: "east")
+
+  circle((4.10, 1.70), radius: 0.08, fill: ink, stroke: none)
+  axis-label((4.28, 1.50), [CM], placement: "west")
+  line((4.10, 1.70), (4.10, 2.90), stroke: 1.2pt + green, mark: (end: ">"))
+  line((4.10, 1.70), (4.82, 1.08), stroke: 1.2pt + green, mark: (end: ">"))
+  line((4.10, 1.70), (3.40, 1.05), stroke: 1.2pt + green, mark: (end: ">"))
+  axis-label((3.45, 2.92), [$vec(F)^"int"$], placement: "east")
+
+  // Indicazione del polo fisso esterno al sistema.
+  line((4.45, 0.62), (0.92, 0.40), stroke: 0.85pt + gold, mark: (end: ">"))
+  axis-label((4.55, 0.62), [polo fisso], placement: "west")
+
+  // Azione esterna sul sistema: risultante e momento rispetto al polo fisso.
+  line((0.15, 2.25), (1.55, 2.25), stroke: 1.35pt + red, mark: (end: ">"))
+  axis-label((0.02, 2.65), [$vec(F)^"ext"$], placement: "west")
+  axis-label((0.02, 1.88), [$vec(tau)^"ext"$], placement: "west")
+
+  // Relazioni fondamentali dell'appunto.
+  axis-label((6.15, 2.95), [$(dif vec(P))/(dif t)=M vec(a)_"CM"=vec(R)^"ext"$], placement: "west")
+  axis-label((6.15, 1.70), [$(dif vec(ell))/(dif t)=vec(tau)^"ext"$], placement: "west")
+})))
+
+#yellow-box([Attenzione al polo])[
+  La forma $dif vec(ell)_O/dif t=vec(tau)^"ext"_O$ è quella pulita quando il polo è fisso in un sistema inerziale. Se il polo si muove, compare un termine aggiuntivo legato alla velocità del polo.
+]
+
+== Teorema dell'energia cinetica per sistemi
+
+Per la particella $i$ il lavoro elementare della forza totale è
+
+$ dif L_i=vec(F)_i dot dif vec(r)_i
+  =(vec(F)_i^"ext"+vec(F)_i^"int") dot dif vec(r)_i
+  =dif L_i^"ext"+dif L_i^"int". $
+
+Sommando su tutte le particelle del sistema:
+
+$ L=sum_i L_i=L^"ext"+L^"int". $
+
+Per ogni particella vale $vec(F)_i=m_i vec(a)_i$, quindi
+
+$ integral vec(F)_i dot dif vec(r)_i
+  =integral m_i vec(v)_i dot dif vec(v)_i
+  =1/2 m_i v_(i,B)^2-1/2 m_i v_(i,A)^2. $
+
+Sommando:
+
+#purple-box([Energia cinetica di un sistema])[
+  $ L^"ext"+L^"int"=Delta E_k, $
+
+  con $E_k=sum_i 1/2 m_i v_i^2$.
+]
+
+Le forze interne hanno risultante nulla, ma il loro lavoro totale in generale non è nullo: possono cambiare le distanze mutue, deformare il sistema o trasformare energia cinetica in energia interna.
+
+#align(center, graph-card([Lavoro delle forze interne], cetz.canvas({
+  import cetz.draw: *
+  circle((1.10, 1.35), radius: 0.09, fill: ink, stroke: none)
+  circle((3.25, 1.35), radius: 0.09, fill: ink, stroke: none)
+  line((1.10, 1.35), (3.25, 1.35), stroke: 0.9pt + ink)
+  line((1.10, 1.35), (0.35, 1.35), stroke: 1.15pt + green, mark: (end: ">"))
+  line((3.25, 1.35), (4.00, 1.35), stroke: 1.15pt + green, mark: (end: ">"))
+  line((0.55, 0.40), (1.10, 1.35), stroke: 1.0pt + blue, mark: (end: ">"))
+  line((0.55, 0.40), (3.25, 1.35), stroke: 1.0pt + blue, mark: (end: ">"))
+  line((1.10, 0.95), (3.25, 0.95), stroke: 0.9pt + gold, mark: (end: ">"))
+  axis-label((1.00, 1.60), [$i$], placement: "south")
+  axis-label((3.35, 1.60), [$j$], placement: "south")
+  axis-label((0.40, 1.58), [$vec(F)_(j i)$], placement: "south")
+  axis-label((3.95, 1.58), [$vec(F)_(i j)$], placement: "south")
+  axis-label((1.85, 0.77), [$vec(r)_(i j)=vec(r)_i-vec(r)_j$], placement: "north")
+  axis-label((5.20, 1.65), [$vec(F)_(i j)=-vec(F)_(j i)$], placement: "west")
+  axis-label((5.20, 0.95), [$L^"int"$ può essere diverso da zero], placement: "west")
+})))
+
+== Energia meccanica di un sistema
+
+Se le forze che compiono lavoro sono conservative, il loro lavoro è l'opposto della variazione di energia potenziale:
+
+$ L_"conserv"=Delta E_k=-Delta E_p. $
+
+Di conseguenza l'energia meccanica totale del sistema si conserva:
+
+$ E=E_k+E_p="costante". $
+
+Se invece sono presenti forze non conservative,
+
+#yellow-box([Bilancio energetico per sistemi])[
+  $ L_"non conserv"=Delta E_"meccanica". $
+]
+
+Questa forma vale anche per sistemi di punti materiali: l'energia potenziale e l'energia cinetica sono quelle totali del sistema.
+
+== Conservazioni e simmetrie
+
+Nella fisica moderna le leggi di conservazione sono collegate alle simmetrie:
+
+- $vec(P)$ costante: lo spazio è omogeneo, cioè non esiste un'origine privilegiata;
+- $vec(ell)$ costante: lo spazio è isotropo, cioè non esiste una direzione privilegiata;
+- $E$ costante: il tempo è omogeneo, cioè non esiste un istante privilegiato.
+
+= Urti
+
+Un urto è un'interazione molto breve tra corpi. Durante l'intervallo dell'urto le forze interne sono molto intense e impulsive:
+
+$ vec(J)=integral_(Delta t) vec(F) dif t. $
+
+Se le forze esterne sono trascurabili durante l'urto, la quantità di moto totale del sistema si conserva sempre:
+
+#green-box([Quantità di moto negli urti])[
+  $ vec(P)_"iniziale"=vec(P)_"finale". $
+]
+
+Per due masse:
+
+$ m_1 vec(v)_1+m_2 vec(v)_2=m_1 vec(v)'_1+m_2 vec(v)'_2. $
+
+Inoltre
+
+$ vec(P)=(m_1+m_2) vec(v)_"CM", $
+
+quindi, se il sistema è isolato durante l'urto, $vec(v)_"CM"$ resta costante.
+
+#align(center, graph-card([Urto e impulso interno], cetz.canvas({
+  import cetz.draw: *
+  circle((1.00, 1.75), radius: 0.16, fill: ink, stroke: none)
+  circle((4.20, 0.75), radius: 0.16, fill: ink, stroke: none)
+  circle((2.55, 1.20), radius: 0.18, stroke: (paint: ink, thickness: 0.9pt, dash: "dashed"))
+  line((1.00, 1.75), (2.20, 1.30), stroke: 1.2pt + blue, mark: (end: ">"))
+  line((4.20, 0.75), (2.90, 1.10), stroke: 1.2pt + blue, mark: (end: ">"))
+  axis-label((0.85, 1.43), [$m_1$], placement: "north")
+  axis-label((4.30, 0.45), [$m_2$], placement: "north")
+  axis-label((1.70, 1.65), [$vec(v)_1$], placement: "south")
+  axis-label((3.45, 1.08), [$vec(v)_2$], placement: "south")
+  axis-label((2.55, 0.78), [zona d'urto], placement: "north")
+  axis-label((6.05, 1.55), [$Delta vec(p)_1=vec(J)_(2 -> 1)$], placement: "west")
+  axis-label((6.05, 0.95), [$Delta vec(p)_2=vec(J)_(1 -> 2)$], placement: "west")
+})))
+
+== Urto elastico e anelastico
+
+La quantità di moto totale si conserva in entrambi i casi, se l'impulso esterno è trascurabile. La differenza riguarda l'energia cinetica:
+
+#blue-box([Classificazione degli urti])[
+  *Urto elastico*: $vec(P)$ si conserva ed $E_k$ si conserva.
+
+  *Urto anelastico*: $vec(P)$ si conserva, ma $E_k$ non si conserva.
+]
+
+In generale non sappiamo se le forze interne dell'urto siano conservative; per questo l'energia meccanica può diminuire, trasformandosi in deformazione, calore, suono o energia interna.
+
+Per un urto completamente anelastico i corpi restano attaccati dopo l'urto:
+
+$ vec(v)'_1=vec(v)'_2=vec(v)'. $
+
+La conservazione della quantità di moto dà
+
+#purple-box([Urto completamente anelastico])[
+  $ m_1 vec(v)_1+m_2 vec(v)_2=(m_1+m_2) vec(v)'. $
+]
+
+L'energia cinetica finale è minore di quella iniziale, salvo casi particolari:
+
+$ E_(k,"fin")=1/2 (m_1+m_2) v'^2. $
+
+La parte mancante è lavoro speso per deformare i corpi o energia interna.
+
+== Energia cinetica e centro di massa
+
+Per un sistema di due particelle si può separare l'energia cinetica in una parte legata al moto del centro di massa e una parte interna:
+
+$ E_k=1/2 (m_1+m_2) v_"CM"^2+E'_k. $
+
+Se il sistema è isolato, $v_"CM"$ è costante; durante un urto può cambiare solo la parte interna $E'_k$.
+
+= Esempio: pendolo balistico
+
+Nel pendolo balistico un proiettile di massa $m$ e velocità $v$ urta un blocco appeso di massa $M$ e rimane conficcato. L'urto è completamente anelastico.
+
+Durante l'urto si conserva la quantità di moto orizzontale:
+
+$ m v=(m+M) v', $
+
+quindi
+
+$ v'=m/(m+M) v. $
+
+Dopo l'urto, il blocco con il proiettile sale fino a quota $h$. In questa fase, trascurando attriti, si conserva l'energia meccanica:
+
+$ 1/2 (m+M) v'^2=(m+M) g h. $
+
+Da cui
+
+$ v'=sqrt(2 g h). $
+
+Combinando le due relazioni:
+
+#green-box([Velocità del proiettile nel pendolo balistico])[
+  $ v=(m+M)/m sqrt(2 g h). $
+]
+
+#align(center, graph-card([Pendolo balistico], cetz.canvas({
+  import cetz.draw: *
+  line((0.40, 3.45), (8.80, 3.45), stroke: 1.0pt + ink)
+  for i in range(0, 12) {
+    line((0.65 + i*0.64, 3.57), (0.95 + i*0.64, 3.80), stroke: 0.6pt + ink)
+  }
+
+  // Prima dell'urto.
+  line((2.05, 3.45), (2.05, 1.35), stroke: 1.0pt + ink)
+  circle((2.05, 1.35), radius: 0.24, fill: ink, stroke: none)
+  circle((0.65, 1.35), radius: 0.11, fill: ink, stroke: none)
+  line((0.78, 1.35), (1.55, 1.35), stroke: 1.2pt + blue, mark: (end: ">"))
+  axis-label((1.35, 2.72), [prima], placement: "south")
+  axis-label((0.58, 0.98), [$m$], placement: "north")
+  axis-label((1.18, 1.63), [$vec(v)$], placement: "south")
+  axis-label((1.95, 0.92), [$M$], placement: "north")
+
+  // Subito dopo l'urto.
+  line((4.65, 3.45), (4.65, 1.35), stroke: 1.0pt + ink)
+  circle((4.65, 1.35), radius: 0.27, fill: ink, stroke: none)
+  circle((4.41, 1.35), radius: 0.065, fill: green, stroke: none)
+  line((4.96, 1.35), (5.76, 1.35), stroke: 1.2pt + blue, mark: (end: ">"))
+  axis-label((4.75, 2.72), [dopo l'urto], placement: "south")
+  axis-label((4.45, 0.88), [$m+M$], placement: "north")
+  axis-label((5.78, 1.63), [$vec(v)'$], placement: "south")
+
+  // Quota massima dopo la salita.
+  line((7.30, 3.45), (7.95, 2.05), stroke: 1.0pt + ink)
+  circle((7.95, 2.05), radius: 0.27, fill: ink, stroke: none)
+  circle((7.72, 1.93), radius: 0.065, fill: green, stroke: none)
+  line((7.95, 1.35), (7.95, 2.05), stroke: 0.9pt + gold, mark: (end: ">"))
+  line((7.24, 1.35), (8.42, 1.35), stroke: 0.7pt + ink)
+  axis-label((8.18, 1.70), [$h$], placement: "west")
+  axis-label((7.35, 2.35), [$E_k=0$], placement: "east")
+  axis-label((7.70, 2.72), [quota massima], placement: "south")
+})))
+
+= Dinamica del corpo rigido
+
+Un corpo rigido è un caso particolare di sistema di punti materiali in cui le distanze mutue tra le particelle restano costanti:
+
+#blue-box([Corpo rigido])[
+  $ r_(i j)="costante" quad "per ogni coppia " i,j. $
+]
+
+Il moto generale di un corpo rigido si può pensare come somma di due moti:
+
+- moto del centro di massa;
+- moto rispetto al centro di massa, cioè moto interno di rotazione.
+
+In un corpo rigido non ci sono deformazioni: i punti mantengono posizione reciproca fissa rispetto al corpo.
+
+#align(center, graph-card([Corpo rigido: moto del CM e rotazione interna], cetz.canvas({
+  import cetz.draw: *
+  line((0.65, 0.45), (1.25, 0.45), stroke: 0.85pt + ink, mark: (end: ">"))
+  line((0.65, 0.45), (0.65, 1.05), stroke: 0.85pt + ink, mark: (end: ">"))
+  axis-label((0.42, 0.24), [$O x y z$ inerziale], placement: "east")
+  circle((3.10, 1.85), radius: 0.95, stroke: (paint: ink, thickness: 1.0pt, dash: "dashed"), fill: rgb("#edf8ef"))
+  circle((3.10, 1.85), radius: 0.08, fill: red, stroke: none)
+  circle((2.72, 2.18), radius: 0.07, fill: ink, stroke: none)
+  circle((3.65, 2.08), radius: 0.07, fill: ink, stroke: none)
+  circle((3.25, 1.25), radius: 0.07, fill: ink, stroke: none)
+  line((0.65, 0.45), (3.10, 1.85), stroke: 1.1pt + blue, mark: (end: ">"))
+  line((3.10, 1.85), (4.15, 1.85), stroke: 1.2pt + green, mark: (end: ">"))
+  arc((3.10, 1.85), start: 20deg, stop: 315deg, radius: 0.55, stroke: 1.0pt + gold, mark: (end: ">"))
+  axis-label((2.70, 1.62), [CM], placement: "north")
+  axis-label((1.90, 1.42), [$vec(r)_"CM"$], placement: "south")
+  axis-label((4.22, 1.90), [moto del CM], placement: "west")
+  axis-label((3.60, 2.62), [rotazione rispetto al CM], placement: "south")
+  axis-label((5.62, 1.62), [$r_(i j)="costante"$], placement: "west")
+})))
+
+== Conseguenze della rigidità
+
+Poiché le distanze $r_(i j)$ restano costanti, il lavoro delle forze interne in un corpo rigido ideale è nullo:
+
+$ L^"int"=0. $
+
+Per il teorema dell'energia cinetica dei sistemi resta quindi
+
+#green-box([Energia cinetica del corpo rigido])[
+  $ Delta E_k=L^"ext". $
+]
+
+Le equazioni globali del moto restano quelle dei sistemi di punti materiali:
+
+$ vec(R)^"ext"=M vec(a)_"CM"=(dif vec(P))/(dif t), $
+
+$ vec(tau)^"ext"=(dif vec(ell))/(dif t). $
+
+== Corpo rigido continuo e densità
+
+Un corpo rigido può essere modellato come:
+
+- insieme discreto di $N$ punti materiali;
+- corpo continuo, diviso in elementi infinitesimi di volume $dif V$ e massa $dif m$.
+
+Nel caso continuo si introduce la densità volumica
+
+#blue-box([Densità])[
+  $ rho=(dif m)/(dif V) quad ["kg"/"m"^3]. $
+]
+
+La massa totale è
+
+$ M=integral_V rho dif V. $
+
+Se la densità è costante,
+
+$ M=rho V. $
+
+Il centro di massa diventa
+
+$ vec(r)_"CM"=(integral vec(r) dif m)/(integral dif m)
+  =(1/M) integral_V rho vec(r) dif V. $
+
+Se $rho$ è costante:
+
+$ vec(r)_"CM"=1/V integral_V vec(r) dif V. $
+
+#align(center, graph-card([Corpo continuo: elemento di massa], cetz.canvas({
+  import cetz.draw: *
+  catmull((1.25, 1.25), (1.55, 2.25), (2.65, 2.65), (3.65, 2.20), (3.90, 1.25), (3.05, 0.55), (1.75, 0.65), (1.25, 1.25), stroke: 1.1pt + ink, fill: rgb("#edf8ef"))
+  rect((2.45, 1.38), (2.90, 1.83), stroke: 0.9pt + ink, fill: rgb("#fbfcfd"))
+  circle((2.58, 1.55), radius: 0.035, fill: ink, stroke: none)
+  line((0.65, 0.45), (2.58, 1.55), stroke: 1.0pt + blue, mark: (end: ">"))
+  axis-label((1.48, 1.14), [$vec(r)$], placement: "south")
+  axis-label((2.95, 1.84), [$dif V$], placement: "west")
+  axis-label((2.98, 1.42), [$dif m$], placement: "west")
+  axis-label((5.25, 1.85), [$dif m=rho dif V$], placement: "west")
+  axis-label((5.25, 1.15), [$M=integral_V rho dif V$], placement: "west")
+})))
+
+== Traslazione pura
+
+In una traslazione tutti i punti del corpo hanno la stessa velocità del centro di massa:
+
+$ vec(v)_i=vec(v)_"CM" quad "per ogni " i. $
+
+Allora
+
+$ vec(P)=M vec(v)_"CM", quad
+   E_k=1/2 M v_"CM"^2, quad
+   vec(R)^"ext"=M vec(a)_"CM". $
+
+Rispetto al centro di massa, se gli assi restano paralleli a quelli inerziali, non c'è rotazione interna.
+
+#align(center, graph-card([Traslazione: stessa velocità per tutti i punti], cetz.canvas({
+  import cetz.draw: *
+  circle((1.75, 1.60), radius: 0.85, stroke: 1.0pt + ink, fill: rgb("#edf8ef"))
+  for p in ((1.35, 1.35), (1.85, 1.95), (2.22, 1.42)) {
+    circle(p, radius: 0.06, fill: ink, stroke: none)
+    line(p, (p.at(0) + 0.85, p.at(1)), stroke: 1.0pt + blue, mark: (end: ">"))
+  }
+  circle((1.75, 1.60), radius: 0.08, fill: red, stroke: none)
+  axis-label((1.55, 1.38), [CM], placement: "north")
+  axis-label((3.25, 2.35), [$vec(v)_i=vec(v)_"CM"$], placement: "west")
+  axis-label((3.25, 1.70), [$E_k=1/2 M v_"CM"^2$], placement: "west")
+  axis-label((3.25, 1.05), [$vec(R)^"ext"=M vec(a)_"CM"$], placement: "west")
+})))
+
+== Rotazione rigida
+
+In una rotazione rigida tutti i punti descrivono moti circolari attorno all'asse di rotazione con la stessa velocità angolare $omega$.
+
+Per un punto a distanza $R_i$ dall'asse:
+
+$ v_i=omega R_i. $
+
+La direzione della velocità è tangente alla circonferenza descritta dal punto.
+
+#align(center, graph-card([Rotazione rigida attorno a un asse], cetz.canvas({
+  import cetz.draw: *
+  line((2.10, 0.35), (2.10, 3.05), stroke: 1.2pt + ink, mark: (end: ">"))
+  line(
+    (0.75, 1.55), (0.95, 1.80), (1.45, 1.98), (2.10, 2.07),
+    (2.75, 1.98), (3.25, 1.80), (3.45, 1.55),
+    (3.25, 1.30), (2.75, 1.12), (2.10, 1.03),
+    (1.45, 1.12), (0.95, 1.30), (0.75, 1.55),
+    stroke: (paint: ink, thickness: 0.9pt, dash: "dashed"),
+  )
+  circle((3.45, 1.55), radius: 0.09, fill: ink, stroke: none)
+  line((2.10, 1.55), (3.45, 1.55), stroke: 1.0pt + blue, mark: (end: ">"))
+  line((3.45, 1.55), (3.75, 2.35), stroke: 1.1pt + green, mark: (end: ">"))
+  arc((2.10, 2.65), start: 30deg, stop: 330deg, radius: 0.25, stroke: 1.0pt + gold, mark: (end: ">"))
+  axis-label((2.26, 3.02), [$vec(omega)$], placement: "west")
+  axis-label((2.75, 1.38), [$R_i$], placement: "north")
+  axis-label((3.82, 2.32), [$vec(v)_i$], placement: "west")
+  axis-label((5.05, 2.00), [$v_i=omega R_i$], placement: "west")
+  axis-label((5.05, 1.35), [stessa $omega$ per tutti i punti], placement: "west")
+})))
+
+In generale l'asse di rotazione non deve essere fisso. Nel caso importante di rotazione attorno a un asse fisso, la dinamica diventa particolarmente semplice.
+
+== Esempio: rotazione rigida attorno a un asse fisso
+
+Consideriamo un corpo rigido che ruota attorno a un asse fisso $z$ con velocità angolare $omega$. Ogni punto descrive una circonferenza perpendicolare all'asse. Per la particella $i$:
+
+$ v_i=omega R_i, $
+
+dove $R_i$ è la distanza dall'asse. Il momento angolare della singola particella è
+
+$ vec(ell)_i=vec(r)_i times m_i vec(v)_i. $
+
+La componente utile per la rotazione attorno all'asse è la componente lungo $z$:
+
+$ ell_(i,z)=ell_i cos phi=m_i R_i^2 omega. $
+
+Sommando tutte le particelle:
+
+$ ell_z=sum_i ell_(i,z)=omega sum_i m_i R_i^2. $
+
+#align(center, graph-card([Rotazione attorno a un asse fisso: componente di $vec(ell)$], cetz.canvas({
+  import cetz.draw: *
+  line((1.10, 0.45), (1.10, 3.20), stroke: 1.25pt + ink, mark: (end: ">"))
+  axis-label((1.25, 3.10), [$z$], placement: "west")
+  circle((1.10, 0.90), radius: 0.08, fill: ink, stroke: none)
+  line((1.10, 0.90), (3.25, 1.70), stroke: 1.1pt + blue, mark: (end: ">"))
+  line((1.10, 1.70), (3.25, 1.70), stroke: 0.95pt + blue, mark: (end: ">"))
+  circle((3.25, 1.70), radius: 0.10, fill: ink, stroke: none)
+  line((3.25, 1.70), (2.78, 2.50), stroke: 1.15pt + green, mark: (end: ">"))
+  line((3.25, 1.70), (2.45, 2.72), stroke: 1.15pt + gold, mark: (end: ">"))
+  line((3.25, 1.70), (3.25, 2.82), stroke: 0.95pt + gold, mark: (end: ">"))
+  arc((1.10, 1.70), start: 0deg, stop: 360deg, radius: 2.15, stroke: (paint: grid-color, thickness: 0.75pt, dash: "dashed"))
+  arc((1.10, 2.92), start: 40deg, stop: 330deg, radius: 0.25, stroke: 1.0pt + red, mark: (end: ">"))
+  axis-label((1.32, 2.92), [$vec(omega)$], placement: "west")
+  axis-label((2.18, 1.52), [$R_i$], placement: "north")
+  axis-label((2.25, 1.48), [$vec(r)_i$], placement: "south")
+  axis-label((2.72, 2.58), [$m_i vec(v)_i$], placement: "east")
+  axis-label((2.18, 2.78), [$vec(ell)_i$], placement: "east")
+  axis-label((3.42, 2.70), [$ell_(i,z)$], placement: "west")
+  axis-label((5.20, 2.25), [$ell_(i,z)=m_i R_i^2 omega$], placement: "west")
+  axis-label((5.20, 1.48), [$ell_z=I_z omega$], placement: "west")
+})))
+
+== Momento d'inerzia
+
+Consideriamo una rotazione attorno a un asse fisso $z$. Per la particella $i$, la componente del momento angolare lungo l'asse è proporzionale a $omega$:
+
+$ ell_(i,z)=m_i R_i^2 omega. $
+
+Sommando su tutte le particelle:
+
+$ ell_z=sum_i ell_(i,z)=sum_i m_i R_i^2 omega. $
+
+Si definisce il *momento d'inerzia* rispetto all'asse $z$:
+
+#blue-box([Momento d'inerzia rispetto all'asse $z$])[
+  $ I_z=sum_i m_i R_i^2. $
+]
+
+Quindi
+
+$ ell_z=I_z omega. $
+
+Per un corpo continuo:
+
+$ I_z=integral R^2 dif m=integral_V rho R^2 dif V. $
+
+Il momento d'inerzia misura quanto la massa è distribuita lontano dall'asse: a parità di massa, più la massa è distante dall'asse, maggiore è $I$.
+
+== Esempio: asse di simmetria e asse non principale
+
+Se l'asse di rotazione $z$ è un asse di simmetria del corpo, le componenti trasversali del momento angolare si cancellano a coppie. Rimane solo la componente lungo l'asse:
+
+$ ell_perp=0, quad vec(ell) parallel vec(omega), quad vec(ell)=I_z vec(omega). $
+
+Se invece il corpo ruota attorno a un asse che non è principale, in generale $vec(ell)$ non è parallelo a $vec(omega)$. In quel caso la relazione scalare $ell=I omega$ non descrive completamente il moto.
+
+#align(center, graph-card([Quando $vec(ell)$ è parallelo a $vec(omega)$], cetz.canvas({
+  import cetz.draw: *
+  // asse di simmetria
+  axis-label((1.45, 3.28), [asse di simmetria], placement: "south")
+  line((1.45, 0.55), (1.45, 2.88), stroke: 1.15pt + ink, mark: (end: ">"))
+  circle((1.45, 1.70), radius: 0.62, stroke: 1.0pt + ink)
+  line((0.65, 1.70), (2.25, 1.70), stroke: 0.85pt + ink)
+  line((1.45, 1.70), (1.45, 2.62), stroke: 1.2pt + red, mark: (end: ">"))
+  line((1.45, 1.70), (1.45, 2.28), stroke: 1.2pt + blue, mark: (end: ">"))
+  axis-label((1.82, 2.62), [$vec(omega)$], placement: "west")
+  axis-label((0.78, 2.28), [$vec(ell)$], placement: "east")
+  axis-label((1.45, 0.30), [$vec(ell)=I_z vec(omega)$], placement: "north")
+  axis-label((0.58, 1.08), [$ell_perp=0$], placement: "north")
+
+  // asse non principale
+  axis-label((4.95, 3.28), [asse non principale], placement: "south")
+  line((4.60, 0.55), (4.60, 2.88), stroke: 1.0pt + ink, mark: (end: ">"))
+  catmull((4.05, 2.55), (4.95, 2.42), (5.08, 1.75), (4.75, 0.98), (3.95, 1.02), (3.72, 1.72), (4.05, 2.55), stroke: 1.0pt + ink, fill: rgb("#edf8ef"))
+  line((4.60, 1.60), (4.60, 2.52), stroke: 1.2pt + red, mark: (end: ">"))
+  line((4.60, 1.60), (5.35, 2.34), stroke: 1.2pt + blue, mark: (end: ">"))
+  axis-label((4.15, 2.52), [$vec(omega)$], placement: "east")
+  axis-label((5.48, 2.38), [$vec(ell)$], placement: "west")
+  axis-label((4.95, 0.30), [$vec(ell) != lambda vec(omega)$], placement: "north")
+})))
+
+== Legge del moto rotatorio
+
+Se l'asse di rotazione è fisso e coincide con un asse di simmetria del corpo, il momento angolare è parallelo alla velocità angolare:
+
+$ vec(ell)=I_z vec(omega). $
+
+Derivando:
+
+$ vec(tau)= (dif vec(ell))/(dif t)=I_z (dif vec(omega))/(dif t)=I_z vec(alpha). $
+
+In forma scalare lungo l'asse:
+
+#purple-box([Legge del moto rotatorio])[
+  $ tau_z=I_z alpha. $
+]
+
+È l'analogo rotazionale di $F=m a$.
+
+#yellow-box([Asse non simmetrico])[
+  In generale $vec(ell)$ non è parallelo a $vec(omega)$. La relazione semplice $vec(ell)=I vec(omega)$ vale quando si ruota attorno a un asse principale di inerzia, per esempio un asse di simmetria.
+]
+
+== Energia cinetica rotazionale
+
+Per rotazione attorno a un asse fisso:
+
+$ E_k=sum_i 1/2 m_i v_i^2
+  =sum_i 1/2 m_i omega^2 R_i^2
+  =1/2 I_z omega^2. $
+
+Usando $ell_z=I_z omega$, si può anche scrivere
+
+$ E_k=ell_z^2/(2 I_z). $
+
+#green-box([Energia di rotazione])[
+  $ E_k=1/2 I_z omega^2. $
+]
+
+== Pendolo fisico
+
+Un *pendolo fisico* o *pendolo composto* è un corpo rigido che oscilla attorno a un punto fisso non coincidente con il centro di massa.
+
+La forza peso agisce sul centro di massa e genera un momento torcente di richiamo:
+
+$ vec(tau)=vec(r) times vec(F), $
+
+in modulo, rispetto al punto di sospensione:
+
+$ tau=-M g d sin theta, $
+
+dove $d$ è la distanza tra il punto di sospensione e il centro di massa.
+
+Per piccoli angoli $sin theta approx theta$, quindi
+
+$ I (dif^2 theta)/(dif t^2)=-M g d theta. $
+
+Questa è l'equazione di un moto armonico:
+
+$ omega^2=(M g d)/I. $
+
+Il periodo è
+
+#green-box([Periodo del pendolo fisico])[
+  $ T=2 pi sqrt(I/(M g d)). $
+]
+
+Dal periodo misurato si può ricavare il momento d'inerzia del corpo rispetto all'asse di sospensione:
+
+$ I=(T^2 M g d)/(4 pi^2). $
+
+#align(center, graph-card([Pendolo fisico], cetz.canvas({
+  import cetz.draw: *
+  // equilibrio
+  line((1.10, 3.15), (1.10, 0.65), stroke: 0.9pt + ink)
+  catmull((0.82, 2.70), (1.35, 2.55), (1.58, 1.85), (1.28, 1.00), (0.70, 0.78), (0.48, 1.62), (0.62, 2.42), (0.82, 2.70), stroke: 1.0pt + ink, fill: rgb("#edf8ef"))
+  circle((1.10, 2.42), radius: 0.07, fill: ink, stroke: none)
+  circle((1.10, 1.72), radius: 0.07, fill: red, stroke: none)
+  axis-label((0.55, 1.66), [CM], placement: "east")
+  line((1.10, 2.42), (1.10, 1.72), stroke: 0.85pt + gold, mark: (end: ">"))
+  axis-label((1.22, 2.10), [$d$], placement: "west")
+  axis-label((0.98, 0.48), [equilibrio], placement: "north")
+
+  // spostato
+  line((3.25, 3.15), (3.25, 0.65), stroke: 0.75pt + ink)
+  line((3.25, 3.15), (4.30, 1.20), stroke: 1.0pt + ink)
+  catmull((3.78, 2.55), (4.35, 2.35), (4.75, 1.65), (4.42, 0.90), (3.82, 0.92), (3.58, 1.72), (3.55, 2.35), (3.78, 2.55), stroke: 1.0pt + ink, fill: rgb("#edf8ef"))
+  circle((3.25, 3.15), radius: 0.07, fill: ink, stroke: none)
+  circle((4.05, 1.58), radius: 0.07, fill: red, stroke: none)
+  line((3.25, 3.15), (4.05, 1.58), stroke: 0.9pt + blue, mark: (end: ">"))
+  line((4.05, 1.58), (4.05, 0.62), stroke: 1.15pt + red, mark: (end: ">"))
+  arc((3.25, 3.15), start: 270deg, stop: 300deg, radius: 0.55, stroke: 0.8pt + ink)
+  axis-label((3.48, 2.45), [$theta$], placement: "west")
+  axis-label((4.20, 0.72), [$M vec(g)$], placement: "west")
+  axis-label((4.22, 1.62), [CM], placement: "west")
+  axis-label((5.65, 2.20), [$tau=-M g d sin theta$], placement: "west")
+  axis-label((5.65, 1.45), [$T=2 pi sqrt(I/(M g d))$], placement: "west")
+})))
