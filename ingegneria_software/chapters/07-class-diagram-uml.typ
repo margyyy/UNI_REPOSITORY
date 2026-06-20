@@ -1,0 +1,274 @@
+#import "../boxes.typ": *
+#import "@preview/cetz:0.5.1"
+#import "../uml.typ": *
+
+= Class diagram e Object diagram UML
+
+Il *Class Diagram* descrive la struttura statica di ciò che si sta modellando: classi, feature e relazioni. Le feature comprendono attributi e operazioni; le relazioni principali sono associazione, aggregazione, composizione, generalizzazione e dipendenza.
+
+#yellow-box([La prospettiva cambia il significato])[
+  In prospettiva concettuale una classe rappresenta un concetto del dominio e un'operazione una responsabilità. In prospettiva software la classe è un modulo implementabile e l'operazione è realizzata da uno o più metodi.
+]
+
+== Classi, attributi e operazioni
+
+Una classe incapsula caratteristiche comuni a un insieme di oggetti. Gli attributi determinano lo stato; le operazioni descrivono il comportamento disponibile. Oggetti collegati collaborano scambiando messaggi, cioè invocando operazioni.
+
+=== Notazione della classe
+
+La rappresentazione completa usa tre comparti: nome, attributi e operazioni. I comparti non necessari possono essere soppressi per mantenere il diagramma leggibile.
+
+#figure(
+  cetz.canvas({
+    import cetz.draw: *
+    content((0, 0), uml-box(
+      [ContoBancario],
+      attributes: ([− saldo: Euro], [− titolare: String], [− numeroConti: int {static}]),
+      operations: ([+ deposita(Euro)], [+ preleva(Euro)], [+ saldoAllaData(Data)], [+ create(Euro) {static}]),
+      width: 62mm,
+      fill: uml-pale-amber,
+      stroke: uml-amber,
+    ))
+  }),
+  caption: [Classe UML con i comparti di nome, attributi e operazioni.],
+)
+
+=== Attributi
+
+La sintassi generale è:
+
+`visibilità nome: tipo [molteplicità] = default {proprietà}`
+
+#table(
+  columns: (.7fr, 1fr, 2.3fr),
+  inset: 5pt,
+  stroke: .4pt + rgb("#d5dadd"),
+  fill: (x, y) => if y == 0 { rgb("#eaf2f8") },
+  table.header([*Simbolo*], [*Visibilità*], [*Accesso*]),
+  [`+`], [public], [Tutte le classi.],
+  [`-`], [private], [Soltanto la classe proprietaria.],
+  [`#`], [protected], [Classe e sottoclassi.],
+  [`~`], [package], [Classi dello stesso package.],
+)
+
+Solo il nome è obbligatorio. Il tipo può essere primitivo, datatype o classe del modello. Default indica il valore iniziale; proprietà come `{readOnly}`, `{ordered}`, `{static}` o `{abstract}` aggiungono semantica.
+
+Le regole di visibilità dei linguaggi non coincidono sempre con UML: in un design software conviene adottare convenzioni compatibili con il linguaggio target e spesso limitarsi a `+` e `-`.
+
+=== Molteplicità
+
+- `1`: esattamente uno, valore predefinito;
+- `0..1`: opzionale;
+- `*` o `0..*`: qualsiasi quantità, anche zero;
+- `1..*`: almeno uno;
+- `n..m`: intervallo limitato.
+
+Un attributo multivalore è concettualmente un insieme; `{ordered}` specifica che l'ordine è significativo. Per valori con comportamento o semantica propri è spesso preferibile introdurre un datatype, per esempio `CifraTelefono`, invece di usare una stringa generica.
+
+=== Operazioni
+
+La sintassi è:
+
+`visibilità nome(direzione parametro: tipo = default): tipoRitornato {proprietà}`
+
+La direzione è `in`, `out` o `inout`; `in` è predefinita. Le operazioni *query* osservano senza side effect, mentre i modificatori cambiano lo stato. Getter e setter ovvi possono essere omessi.
+
+Un'operazione è la dichiarazione astratta del servizio; il *metodo* è il corpo che la implementa. Una stessa operazione astratta può avere metodi differenti nelle sottoclassi.
+
+=== Datatype, costruttori e membri statici
+
+Un oggetto possiede identità: due persone con gli stessi dati possono essere entità diverse. Un datatype rappresenta invece valori: due istanze di `Euro` con valore 10 sono equivalenti. In UML si usa lo stereotipo `«datatype»`.
+
+Attributi e operazioni statici appartengono alla classe e sono tradizionalmente sottolineati. I costruttori possono essere indicati come `create`, `make` o col nome della classe, secondo la convenzione adottata.
+
+== Associazioni e molteplicità
+
+Un'associazione rappresenta una relazione fisica o concettuale tra classi. Può avere nome, ruoli agli estremi, molteplicità e verso di navigazione.
+
+#figure(
+  cetz.canvas({
+    import cetz.draw: *
+    content((-3.7, 1.3), uml-box([Persona], attributes: ([− nome: String],), width: 36mm))
+    content((3.7, 1.3), uml-box([Automobile], attributes: ([− targa: String],), width: 36mm))
+    content((-3.7, -1.3), uml-box([Dipartimento], width: 36mm))
+    content((3.7, -1.3), uml-box([Sede], width: 36mm))
+    line((-2.25, 1.3), (2.25, 1.3), mark: (end: ">"), stroke: .8pt + uml-blue)
+    line((-2.25, -1.3), (2.25, -1.3), mark: (end: ">"), stroke: .8pt + uml-blue)
+    content((0, 1.65), text(7pt)[possiede])
+    content((-2.05, 1.6), text(7pt)[1])
+    content((2.05, 1.6), text(7pt, "1..*"))
+    content((0, -.95), text(7pt)[situato in])
+    content((-2.05, -1), text(7pt, "1..*"))
+    content((2.05, -1), text(7pt, "1..*"))
+  }),
+  caption: [Associazioni orientate con nomi e molteplicità.],
+)
+
+La freccia di navigabilità indica che, noto un oggetto all'origine, è possibile reperire quelli alla destinazione. Non coincide necessariamente con la direzione in cui si legge il nome dell'associazione.
+
+#red-box([Attenzione alle molteplicità])[
+  La molteplicità scritta accanto a una classe indica quanti oggetti di quella classe possono essere collegati a una singola istanza dell'altra estremità. Non va letta “dal proprio lato”.
+]
+
+=== Attributo o associazione?
+
+La stessa informazione può talvolta essere espressa in entrambi i modi. Convenzionalmente si usano attributi per primitivi e datatype (`String`, `Date`, `boolean`) e associazioni quando il tipo è una classe con identità propria.
+
+=== Associazioni riflessive
+
+Una classe può essere associata a se stessa. Per esempio una cartella contiene altre cartelle o una persona svolge il ruolo di genitore rispetto ad altre persone. I nomi di ruolo sono essenziali per distinguere le estremità.
+
+=== Associazioni bidirezionali
+
+Una relazione navigabile in entrambe le direzioni richiede che entrambe le estremità siano mantenute coerenti. In una relazione `Man`–`Woman`, impostare `husband` deve aggiornare anche `wife`; un solo attributo non basta.
+
+#yellow-box([Costo della libertà del modello])[
+  Un design astratto e bidirezionale può sembrare semplice nel diagramma, ma trasferisce complessità alla codifica: sincronizzazione, collezioni inverse e vincoli devono essere implementati esplicitamente.
+]
+
+== Object diagram e classi associative
+
+=== Object diagram
+
+Il Class Diagram descrive tutte le configurazioni valide; l'Object Diagram mostra una configurazione concreta in un istante. Un oggetto è scritto `nome : Classe`, tradizionalmente sottolineato, e un link è un'istanza di un'associazione.
+
+#figure(
+  cetz.canvas({
+    import cetz.draw: *
+    content((-3.5, 0), uml-box([mario : Persona], attributes: ([nome = Mario Rossi],), width: 42mm, fill: uml-pale-green, stroke: uml-green, object: true))
+    content((3.5, 1.35), uml-box([a1 : Automobile], attributes: ([targa = AB123CD],), width: 42mm, fill: uml-pale-green, stroke: uml-green, object: true))
+    content((3.5, -1.35), uml-box([a2 : Automobile], attributes: ([targa = EF456GH],), width: 42mm, fill: uml-pale-green, stroke: uml-green, object: true))
+    line((-1.8, .25), (1.8, 1.1), stroke: .8pt + uml-green)
+    line((-1.8, -.25), (1.8, -1.1), stroke: .8pt + uml-green)
+    content((0, 1), text(7pt)[possiede])
+    content((0, -1), text(7pt)[possiede])
+  }),
+  caption: [Snapshot di oggetti e link coerente col precedente Class Diagram.],
+)
+
+Gli Object Diagram sono utili per spiegare class diagram complessi, verificare le molteplicità con esempi e discutere casi limite.
+
+=== Classe associativa
+
+Quando data, voto, quantità o altre proprietà appartengono alla relazione e non alle classi coinvolte, si usa una *association class*. In implementazione è spesso più chiaro trasformarla in una normale classe collegata alle due estremità.
+
+#figure(
+  cetz.canvas({
+    import cetz.draw: *
+    content((-3.6, 1.4), uml-box([Studente], attributes: ([− matricola: String],), width: 40mm))
+    content((3.6, 1.4), uml-box([Esame], attributes: ([− codice: String],), width: 40mm))
+    content((0, -1.4), uml-box([IscrizioneEsame], attributes: ([data: Data], [voto: int], [lode: boolean]), width: 46mm, fill: uml-pale-amber, stroke: uml-amber))
+    line((-2.1, .95), (-.65, -.65), mark: (end: ">"), stroke: .8pt + uml-blue)
+    line((2.1, .95), (.65, -.65), mark: (end: ">"), stroke: .8pt + uml-blue)
+    content((-2, .55), text(7pt)[1])
+    content((2, .55), text(7pt)[1])
+    content((-.9, -.45), text(7pt, "0..*"))
+    content((.9, -.45), text(7pt, "0..*"))
+  }),
+  caption: [Le proprietà dell'associazione sono modellate come classe implementabile.],
+)
+
+== Relazioni tutto-parte e generalizzazione
+
+=== Aggregazione e composizione
+
+L'aggregazione rappresenta una relazione tutto-parte debole. La composizione è la forma forte: la parte non esiste senza il tutto e può appartenere a un solo composto alla volta.
+
+#figure(
+  cetz.canvas({
+    import cetz.draw: *
+    content((-3.7, 1.2), uml-box([Nazione], width: 34mm))
+    content((3.7, 1.2), uml-box([Regione], width: 34mm))
+    content((-3.7, -1.2), uml-box([Ordine], width: 34mm))
+    content((3.7, -1.2), uml-box([RigaOrdine], width: 34mm))
+    line((-2.25, 1.2), (2.25, 1.2), stroke: .8pt + uml-blue)
+    line((-2.25, -1.2), (2.25, -1.2), stroke: .8pt + uml-blue)
+    // Diamante vuoto: aggregazione; diamante pieno: composizione.
+    polygon((-1.85, 1.2), 4, angle: 0deg, radius: (.4, .25), fill: white, stroke: .8pt + uml-blue)
+    polygon((-1.85, -1.2), 4, angle: 0deg, radius: (.4, .25), fill: uml-blue, stroke: .8pt + uml-blue)
+    content((0, 1.55), text(7pt)[aggregazione])
+    content((0, -.85), text(7pt)[composizione])
+    content((-1.35, 1.55), text(7pt)[1])
+    content((1.9, 1.55), text(7pt, "1..*"))
+    content((-1.35, -.85), text(7pt)[1])
+    content((1.9, -.85), text(7pt, "1..*"))
+  }),
+  caption: [Diamante vuoto per aggregazione e pieno per composizione.],
+)
+
+La distinzione dell'aggregazione è spesso ambigua e a livello software si implementa come un'associazione. Conviene usarla soprattutto quando il significato concettuale tutto-parte è davvero informativo.
+
+=== Generalizzazione ed ereditarietà
+
+La generalizzazione esprime una relazione concettuale “è un”: ogni istanza della sottoclasse è anche istanza della superclasse. L'ereditarietà è il meccanismo implementativo con cui la sottoclasse incorpora e specializza struttura e comportamento.
+
+#figure(
+  cetz.canvas({
+    import cetz.draw: *
+    content((0, 1.8), uml-box([Persona], attributes: ([dataNascita],), operations: ([stampa()],), width: 40mm))
+    content((-3.2, -1.5), uml-box([Studente], attributes: ([matricola],), operations: ([mediaVoti()], [stampa()]), width: 40mm))
+    content((3.2, -1.5), uml-box([Docente], attributes: ([settore],), operations: ([stampa()],), width: 40mm))
+    line((-2.35, -.65), (-.35, 1), stroke: .8pt + uml-blue)
+    line((2.35, -.65), (.35, 1), stroke: .8pt + uml-blue)
+    polygon((0, 1.05), 3, angle: 90deg, radius: .5, fill: white, stroke: .8pt + uml-blue)
+  }),
+  caption: [Le sottoclassi ereditano feature e possono aggiungerle o ridefinirle.],
+)
+
+Un oggetto `Studente` può essere trattato come `Persona`; la sottoclasse aggiunge `matricola` e `mediaVoti()` e può ridefinire `stampa()` mediante overriding. Operazione e metodo non coincidono: l'operazione è il contratto invocabile, il metodo una sua implementazione concreta.
+
+== Dipendenze e traduzione nel codice
+
+Una classe Cliente dipende da un Fornitore quando una modifica all'interfaccia del fornitore può richiedere una modifica al cliente. La dipendenza è rappresentata da una freccia tratteggiata.
+
+#figure(
+  cetz.canvas({
+    import cetz.draw: *
+    content((-3.2, 0), uml-box([LineStorage], attributes: ([lines: List<Line>],), operations: ([addLine(Line)], [size()]), width: 44mm))
+    content((3.2, 0), uml-box([Line], operations: ([length()],), width: 36mm))
+    line((-1.45, 0), (1.7, 0), mark: (end: ">"), stroke: (dash: "dashed", paint: uml-blue))
+    content((0, .35), text(7pt)[«use»])
+  }),
+  caption: [`LineStorage` dipende da `Line` perché la usa come tipo e parametro.],
+)
+
+Cause comuni sono invocare operazioni, creare istanze o usare il fornitore come tipo di attributo, variabile locale, parametro o valore restituito. Nel diagramma vanno mostrate soltanto le dipendenze significative: troppe frecce nascondono la struttura che si voleva comunicare.
+
+=== Dalle molteplicità alle strutture dati
+
+#table(
+  columns: (1fr, 2.6fr),
+  inset: 6pt,
+  stroke: .4pt + rgb("#d5dadd"),
+  fill: (x, y) => if x == 0 { rgb("#eaf2f8") },
+  [`1`], [Riferimento o attributo singolo.],
+  [`0..1`], [Riferimento opzionale.],
+  [`0..*` / `1..*`], [Collezione tipizzata, per esempio `Set<T>`; il minimo deve essere validato.],
+  [`{ordered} 0..*`], [Lista ordinata, per esempio `ArrayList<T>` o `LinkedList<T>`.],
+)
+
+Non esiste una traduzione unica. Le associazioni bidirezionali richiedono due strutture sincronizzate; aggregazione e composizione richiedono politiche di ciclo di vita; vincoli e invarianti devono essere implementati o verificati.
+
+#red-box([Gestire le dipendenze])[
+  Minimizzare dipendenze e cicli, specialmente tra package. Diagrammi troppo completi sono illeggibili; strumenti automatici possono aiutare a individuare dipendenze effettive nel codice.
+]
+
+== Riepilogo
+
+#table(
+  columns: (1.2fr, 2.8fr),
+  inset: (x: 6pt, y: 4pt),
+  stroke: .4pt + rgb("#d5dadd"),
+  fill: (x, y) => if calc.rem(y, 2) == 0 { rgb("#f6f9fb") },
+  [*Classe*], [Nome, attributi e operazioni; i dettagli possono essere soppressi.],
+  [*Associazione*], [Relazione con ruoli, navigabilità e molteplicità.],
+  [*Object Diagram*], [Esempio concreto di oggetti e link.],
+  [*Aggregazione*], [Relazione tutto-parte debole.],
+  [*Composizione*], [Tutto-parte forte con ciclo di vita condiviso.],
+  [*Generalizzazione*], [Relazione “è un” e base per l'ereditarietà.],
+  [*Dipendenza*], [Il cliente può essere influenzato da modifiche al fornitore.],
+)
+
+#green-box([Regola finale])[
+  Un buon Class Diagram non mostra tutto: seleziona classi, feature e relazioni necessarie alla domanda corrente, dichiara la prospettiva e usa esempi di oggetti per validare le decisioni più complesse.
+]
