@@ -1469,3 +1469,465 @@ Il moto lungo $x$ è uniformemente accelerato:
 
 $ x(t)=x_0+v_0t+1/2 g sin theta, t^2, $
 $ v(t)=v_0+g sin theta, t. $
+
+= Forza di attrito
+
+L'attrito radente è la forza tangenziale che nasce al contatto tra due superfici e si oppone al moto relativo, oppure alla tendenza al moto relativo. La sua direzione è parallela alla superficie di contatto.
+
+#blue-box([Attrito statico e dinamico])[
+  - *Attrito statico*: il corpo resta fermo rispetto alla superficie, quindi $v=0$. Il modulo si adatta al valore necessario per mantenere l'equilibrio, fino a un massimo:
+    $ F_"attr,s" <= mu_s N. $
+  - *Attrito dinamico*: il corpo scivola, quindi $v != 0$. Il modulo è
+    $ F_"attr,d" = mu_d N, $
+    e il verso è opposto alla velocità relativa.
+
+  In genere $mu_s > mu_d$: serve più forza per mettere in moto un corpo che per mantenerlo in scorrimento.
+]
+
+#align(center, graph-card([Attrito radente su superficie orizzontale], cetz.canvas({
+  import cetz.draw: *
+  // caso statico
+  line((0.45, 2.45), (4.55, 2.45), stroke: 1.2pt + ink)
+  for x in range(0, 9) { line((0.5 + x*0.45, 2.45), (0.7 + x*0.45, 2.25), stroke: 0.55pt + ink) }
+  rect((1.55, 2.45), (2.35, 3.15), fill: rgb("#edf3f8"), stroke: 0.9pt + ink)
+  circle((1.95, 2.8), radius: 0.06, fill: ink, stroke: none)
+  line((1.95, 2.8), (3.35, 2.8), stroke: 1.4pt + blue, mark: (end: ">"))
+  line((1.95, 2.8), (0.8, 2.8), stroke: 1.4pt + red, mark: (end: ">"))
+  line((1.95, 2.8), (1.95, 3.85), stroke: 1.3pt + green, mark: (end: ">"))
+  line((1.95, 2.8), (1.95, 1.75), stroke: 1.3pt + red, mark: (end: ">"))
+  axis-label((3.42, 2.85), [$vec(F)$], placement: "west")
+  axis-label((0.72, 2.85), [$vec(F)_"attr"$], placement: "east")
+  axis-label((2.15, 3.78), [$vec(N)$], placement: "west")
+  axis-label((2.15, 1.85), [$m vec(g)$], placement: "west")
+  // caso dinamico
+  line((5.15, 2.45), (9.25, 2.45), stroke: 1.2pt + ink)
+  for x in range(0, 9) { line((5.2 + x*0.45, 2.45), (5.4 + x*0.45, 2.25), stroke: 0.55pt + ink) }
+  rect((6.25, 2.45), (7.05, 3.15), fill: rgb("#edf3f8"), stroke: 0.9pt + ink)
+  circle((6.65, 2.8), radius: 0.06, fill: ink, stroke: none)
+  line((6.65, 2.8), (8.05, 2.8), stroke: 1.4pt + blue, mark: (end: ">"))
+  line((6.65, 3.18), (7.65, 3.18), stroke: 1.1pt + ink, mark: (end: ">"))
+  line((6.65, 2.8), (5.5, 2.8), stroke: 1.4pt + red, mark: (end: ">"))
+  line((6.65, 2.8), (6.65, 3.85), stroke: 1.3pt + green, mark: (end: ">"))
+  line((6.65, 2.8), (6.65, 1.75), stroke: 1.3pt + red, mark: (end: ">"))
+  axis-label((8.12, 2.85), [$vec(F)$], placement: "west")
+  axis-label((7.72, 3.24), [$vec(v)$], placement: "west")
+  axis-label((5.42, 2.85), [$vec(F)_"attr,d"$], placement: "east")
+  axis-label((6.85, 3.78), [$vec(N)$], placement: "west")
+  axis-label((6.85, 1.85), [$m vec(g)$], placement: "west")
+})))
+
+Nel caso orizzontale con una forza applicata $F$:
+
+$ N-m g=0 quad arrow quad N=m g. $
+
+Se il blocco è in quiete, l'attrito statico compensa la forza applicata finché
+
+$ F <= mu_s m g. $
+
+Se il corpo scivola verso destra, l'attrito dinamico è verso sinistra e
+
+$ F-mu_d m g=m a quad arrow quad a=(F-mu_d m g)/m. $
+
+== Forza inclinata e attrito
+
+Se la forza applicata forma un angolo $theta$ sopra l'orizzontale, la componente verticale alleggerisce il contatto e quindi riduce l'attrito massimo.
+
+#align(center, graph-card([Forza inclinata con attrito], cetz.canvas({
+  import cetz.draw: *
+  line((0.55, 0.65), (7.15, 0.65), stroke: 1.3pt + ink)
+  for x in range(0, 14) { line((0.6 + x*0.46, 0.65), (0.82 + x*0.46, 0.43), stroke: 0.55pt + ink) }
+  rect((2.35, 0.65), (3.45, 1.55), fill: rgb("#edf3f8"), stroke: 1pt + ink)
+  circle((2.9, 1.1), radius: 0.07, fill: ink, stroke: none)
+  line((2.9, 1.1), (4.45, 2.15), stroke: 1.5pt + blue, mark: (end: ">"))
+  line((2.9, 1.1), (1.65, 1.1), stroke: 1.5pt + red, mark: (end: ">"))
+  line((2.9, 1.1), (2.9, 2.45), stroke: 1.45pt + green, mark: (end: ">"))
+  line((2.9, 1.1), (2.9, -0.1), stroke: 1.45pt + red, mark: (end: ">"))
+  line((2.9, 1.1), (4.05, 1.1), stroke: (paint: grid-color, thickness: 0.8pt, dash: "dashed"))
+  line((4.05, 1.1), (4.05, 1.88), stroke: (paint: grid-color, thickness: 0.8pt, dash: "dashed"))
+  arc((3.55, 1.1), start: 0deg, stop: 34deg, radius: 0.62, stroke: 0.9pt + gold)
+  axis-label((4.52, 2.2), [$vec(F)$], placement: "west")
+  axis-label((1.58, 1.15), [$vec(F)_"attr"$], placement: "east")
+  axis-label((3.1, 2.38), [$vec(N)$], placement: "west")
+  axis-label((3.1, 0.0), [$m vec(g)$], placement: "west")
+  axis-label((3.58, 1.34), [$theta$], placement: "south")
+  // corpo libero
+  circle((6.1, 1.15), radius: 0.08, fill: ink, stroke: none)
+  line((6.1, 1.15), (7.25, 1.92), stroke: 1.45pt + blue, mark: (end: ">"))
+  line((6.1, 1.15), (5.12, 1.15), stroke: 1.45pt + red, mark: (end: ">"))
+  line((6.1, 1.15), (6.1, 2.35), stroke: 1.4pt + green, mark: (end: ">"))
+  line((6.1, 1.15), (6.1, 0.0), stroke: 1.4pt + red, mark: (end: ">"))
+  axis-label((7.3, 1.96), [$vec(F)$], placement: "west")
+  axis-label((5.05, 1.2), [$vec(F)_"attr"$], placement: "east")
+})))
+
+Le equazioni sono
+
+$ N+F sin theta-m g=0 quad arrow quad N=m g-F sin theta, $
+
+e, in quiete,
+
+$ F cos theta <= mu_s (m g-F sin theta). $
+
+Se il corpo è in moto verso destra,
+
+$ F cos theta-mu_d (m g-F sin theta)=m a_x, $
+
+cioè
+
+$ a_x=(F cos theta-mu_d (m g-F sin theta))/m. $
+
+= Sistemi con più corpi
+
+Quando due corpi sono collegati da una fune ideale, la fune impone un vincolo cinematico: i moduli delle accelerazioni sono uguali. Per una fune ideale e una carrucola ideale anche il modulo della tensione è lo stesso in ogni tratto.
+
+#yellow-box([Fune ideale])[
+  Fune ideale significa massa trascurabile, inestensibilità e assenza di attrito nelle carrucole. In queste ipotesi:
+  $ |a_1|=|a_2|=a, quad T_1=T_2=T. $
+]
+
+== Massa su piano liscio e massa sospesa
+
+#align(center, graph-card([Due corpi collegati: piano liscio e massa sospesa], cetz.canvas({
+  import cetz.draw: *
+  line((0.5, 1.55), (4.25, 1.55), stroke: 1.3pt + ink)
+  for x in range(0, 8) { line((0.6 + x*0.43, 1.55), (0.8 + x*0.43, 1.35), stroke: 0.55pt + ink) }
+  rect((1.05, 1.55), (2.05, 2.35), fill: rgb("#edf3f8"), stroke: 1pt + ink)
+  circle((4.25, 1.55), radius: 0.34, stroke: 1pt + ink)
+  line((2.05, 1.95), (3.91, 1.95), stroke: 1.1pt + blue)
+  line((4.59, 1.55), (4.59, 0.45), stroke: 1.1pt + blue)
+  rect((4.22, -0.25), (4.96, 0.45), fill: rgb("#edf3f8"), stroke: 0.9pt + ink)
+  line((1.55, 1.95), (2.65, 1.95), stroke: 1.35pt + blue, mark: (end: ">"))
+  line((1.55, 1.95), (1.55, 2.9), stroke: 1.25pt + green, mark: (end: ">"))
+  line((1.55, 1.95), (1.55, 0.95), stroke: 1.25pt + red, mark: (end: ">"))
+  line((4.59, 0.1), (4.59, 0.95), stroke: 1.35pt + blue, mark: (end: ">"))
+  line((4.59, 0.1), (4.59, -0.9), stroke: 1.35pt + red, mark: (end: ">"))
+  axis-label((1.55, 1.18), [$m_1$], placement: "south")
+  axis-label((4.88, 0.1), [$m_2$], placement: "west")
+  axis-label((2.7, 2.0), [$vec(T)$], placement: "west")
+  axis-label((1.72, 2.82), [$vec(N)$], placement: "west")
+  axis-label((1.72, 1.02), [$m_1 vec(g)$], placement: "west")
+  axis-label((4.78, 0.85), [$vec(T)$], placement: "west")
+  axis-label((4.78, -0.78), [$m_2 vec(g)$], placement: "west")
+  axis-label((0.72, 0.95), [superficie liscia], placement: "north")
+  // diagrammi isolati
+  circle((6.45, 1.55), radius: 0.08, fill: ink, stroke: none)
+  line((6.45, 1.55), (7.45, 1.55), stroke: 1.35pt + blue, mark: (end: ">"))
+  line((6.45, 1.55), (6.45, 2.55), stroke: 1.25pt + green, mark: (end: ">"))
+  line((6.45, 1.55), (6.45, 0.55), stroke: 1.25pt + red, mark: (end: ">"))
+  circle((8.75, 1.55), radius: 0.08, fill: ink, stroke: none)
+  line((8.75, 1.55), (8.75, 2.55), stroke: 1.35pt + blue, mark: (end: ">"))
+  line((8.75, 1.55), (8.75, 0.45), stroke: 1.35pt + red, mark: (end: ">"))
+  axis-label((7.5, 1.6), [$vec(T)$], placement: "west")
+  axis-label((8.95, 2.48), [$vec(T)$], placement: "west")
+  axis-label((8.95, 0.55), [$m_2 vec(g)$], placement: "west")
+})))
+
+Con $x$ verso destra per $m_1$ e verso il basso per $m_2$:
+
+$ T=m_1 a, $
+$ m_2 g-T=m_2 a. $
+
+Sommando le due equazioni,
+
+$ a=(m_2 g)/(m_1+m_2), quad T=(m_1 m_2 g)/(m_1+m_2). $
+
+Il moto è uniformemente accelerato se le masse sono costanti e le forze esterne non cambiano.
+
+== Macchina di Atwood
+
+Due masse sospese alla stessa carrucola ideale accelerano in versi opposti. Se $m_1>m_2$, scegliamo positivo verso il basso per $m_1$ e verso l'alto per $m_2$.
+
+#align(center, graph-card([Macchina di Atwood], cetz.canvas({
+  import cetz.draw: *
+  circle((2.55, 2.95), radius: 0.5, stroke: 1.1pt + ink)
+  arc((2.05, 2.95), start: 180deg, stop: 0deg, radius: 0.5, stroke: 1.1pt + blue)
+  line((2.05, 2.95), (2.05, 1.25), stroke: 1.1pt + blue)
+  line((3.05, 2.95), (3.05, 1.55), stroke: 1.1pt + blue)
+  rect((1.68, 0.55), (2.42, 1.25), fill: rgb("#edf3f8"), stroke: 0.9pt + ink)
+  rect((2.68, 0.85), (3.42, 1.55), fill: rgb("#edf3f8"), stroke: 0.9pt + ink)
+  line((2.05, 0.9), (2.05, 1.85), stroke: 1.4pt + blue, mark: (end: ">"))
+  line((2.05, 0.9), (2.05, -0.15), stroke: 1.4pt + red, mark: (end: ">"))
+  line((3.05, 1.2), (3.05, 2.15), stroke: 1.4pt + blue, mark: (end: ">"))
+  line((3.05, 1.2), (3.05, 0.15), stroke: 1.4pt + red, mark: (end: ">"))
+  axis-label((1.4, 0.9), [$m_1$], placement: "east")
+  axis-label((3.7, 1.2), [$m_2$], placement: "west")
+  axis-label((2.24, 1.78), [$vec(T)$], placement: "west")
+  axis-label((2.24, -0.05), [$m_1 vec(g)$], placement: "west")
+  axis-label((3.24, 2.08), [$vec(T)$], placement: "west")
+  axis-label((3.24, 0.25), [$m_2 vec(g)$], placement: "west")
+  // diagrammi isolati
+  circle((5.65, 1.65), radius: 0.08, fill: ink, stroke: none)
+  line((5.65, 1.65), (5.65, 2.75), stroke: 1.4pt + blue, mark: (end: ">"))
+  line((5.65, 1.65), (5.65, 0.55), stroke: 1.4pt + red, mark: (end: ">"))
+  circle((7.45, 1.65), radius: 0.08, fill: ink, stroke: none)
+  line((7.45, 1.65), (7.45, 2.75), stroke: 1.4pt + blue, mark: (end: ">"))
+  line((7.45, 1.65), (7.45, 0.55), stroke: 1.4pt + red, mark: (end: ">"))
+  axis-label((5.85, 2.68), [$vec(T)$], placement: "west")
+  axis-label((5.85, 0.65), [$m_1 vec(g)$], placement: "west")
+  axis-label((7.65, 2.68), [$vec(T)$], placement: "west")
+  axis-label((7.65, 0.65), [$m_2 vec(g)$], placement: "west")
+})))
+
+Le equazioni scalari sono
+
+$ m_1 g-T=m_1 a, $
+$ T-m_2 g=m_2 a. $
+
+Da cui
+
+$ a=((m_1-m_2) g)/(m_1+m_2), quad T=(2m_1 m_2 g)/(m_1+m_2). $
+
+== Piano inclinato con massa sospesa
+
+Nel caso degli appunti, $m_1$ è su un piano liscio inclinato di $theta$ e $m_2$ è sospesa. Se $m_2$ scende, $m_1$ sale lungo il piano.
+
+#align(center, graph-card([Piano inclinato e massa sospesa], cetz.canvas({
+  import cetz.draw: *
+  line((0.45, 0.4), (3.95, 2.65), stroke: 1.3pt + ink)
+  line((3.95, 2.65), (3.95, 0.4), stroke: 1.1pt + ink)
+  line((0.45, 0.4), (3.95, 0.4), stroke: 1.1pt + ink)
+  circle((3.95, 2.65), radius: 0.28, fill: white, stroke: 1pt + ink)
+  rect((1.85, 1.18), (2.55, 1.78), fill: rgb("#edf3f8"), stroke: 0.9pt + ink)
+  line((2.2, 1.48), (3.72, 2.46), stroke: 1.1pt + blue)
+  line((4.23, 2.65), (4.23, 1.28), stroke: 1.1pt + blue)
+  rect((3.9, 0.62), (4.56, 1.28), fill: rgb("#edf3f8"), stroke: 0.9pt + ink)
+  line((2.2, 1.48), (3.25, 2.15), stroke: 1.35pt + blue, mark: (end: ">"))
+  line((2.2, 1.48), (1.55, 2.55), stroke: 1.35pt + green, mark: (end: ">"))
+  line((2.2, 1.48), (2.2, 0.25), stroke: 1.35pt + red, mark: (end: ">"))
+  line((4.23, 0.95), (4.23, 1.85), stroke: 1.35pt + blue, mark: (end: ">"))
+  line((4.23, 0.95), (4.23, -0.05), stroke: 1.35pt + red, mark: (end: ">"))
+  arc((0.85, 0.4), start: 0deg, stop: 33deg, radius: 0.55, stroke: 0.9pt + gold)
+  axis-label((0.9, 0.62), [$theta$], placement: "south")
+  axis-label((3.3, 2.2), [$vec(T)$], placement: "west")
+  axis-label((1.42, 2.6), [$vec(N)$], placement: "east")
+  axis-label((2.38, 0.35), [$m_1 vec(g)$], placement: "west")
+  axis-label((4.42, 1.78), [$vec(T)$], placement: "west")
+  axis-label((4.42, 0.05), [$m_2 vec(g)$], placement: "west")
+  // diagrammi isolati
+  circle((6.25, 1.55), radius: 0.08, fill: ink, stroke: none)
+  line((6.25, 1.55), (7.25, 2.2), stroke: 1.35pt + blue, mark: (end: ">"))
+  line((6.25, 1.55), (5.6, 2.65), stroke: 1.35pt + green, mark: (end: ">"))
+  line((6.25, 1.55), (6.25, 0.35), stroke: 1.35pt + red, mark: (end: ">"))
+  circle((8.6, 1.55), radius: 0.08, fill: ink, stroke: none)
+  line((8.6, 1.55), (8.6, 2.65), stroke: 1.35pt + blue, mark: (end: ">"))
+  line((8.6, 1.55), (8.6, 0.35), stroke: 1.35pt + red, mark: (end: ">"))
+})))
+
+Le equazioni lungo le direzioni di moto sono
+
+$ T-m_1 g sin theta=m_1 a, $
+$ m_2 g-T=m_2 a. $
+
+Quindi
+
+$ a=(m_2 g-m_1 g sin theta)/(m_1+m_2), $
+$ T=m_1 g sin theta+m_1 a. $
+
+= Dinamica del moto circolare uniforme
+
+Nel moto circolare uniforme il modulo della velocità è costante, ma il vettore velocità cambia direzione. L'accelerazione è centripeta:
+
+$ a_c=v^2/R. $
+
+Per la seconda legge di Newton, la risultante delle forze lungo il raggio deve essere diretta verso il centro:
+
+$ |vec(R)|=|sum vec(F)|=m a_c=(m v^2)/R. $
+
+#align(center, graph-card([Risultante centripeta nel moto circolare uniforme], cetz.canvas({
+  import cetz.draw: *
+  circle((2.5, 2.05), radius: 1.45, stroke: 1.2pt + ink)
+  circle((3.55, 1.05), radius: 0.09, fill: ink, stroke: none)
+  line((3.55, 1.05), (2.5, 2.05), stroke: 1.6pt + red, mark: (end: ">"))
+  line((3.55, 1.05), (4.55, 2.1), stroke: 1.5pt + green, mark: (end: ">"))
+  axis-label((3.05, 1.75), [$vec(a)_c$], placement: "south")
+  axis-label((4.62, 2.16), [$vec(v)$], placement: "west")
+  axis-label((2.32, 2.22), [$O$])
+  axis-label((3.22, 1.58), [$R$], placement: "north")
+  circle((7.0, 1.6), radius: 0.08, fill: ink, stroke: none)
+  line((7.0, 1.6), (5.95, 2.25), stroke: 1.6pt + red, mark: (end: ">"))
+  line((7.0, 1.6), (8.05, 2.25), stroke: 1.4pt + green, mark: (end: ">"))
+  axis-label((5.88, 2.3), [$sum vec(F)$], placement: "east")
+  axis-label((8.12, 2.3), [$vec(v)$], placement: "west")
+})))
+
+#yellow-box([Attenzione])[
+  La forza centripeta non è una nuova forza: è il nome della risultante radiale delle forze reali. Può essere fornita da tensione, attrito, normale, gravità o da una combinazione di queste.
+]
+
+== Pendolo conico
+
+Nel pendolo conico una massa ruota con velocità costante su una circonferenza orizzontale. La tensione della fune ha una componente verticale che equilibra il peso e una componente orizzontale centripeta.
+
+#align(center, graph-card([Pendolo conico], cetz.canvas({
+  import cetz.draw: *
+  line((0.9, 3.3), (4.3, 3.3), stroke: 1.2pt + ink)
+  line((2.6, 3.3), (1.5, 1.35), stroke: 1.4pt + ink)
+  line((2.6, 3.3), (2.6, 1.35), stroke: (paint: grid-color, thickness: 0.9pt, dash: "dashed"))
+  line(
+    (1.5, 1.35), (1.75, 1.58), (2.15, 1.72), (2.6, 1.75),
+    (3.05, 1.72), (3.45, 1.58), (3.7, 1.35),
+    (3.45, 1.12), (3.05, 0.98), (2.6, 0.95),
+    (2.15, 0.98), (1.75, 1.12), (1.5, 1.35),
+    stroke: 1pt + blue,
+  )
+  circle((1.5, 1.35), radius: 0.1, fill: ink, stroke: none)
+  line((1.5, 1.35), (2.6, 1.35), stroke: 1.1pt + gold)
+  line((1.5, 1.35), (1.05, 0.35), stroke: 1.3pt + green, mark: (end: ">"))
+  arc((2.35, 2.85), start: 240deg, stop: 270deg, radius: 0.55, stroke: 0.9pt + gold)
+  axis-label((1.0, 2.25), [$ell$], placement: "east")
+  axis-label((2.34, 2.5), [$theta$], placement: "east")
+  axis-label((2.05, 1.18), [$R$], placement: "north")
+  axis-label((0.98, 0.42), [$vec(v)$], placement: "east")
+  // diagramma delle forze
+  circle((6.0, 1.55), radius: 0.08, fill: ink, stroke: none)
+  line((6.0, 1.55), (6.85, 2.75), stroke: 1.5pt + blue, mark: (end: ">"))
+  line((6.0, 1.55), (6.0, 0.25), stroke: 1.5pt + red, mark: (end: ">"))
+  line((6.0, 1.55), (6.75, 1.55), stroke: (paint: grid-color, thickness: 0.9pt, dash: "dashed"))
+  line((6.75, 1.55), (6.75, 2.6), stroke: (paint: grid-color, thickness: 0.9pt, dash: "dashed"))
+  axis-label((6.9, 2.78), [$vec(T)$], placement: "west")
+  axis-label((6.18, 0.35), [$m vec(g)$], placement: "west")
+  axis-label((6.72, 1.35), [$T sin theta$], placement: "north")
+})))
+
+Scegliendo $x$ radiale verso il centro e $y$ verticale:
+
+$ T sin theta=m v^2/R, $
+$ T cos theta-m g=0. $
+
+Da qui
+
+$ T=(m g)/(cos theta), quad tan theta=v^2/(R g), $
+
+e quindi
+
+$ v=sqrt(R g tan theta). $
+
+Poiché $T_"periodo"=(2 pi R)/v$,
+
+$ T_"periodo"=2 pi sqrt(R/(g tan theta)). $
+
+= Dinamometro statico
+
+Un dinamometro statico misura una forza tramite l'allungamento di una molla. In equilibrio, la forza elastica compensa la forza applicata.
+
+#align(center, graph-card([Dinamometro: equilibrio statico della molla], cetz.canvas({
+  import cetz.draw: *
+  line((0.75, 3.25), (5.05, 3.25), stroke: 1.2pt + ink)
+  for x in range(0, 10) { line((0.82 + x*0.42, 3.25), (1.02 + x*0.42, 3.45), stroke: 0.55pt + ink) }
+  // molla non allungata
+  line((1.75, 3.25), (1.75, 2.85), stroke: 1.1pt + blue)
+  line(
+    (1.75, 2.85), (1.75, 2.65),
+    (1.55, 2.55), (1.95, 2.35), (1.55, 2.15), (1.95, 1.95),
+    (1.55, 1.75), (1.95, 1.55), (1.75, 1.45), (1.75, 1.25),
+    stroke: 1.2pt + blue,
+  )
+  line((1.35, 1.25), (2.15, 1.25), stroke: (paint: grid-color, thickness: 0.9pt, dash: "dashed"))
+  // molla allungata con massa
+  line((3.85, 3.25), (3.85, 2.9), stroke: 1.1pt + blue)
+  line(
+    (3.85, 2.9), (3.85, 2.65),
+    (3.65, 2.52), (4.05, 2.28), (3.65, 2.04), (4.05, 1.80),
+    (3.65, 1.56), (4.05, 1.32), (3.85, 1.18), (3.85, 0.9),
+    stroke: 1.2pt + blue,
+  )
+  rect((3.48, 0.45), (4.22, 0.9), fill: rgb("#edf3f8"), stroke: 0.9pt + ink)
+  line((2.25, 1.25), (4.9, 1.25), stroke: (paint: grid-color, thickness: 0.9pt, dash: "dashed"))
+  line((4.65, 1.25), (4.65, 0.9), stroke: 0.9pt + gold, mark: (end: ">"))
+  axis-label((4.82, 1.08), [$x$], placement: "west")
+  axis-label((4.35, 0.6), [$m$], placement: "west")
+  // corpo libero
+  circle((6.7, 1.35), radius: 0.08, fill: ink, stroke: none)
+  line((6.7, 1.35), (6.7, 2.5), stroke: 1.45pt + blue, mark: (end: ">"))
+  line((6.7, 1.35), (6.7, 0.25), stroke: 1.45pt + red, mark: (end: ">"))
+  axis-label((6.9, 2.42), [$vec(F)_"el"$], placement: "west")
+  axis-label((6.9, 0.35), [$m vec(g)$], placement: "west")
+})))
+
+Per una massa appesa:
+
+$ m g-k x=0 quad arrow quad x=(m g)/k. $
+
+La misura della forza si ricava quindi da $F=k x$.
+
+= Lavoro ed energia
+
+Il lavoro misura quanta energia viene trasferita da una forza durante uno spostamento. Conta solo la componente della forza parallela allo spostamento.
+
+#blue-box([Lavoro elementare])[
+  Per uno spostamento infinitesimo $dif vec(s)$,
+
+  $ dif L=vec(F) dot dif vec(s). $
+
+  L'unità di misura è il joule:
+
+  $ 1 "J"=1 "N" dot "m". $
+]
+
+#align(center, graph-card([Segno del lavoro], cetz.canvas({
+  import cetz.draw: *
+  // lavoro positivo
+  line((0.5, 0.65), (3.2, 0.65), stroke: 1.1pt + ink)
+  rect((1.15, 0.65), (1.9, 1.25), fill: rgb("#edf3f8"), stroke: 0.9pt + ink)
+  line((1.52, 0.95), (2.65, 0.95), stroke: 1.35pt + blue, mark: (end: ">"))
+  line((1.15, 0.35), (1.9, 0.35), stroke: 1pt + gold)
+  axis-label((2.7, 1.0), [$vec(F)$], placement: "west")
+  axis-label((1.5, 0.18), [$Delta s$], placement: "north")
+  axis-label((1.85, 1.55), [$L>0$], placement: "south")
+  // lavoro nullo
+  line((4.0, 0.65), (6.7, 0.65), stroke: 1.1pt + ink)
+  rect((4.65, 0.65), (5.4, 1.25), fill: rgb("#edf3f8"), stroke: 0.9pt + ink)
+  line((5.02, 0.95), (5.02, 2.05), stroke: 1.35pt + blue, mark: (end: ">"))
+  line((4.65, 0.35), (5.4, 0.35), stroke: 1pt + gold)
+  axis-label((5.18, 2.0), [$vec(F)$], placement: "west")
+  axis-label((5.0, 0.18), [$Delta s$], placement: "north")
+  axis-label((5.35, 1.55), [$L=0$], placement: "south")
+  // lavoro negativo
+  line((7.5, 0.65), (10.2, 0.65), stroke: 1.1pt + ink)
+  rect((8.15, 0.65), (8.9, 1.25), fill: rgb("#edf3f8"), stroke: 0.9pt + ink)
+  line((8.52, 0.95), (7.55, 0.95), stroke: 1.35pt + blue, mark: (end: ">"))
+  line((8.15, 0.35), (8.9, 0.35), stroke: 1pt + gold)
+  axis-label((7.48, 1.0), [$vec(F)$], placement: "east")
+  axis-label((8.5, 0.18), [$Delta s$], placement: "north")
+  axis-label((8.85, 1.55), [$L<0$], placement: "south")
+})))
+
+Se la forza è costante lungo uno spostamento rettilineo da $A$ a $B$,
+
+$ L=integral_A^B vec(F) dot dif vec(s). $
+
+In particolare, se $vec(F)$ è parallela e concorde allo spostamento,
+
+$ L=F s. $
+
+== Esempio: blocco su piano inclinato liscio
+
+Un blocco sale lungo un piano inclinato liscio per uno spostamento $s$, con velocità costante. La risultante è nulla, quindi la forza esterna lungo il piano compensa la componente del peso.
+
+#align(center, graph-card([Lavoro su piano inclinato liscio], cetz.canvas({
+  import cetz.draw: *
+  line((0.65, 0.45), (5.4, 2.95), stroke: 1.4pt + ink)
+  line((0.65, 0.45), (5.4, 0.45), stroke: 0.9pt + grid-color)
+  line((5.4, 2.95), (5.4, 0.45), stroke: 0.9pt + grid-color)
+  rect((2.35, 1.25), (3.05, 1.82), fill: rgb("#edf3f8"), stroke: 0.9pt + ink)
+  line((2.7, 1.54), (3.85, 2.15), stroke: 1.45pt + blue, mark: (end: ">"))
+  line((2.7, 1.54), (2.05, 2.62), stroke: 1.35pt + green, mark: (end: ">"))
+  line((2.7, 1.54), (2.7, 0.35), stroke: 1.35pt + red, mark: (end: ">"))
+  line((2.0, 0.9), (4.35, 2.14), stroke: 1pt + gold, mark: (end: ">"))
+  line((3.95, 0.45), (3.95, 2.22), stroke: (paint: grid-color, thickness: 0.8pt, dash: "dashed"))
+  arc((1.05, 0.45), start: 0deg, stop: 28deg, radius: 0.6, stroke: 0.9pt + gold)
+  axis-label((1.1, 0.68), [$theta$], placement: "south")
+  axis-label((3.92, 2.2), [$vec(F)$], placement: "west")
+  axis-label((1.95, 2.68), [$vec(N)$], placement: "east")
+  axis-label((2.9, 0.45), [$m vec(g)$], placement: "west")
+  axis-label((3.35, 1.35), [$s$], placement: "north")
+  axis-label((4.1, 1.27), [$h=s sin theta$], placement: "west")
+})))
+
+Con $v$ costante, $sum vec(F)=vec(0)$:
+
+$ N=m g cos theta, quad F-m g sin theta=0. $
+
+Il lavoro della forza esterna è
+
+$ L=F s=m g sin theta, s=m g h. $
