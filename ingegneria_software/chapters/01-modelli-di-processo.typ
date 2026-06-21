@@ -35,6 +35,8 @@ Modellare il processo dà ordine, controllo e ripetibilità a un'attività altri
 
 Un *modello di processo* è una rappresentazione astratta del processo reale. Non descrive ogni dettaglio operativo: seleziona le attività e le relazioni più importanti per guidare e coordinare il team.
 
+\
+
 I modelli si collocano lungo uno spettro tra due estremi:
 
 #table(

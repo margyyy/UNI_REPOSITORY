@@ -50,20 +50,14 @@ Nella pratica lo sketch è l'uso più comune: seleziona l'informazione utile inv
 Un modello di dominio è un glossario visuale delle astrazioni rilevanti. Non rappresenta tutto il mondo reale: seleziona concetti, attributi e relazioni utili allo scopo, crea un vocabolario comune tra stakeholder e ispira successivamente nomi e strutture del design.
 
 #figure(
-  cetz.canvas({
-    import cetz.draw: *
-    content((-3.8, 1.5), uml-box([Studente], width: 35mm))
-    content((-3.8, -1.5), uml-box([Docente], width: 35mm))
-    content((3.8, 0), uml-box([Corso], width: 35mm))
-    line((-2.35, 1.5), (2.35, .25), mark: (end: ">"), stroke: .8pt + uml-blue)
-    line((-2.35, -1.5), (2.35, -.25), mark: (end: ">"), stroke: .8pt + uml-blue)
-    content((0, 1.25), text(7pt)[frequenta])
-    content((-2.05, 1.75), text(7pt, "0..*"))
-    content((2.05, .7), text(7pt, "1..*"))
-    content((0, -1.25), text(7pt)[insegna])
-    content((-2.05, -1.75), text(7pt)[1])
-    content((2.05, -.7), text(7pt, "0..*"))
-  }),
+  [```pintora
+classDiagram
+  class Studente
+  class Docente
+  class Corso
+  Studente "0..*" --> "1..*" Corso : frequenta
+  Docente "1" --> "0..*" Corso : insegna
+```],
   caption: [Modello concettuale del dominio universitario.],
 )
 

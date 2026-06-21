@@ -1,8 +1,13 @@
 #import "layout.typ": appunti
 #import "boxes.typ": *
 #import "@preview/cetz:0.5.1"
+#import "@preview/pintorita:0.1.4"
 
 #show: appunti
+#show raw.where(lang: "pintora"): it => pintorita.render(it.text, factor: 0.62)
+#show raw.where(lang: "pintora-small"): it => pintorita.render(it.text, factor: 0.46)
+#show raw.where(lang: "pintora-tiny"): it => pintorita.render(it.text, factor: 0.34)
+#show raw.where(lang: "pintora-micro"): it => pintorita.render(it.text, factor: 0.28)
 
 #let blue = rgb("#245b88")
 #let green = rgb("#327a50")
@@ -48,3 +53,18 @@
 
 #pagebreak(weak: true)
 #include "chapters/09-state-machine-diagram.typ"
+
+#pagebreak(weak: true)
+#include "chapters/10-sequence-diagram.typ"
+
+#pagebreak(weak: true)
+#include "chapters/11-activity-diagram.typ"
+
+#pagebreak(weak: true)
+#include "chapters/12-component-package-deployment.typ"
+
+#pagebreak(weak: true)
+#include "chapters/13-design-patterns.typ"
+
+#pagebreak(weak: true)
+#include "chapters/14-software-testing.typ"

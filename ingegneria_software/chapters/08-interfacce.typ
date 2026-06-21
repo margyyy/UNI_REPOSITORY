@@ -17,15 +17,19 @@ Il termine *interfaccia* indica sia l'insieme delle operazioni pubblicamente vis
 Una classe *fornisce* un'interfaccia quando implementa tutte le operazioni che essa dichiara. UML rappresenta la realizzazione con una linea tratteggiata e un triangolo vuoto rivolto verso l'interfaccia. Lo stereotipo `«interface»` distingue l'interfaccia da una classe ordinaria.
 
 #figure(
-  cetz.canvas({
-    import cetz.draw: *
-    content((0, 2), uml-box([«interface»\ List], operations: ([+ equals(Object)], [+ add(Object)], [+ get(index)]), width: 43mm, fill: uml-pale-amber, stroke: uml-amber))
-    content((-3.2, -1.3), uml-box([ArrayList], width: 38mm))
-    content((3.2, -1.3), uml-box([LinkedList], width: 38mm))
-    line((-2.3, -.85), (-.4, 1.2), stroke: (dash: "dashed", paint: uml-blue))
-    line((2.3, -.85), (.4, 1.2), stroke: (dash: "dashed", paint: uml-blue))
-    polygon((0, 1.35), 3, angle: 90deg, radius: .5, fill: white, stroke: .8pt + uml-blue)
-  }),
+  [```pintora
+classDiagram
+  class List {
+    <<interface>>
+    +equals(Object)
+    +add(Object)
+    +get(index)
+  }
+  class ArrayList
+  class LinkedList
+  List <|.. ArrayList
+  List <|.. LinkedList
+```],
   caption: [`ArrayList` e `LinkedList` realizzano la stessa interfaccia `List`.],
 )
 
@@ -83,18 +87,21 @@ La stessa relazione può essere espressa con la notazione estesa — rettangolo 
 Senza interfaccia, un cliente dipende direttamente da una classe concreta. Introducendo un contratto intermedio, sia il cliente sia le implementazioni dipendono da un'astrazione stabile.
 
 #figure(
-  cetz.canvas({
-    import cetz.draw: *
-    content((-3.8, 1.2), uml-box([Cliente A], width: 32mm))
-    content((-3.8, -1.2), uml-box([Cliente B], width: 32mm))
-    content((0, 0), uml-box([«interface»\ Servizio], operations: ([+ esegui()],), width: 38mm, fill: uml-pale-amber, stroke: uml-amber))
-    content((3.8, 1.2), uml-box([Implementazione 1], width: 40mm, fill: uml-pale-green, stroke: uml-green))
-    content((3.8, -1.2), uml-box([Implementazione 2], width: 40mm, fill: uml-pale-green, stroke: uml-green))
-    line((-2.5, 1), (-1.5, .35), mark: (end: ">"), stroke: (dash: "dashed", paint: uml-blue))
-    line((-2.5, -1), (-1.5, -.35), mark: (end: ">"), stroke: (dash: "dashed", paint: uml-blue))
-    line((2.5, 1), (1.5, .35), stroke: (dash: "dashed", paint: uml-green))
-    line((2.5, -1), (1.5, -.35), stroke: (dash: "dashed", paint: uml-green))
-  }),
+  [```pintora
+classDiagram
+  class Servizio {
+    <<interface>>
+    +esegui()
+  }
+  class ClienteA
+  class ClienteB
+  class Implementazione1
+  class Implementazione2
+  ClienteA ..> Servizio : richiede
+  ClienteB ..> Servizio : richiede
+  Servizio <|.. Implementazione1
+  Servizio <|.. Implementazione2
+```],
   caption: [Clienti e implementazioni sono disaccoppiati da un contratto comune.],
 )
 
@@ -115,15 +122,12 @@ I principali vantaggi sono:
 Un Class Diagram non descrive soltanto elementi strutturali: associazioni, attributi, molteplicità e generalizzazioni impongono già vincoli sulle configurazioni ammesse. Per esempio, la molteplicità `1` accanto a `Persona` stabilisce che ogni automobile abbia esattamente un proprietario.
 
 #figure(
-  cetz.canvas({
-    import cetz.draw: *
-    content((-3.2, 0), uml-box([Persona], width: 36mm))
-    content((3.2, 0), uml-box([Automobile], width: 36mm))
-    line((-1.75, 0), (1.75, 0), stroke: .8pt + uml-blue)
-    content((0, .35), text(7pt)[possiede])
-    content((-1.55, .35), text(7pt)[1])
-    content((1.55, .35), text(7pt, "1..*"))
-  }),
+  [```pintora
+classDiagram
+  class Persona
+  class Automobile
+  Persona "1" -- "1..*" Automobile : possiede
+```],
   caption: [La molteplicità esprime il vincolo: ogni automobile appartiene a una sola persona.],
 )
 

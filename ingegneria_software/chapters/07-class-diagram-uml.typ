@@ -1,6 +1,4 @@
 #import "../boxes.typ": *
-#import "@preview/cetz:0.5.1"
-#import "../uml.typ": *
 
 = Class diagram e Object diagram UML
 
@@ -19,17 +17,18 @@ Una classe incapsula caratteristiche comuni a un insieme di oggetti. Gli attribu
 La rappresentazione completa usa tre comparti: nome, attributi e operazioni. I comparti non necessari possono essere soppressi per mantenere il diagramma leggibile.
 
 #figure(
-  cetz.canvas({
-    import cetz.draw: *
-    content((0, 0), uml-box(
-      [ContoBancario],
-      attributes: ([− saldo: Euro], [− titolare: String], [− numeroConti: int {static}]),
-      operations: ([+ deposita(Euro)], [+ preleva(Euro)], [+ saldoAllaData(Data)], [+ create(Euro) {static}]),
-      width: 62mm,
-      fill: uml-pale-amber,
-      stroke: uml-amber,
-    ))
-  }),
+  [```pintora
+classDiagram
+  class ContoBancario {
+    -Euro saldo
+    -String titolare
+    {static} int numeroConti
+    +deposita(Euro)
+    +preleva(Euro)
+    +saldoAllaData(Data)
+    {static} +create(Euro)
+  }
+```],
   caption: [Classe UML con i comparti di nome, attributi e operazioni.],
 )
 
@@ -86,21 +85,15 @@ Attributi e operazioni statici appartengono alla classe e sono tradizionalmente 
 Un'associazione rappresenta una relazione fisica o concettuale tra classi. Può avere nome, ruoli agli estremi, molteplicità e verso di navigazione.
 
 #figure(
-  cetz.canvas({
-    import cetz.draw: *
-    content((-3.7, 1.3), uml-box([Persona], attributes: ([− nome: String],), width: 36mm))
-    content((3.7, 1.3), uml-box([Automobile], attributes: ([− targa: String],), width: 36mm))
-    content((-3.7, -1.3), uml-box([Dipartimento], width: 36mm))
-    content((3.7, -1.3), uml-box([Sede], width: 36mm))
-    line((-2.25, 1.3), (2.25, 1.3), mark: (end: ">"), stroke: .8pt + uml-blue)
-    line((-2.25, -1.3), (2.25, -1.3), mark: (end: ">"), stroke: .8pt + uml-blue)
-    content((0, 1.65), text(7pt)[possiede])
-    content((-2.05, 1.6), text(7pt)[1])
-    content((2.05, 1.6), text(7pt, "1..*"))
-    content((0, -.95), text(7pt)[situato in])
-    content((-2.05, -1), text(7pt, "1..*"))
-    content((2.05, -1), text(7pt, "1..*"))
-  }),
+  [```pintora
+classDiagram
+  class Persona { -String nome }
+  class Automobile { -String targa }
+  class Dipartimento
+  class Sede
+  Persona "1" --> "1..*" Automobile : possiede
+  Dipartimento "1..*" --> "1..*" Sede : situato in
+```],
   caption: [Associazioni orientate con nomi e molteplicità.],
 )
 
@@ -133,16 +126,14 @@ Una relazione navigabile in entrambe le direzioni richiede che entrambe le estre
 Il Class Diagram descrive tutte le configurazioni valide; l'Object Diagram mostra una configurazione concreta in un istante. Un oggetto è scritto `nome : Classe`, tradizionalmente sottolineato, e un link è un'istanza di un'associazione.
 
 #figure(
-  cetz.canvas({
-    import cetz.draw: *
-    content((-3.5, 0), uml-box([mario : Persona], attributes: ([nome = Mario Rossi],), width: 42mm, fill: uml-pale-green, stroke: uml-green, object: true))
-    content((3.5, 1.35), uml-box([a1 : Automobile], attributes: ([targa = AB123CD],), width: 42mm, fill: uml-pale-green, stroke: uml-green, object: true))
-    content((3.5, -1.35), uml-box([a2 : Automobile], attributes: ([targa = EF456GH],), width: 42mm, fill: uml-pale-green, stroke: uml-green, object: true))
-    line((-1.8, .25), (1.8, 1.1), stroke: .8pt + uml-green)
-    line((-1.8, -.25), (1.8, -1.1), stroke: .8pt + uml-green)
-    content((0, 1), text(7pt)[possiede])
-    content((0, -1), text(7pt)[possiede])
-  }),
+  [```pintora
+classDiagram
+  class mario_Persona { String nome_Mario_Rossi }
+  class a1_Automobile { String targa_AB123CD }
+  class a2_Automobile { String targa_EF456GH }
+  mario_Persona -- a1_Automobile : possiede
+  mario_Persona -- a2_Automobile : possiede
+```],
   caption: [Snapshot di oggetti e link coerente col precedente Class Diagram.],
 )
 
@@ -153,18 +144,18 @@ Gli Object Diagram sono utili per spiegare class diagram complessi, verificare l
 Quando data, voto, quantità o altre proprietà appartengono alla relazione e non alle classi coinvolte, si usa una *association class*. In implementazione è spesso più chiaro trasformarla in una normale classe collegata alle due estremità.
 
 #figure(
-  cetz.canvas({
-    import cetz.draw: *
-    content((-3.6, 1.4), uml-box([Studente], attributes: ([− matricola: String],), width: 40mm))
-    content((3.6, 1.4), uml-box([Esame], attributes: ([− codice: String],), width: 40mm))
-    content((0, -1.4), uml-box([IscrizioneEsame], attributes: ([data: Data], [voto: int], [lode: boolean]), width: 46mm, fill: uml-pale-amber, stroke: uml-amber))
-    line((-2.1, .95), (-.65, -.65), mark: (end: ">"), stroke: .8pt + uml-blue)
-    line((2.1, .95), (.65, -.65), mark: (end: ">"), stroke: .8pt + uml-blue)
-    content((-2, .55), text(7pt)[1])
-    content((2, .55), text(7pt)[1])
-    content((-.9, -.45), text(7pt, "0..*"))
-    content((.9, -.45), text(7pt, "0..*"))
-  }),
+  [```pintora
+classDiagram
+  class Studente { -String matricola }
+  class Esame { -String codice }
+  class IscrizioneEsame {
+    Data data
+    int voto
+    boolean lode
+  }
+  Studente "1" --> "0..*" IscrizioneEsame
+  Esame "1" --> "0..*" IscrizioneEsame
+```],
   caption: [Le proprietà dell'associazione sono modellate come classe implementabile.],
 )
 
@@ -175,24 +166,11 @@ Quando data, voto, quantità o altre proprietà appartengono alla relazione e no
 L'aggregazione rappresenta una relazione tutto-parte debole. La composizione è la forma forte: la parte non esiste senza il tutto e può appartenere a un solo composto alla volta.
 
 #figure(
-  cetz.canvas({
-    import cetz.draw: *
-    content((-3.7, 1.2), uml-box([Nazione], width: 34mm))
-    content((3.7, 1.2), uml-box([Regione], width: 34mm))
-    content((-3.7, -1.2), uml-box([Ordine], width: 34mm))
-    content((3.7, -1.2), uml-box([RigaOrdine], width: 34mm))
-    line((-2.25, 1.2), (2.25, 1.2), stroke: .8pt + uml-blue)
-    line((-2.25, -1.2), (2.25, -1.2), stroke: .8pt + uml-blue)
-    // Diamante vuoto: aggregazione; diamante pieno: composizione.
-    polygon((-1.85, 1.2), 4, angle: 0deg, radius: (.4, .25), fill: white, stroke: .8pt + uml-blue)
-    polygon((-1.85, -1.2), 4, angle: 0deg, radius: (.4, .25), fill: uml-blue, stroke: .8pt + uml-blue)
-    content((0, 1.55), text(7pt)[aggregazione])
-    content((0, -.85), text(7pt)[composizione])
-    content((-1.35, 1.55), text(7pt)[1])
-    content((1.9, 1.55), text(7pt, "1..*"))
-    content((-1.35, -.85), text(7pt)[1])
-    content((1.9, -.85), text(7pt, "1..*"))
-  }),
+  [```pintora
+classDiagram
+  Nazione "1" o-- "1..*" Regione : aggregazione
+  Ordine "1" *-- "1..*" RigaOrdine : composizione
+```],
   caption: [Diamante vuoto per aggregazione e pieno per composizione.],
 )
 
@@ -203,15 +181,24 @@ La distinzione dell'aggregazione è spesso ambigua e a livello software si imple
 La generalizzazione esprime una relazione concettuale “è un”: ogni istanza della sottoclasse è anche istanza della superclasse. L'ereditarietà è il meccanismo implementativo con cui la sottoclasse incorpora e specializza struttura e comportamento.
 
 #figure(
-  cetz.canvas({
-    import cetz.draw: *
-    content((0, 1.8), uml-box([Persona], attributes: ([dataNascita],), operations: ([stampa()],), width: 40mm))
-    content((-3.2, -1.5), uml-box([Studente], attributes: ([matricola],), operations: ([mediaVoti()], [stampa()]), width: 40mm))
-    content((3.2, -1.5), uml-box([Docente], attributes: ([settore],), operations: ([stampa()],), width: 40mm))
-    line((-2.35, -.65), (-.35, 1), stroke: .8pt + uml-blue)
-    line((2.35, -.65), (.35, 1), stroke: .8pt + uml-blue)
-    polygon((0, 1.05), 3, angle: 90deg, radius: .5, fill: white, stroke: .8pt + uml-blue)
-  }),
+  [```pintora
+classDiagram
+  class Persona {
+    Data dataNascita
+    +stampa()
+  }
+  class Studente {
+    String matricola
+    +mediaVoti()
+    +stampa()
+  }
+  class Docente {
+    String settore
+    +stampa()
+  }
+  Persona <|-- Studente
+  Persona <|-- Docente
+```],
   caption: [Le sottoclassi ereditano feature e possono aggiungerle o ridefinirle.],
 )
 
@@ -222,13 +209,16 @@ Un oggetto `Studente` può essere trattato come `Persona`; la sottoclasse aggiun
 Una classe Cliente dipende da un Fornitore quando una modifica all'interfaccia del fornitore può richiedere una modifica al cliente. La dipendenza è rappresentata da una freccia tratteggiata.
 
 #figure(
-  cetz.canvas({
-    import cetz.draw: *
-    content((-3.2, 0), uml-box([LineStorage], attributes: ([lines: List<Line>],), operations: ([addLine(Line)], [size()]), width: 44mm))
-    content((3.2, 0), uml-box([Line], operations: ([length()],), width: 36mm))
-    line((-1.45, 0), (1.7, 0), mark: (end: ">"), stroke: (dash: "dashed", paint: uml-blue))
-    content((0, .35), text(7pt)[«use»])
-  }),
+  [```pintora
+classDiagram
+  class LineStorage {
+    List~Line~ lines
+    +addLine(Line)
+    +size()
+  }
+  class Line { +length() }
+  LineStorage ..> Line : use
+```],
   caption: [`LineStorage` dipende da `Line` perché la usa come tipo e parametro.],
 )
 

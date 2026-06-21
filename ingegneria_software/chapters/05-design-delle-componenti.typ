@@ -94,24 +94,23 @@ Per `withdraw(value)`:
 `balance@pre` indica il saldo prima della chiamata. Il contratto garantisce che il prelievo modifichi esattamente il saldo e che l'oggetto resti coerente.
 
 #figure(
-  cetz.canvas({
-    import cetz.draw: *
-    content((-3.4, 0), uml-box(
-      [Account],
-      attributes: ([− balance: Euro], [− deposits], [− withdrawals]),
-      operations: ([+ deposit(value)], [+ withdraw(value)], [+ mayWithdraw(value)], [+ getBalance()]),
-      width: 44mm,
-    ))
-    content((3.4, 0), uml-box(
-      [withdraw contract],
-      attributes: ([pre: 0 ≤ value ≤ balance], [post: balance = balance\@pre − value]),
-      width: 50mm,
-      fill: uml-pale-amber,
-      stroke: uml-amber,
-    ))
-    line((-1.65, 0), (1.35, 0), mark: (end: ">"), stroke: (dash: "dashed", paint: uml-blue))
-    content((0, .35), text(7pt, fill: uml-blue)[specifica])
-  }),
+  [```pintora
+classDiagram
+  class Account {
+    -Euro balance
+    -List deposits
+    -List withdrawals
+    +deposit(value)
+    +withdraw(value)
+    +mayWithdraw(value)
+    +getBalance()
+  }
+  class WithdrawContract {
+    pre_0_le_value_le_balance
+    post_balance_eq_balancePre_minus_value
+  }
+  Account ..> WithdrawContract : specifica
+```],
   caption: [Classe `Account` e contratto dell'operazione `withdraw`.],
 )
 
