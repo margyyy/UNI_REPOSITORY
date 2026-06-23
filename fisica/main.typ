@@ -6913,3 +6913,834 @@ Oersted osservò che una corrente elettrica devia un ago magnetico: le sorgenti 
   line((8.32, 1.58), (9.24, 1.58), stroke: 1.05pt + blue, mark: (end: ">"))
   axis-label((9.34, 1.58), [$i$], placement: "west")
 })))
+
+== Teorema di Ampère
+
+Nel caso magnetostatico, cioè con correnti stazionarie, la circuitazione del campo magnetico lungo una linea chiusa $Gamma$ è proporzionale alla corrente concatenata con quella linea.
+
+#green-box([Teorema di Ampère])[
+  $ integral_Gamma vec(B) dot dif vec(ell) = mu_0 i_"conc". $
+]
+
+La costante $mu_0$ è la *permeabilità magnetica del vuoto*. Nel sistema SI vale
+
+$ mu_0 = 4 pi dot 10^(-7) " N"/"A"^2. $
+
+La corrente concatenata $i_"conc"$ è la corrente totale che attraversa una qualsiasi superficie avente bordo $Gamma$, contando il segno rispetto all'orientazione scelta. In forma locale il teorema diventa
+
+#blue-box([Forma locale di Ampère])[
+  $ nabla times vec(B) = mu_0 vec(J). $
+]
+
+Il teorema di Ampère è particolarmente utile quando la simmetria permette di sapere in anticipo la direzione di $vec(B)$ e di scegliere una linea amperiana su cui il modulo di $B$ è costante.
+
+#align(center, graph-card([Teorema di Ampère e corrente concatenata], cetz.canvas({
+  import cetz.draw: *
+
+  axis-label((1.62, 3.72), [corrente e linee di $vec(B)$], placement: "south")
+  line((1.18, 0.58), (1.18, 3.26), stroke: 1.20pt + ink, mark: (end: ">"))
+  axis-label((1.38, 3.16), [$i$], placement: "west")
+  circle((1.18, 1.84), radius: (0.90, 0.34), stroke: 1.20pt + blue, fill: none, mark: (end: ">"))
+  circle((1.18, 1.84), radius: (1.30, 0.50), stroke: 1.05pt + blue, fill: none, mark: (end: ">"))
+  axis-label((2.72, 2.02), [$vec(B)$], placement: "west")
+
+  line((3.30, 0.62), (3.30, 3.90), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((5.42, 3.72), [linea amperiana $Gamma$], placement: "south")
+  circle((5.42, 2.14), radius: (1.18, 0.52), stroke: 1.15pt + ink, fill: none, mark: (end: ">"))
+  catmull((4.72, 0.98), (5.04, 1.74), (5.92, 2.36), (6.30, 3.16), stroke: 1.05pt + red, mark: (end: ">"))
+  axis-label((4.42, 2.88), [$+i_"conc"$], placement: "east")
+  catmull((6.10, 0.94), (5.76, 1.62), (4.92, 2.18), (4.50, 3.02), stroke: 1.05pt + red, mark: (end: ">"))
+  axis-label((6.42, 2.80), [$-i_"conc"$], placement: "west")
+  axis-label((5.44, 0.66), [$integral_Gamma vec(B) dot dif vec(ell)=mu_0 i_"conc"$], placement: "north")
+
+  line((7.72, 0.62), (7.72, 3.90), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((8.16, 3.18), [sorgenti di $vec(B)$:], placement: "west")
+  axis-label((8.16, 2.52), [cariche in moto], placement: "west")
+  axis-label((8.16, 1.86), [correnti $i$ o densità $vec(J)$], placement: "west")
+  axis-label((8.16, 1.12), [$nabla times vec(B)=mu_0 vec(J)$], placement: "west")
+})))
+
+== Forza magnetica e forza di Lorentz
+
+Il campo magnetico è prodotto da cariche in moto e agisce su cariche in moto. La forza magnetica su una carica $q$ che si muove con velocità $vec(v)$ è
+
+#blue-box([Forza magnetica su una carica])[
+  $ vec(F)_B = q vec(v) times vec(B). $
+]
+
+La forza è perpendicolare sia alla velocità sia al campo magnetico. Per questo motivo la potenza istantanea della forza magnetica è nulla:
+
+$ P = vec(F)_B dot vec(v) = 0. $
+
+Il campo magnetico può deviare la traiettoria, ma non cambia direttamente il modulo della velocità né l'energia cinetica della carica.
+
+Se sono presenti sia campo elettrico sia campo magnetico, la forza totale è la forza di Lorentz:
+
+#green-box([Forza di Lorentz])[
+  $ vec(F) = q vec(E) + q vec(v) times vec(B). $
+]
+
+Su un tratto infinitesimo di filo percorso da corrente $i$ la forza magnetica è
+
+#yellow-box([Forza su un filo percorso da corrente])[
+  $ dif vec(F) = i dif vec(ell) times vec(B). $
+]
+
+#align(center, graph-card([Forza di Lorentz e forza su un filo], cetz.canvas({
+  import cetz.draw: *
+
+  axis-label((1.70, 3.72), [carica in moto], placement: "south")
+  circle((1.18, 1.62), radius: 0.12, fill: ink, stroke: none)
+  axis-label((0.96, 1.34), [$q$], placement: "east")
+  line((1.18, 1.62), (2.10, 2.44), stroke: 1.15pt + green, mark: (end: ">"))
+  axis-label((2.22, 2.50), [$vec(v)$], placement: "west")
+  line((1.18, 1.62), (2.18, 1.62), stroke: 1.15pt + blue, mark: (end: ">"))
+  axis-label((2.30, 1.62), [$vec(B)$], placement: "west")
+  line((1.18, 1.62), (0.40, 0.82), stroke: 1.15pt + red, mark: (end: ">"))
+  axis-label((0.30, 0.76), [$vec(F)_B$], placement: "east")
+  axis-label((1.72, 0.52), [$vec(F)_B$ perpendicolare a $vec(v)$ e $vec(B)$], placement: "north")
+
+  line((3.40, 0.60), (3.40, 3.90), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((5.64, 3.72), [filo in campo magnetico], placement: "south")
+  catmull((4.24, 0.96), (4.88, 1.80), (5.58, 2.52), (6.42, 3.12), stroke: 1.20pt + ink)
+  line((4.86, 1.78), (5.54, 2.50), stroke: 1.20pt + green, mark: (end: ">"))
+  axis-label((5.72, 2.54), [$i dif vec(ell)$], placement: "west")
+  line((5.18, 2.10), (6.18, 2.10), stroke: 1.05pt + blue, mark: (end: ">"))
+  axis-label((6.30, 2.10), [$vec(B)$], placement: "west")
+  line((5.18, 2.10), (4.52, 1.36), stroke: 1.10pt + red, mark: (end: ">"))
+  axis-label((4.40, 1.30), [$dif vec(F)$], placement: "east")
+  axis-label((5.46, 0.62), [$dif vec(F)=i dif vec(ell) times vec(B)$], placement: "north")
+
+  line((7.40, 0.60), (7.40, 3.90), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((7.86, 3.02), [$vec(F)_B dot vec(v)=0$], placement: "west")
+  axis-label((7.86, 2.22), [lavoro magnetico nullo], placement: "west")
+  axis-label((7.86, 1.42), [devia la traiettoria], placement: "west")
+})))
+
+== Dipolo magnetico e spira in campo esterno
+
+Una spira elementare percorsa da corrente si comporta come un *dipolo magnetico*. Il suo momento di dipolo magnetico è
+
+#green-box([Momento di dipolo magnetico])[
+  $ vec(mu) = i vec(S). $
+]
+
+Il vettore $vec(S)$ è perpendicolare al piano della spira e ha modulo pari all'area della spira; il verso si sceglie con la regola della mano destra rispetto al verso della corrente.
+
+In un campo magnetico esterno uniforme, i lati della spira paralleli al campo non subiscono forza. Gli altri lati subiscono forze opposte che formano una coppia: la spira ruota fino ad allineare $vec(mu)$ con $vec(B)$.
+
+#blue-box([Coppia ed energia del dipolo magnetico])[
+  $ vec(tau) = vec(mu) times vec(B), quad
+    U = - vec(mu) dot vec(B). $
+]
+
+L'equilibrio stabile si ha per $vec(mu)$ parallelo a $vec(B)$; l'equilibrio instabile per $vec(mu)$ antiparallelo a $vec(B)$.
+
+#align(center, graph-card([Spira e dipolo magnetico in campo esterno], cetz.canvas({
+  import cetz.draw: *
+
+  axis-label((1.68, 3.82), [dipolo magnetico], placement: "south")
+  circle((1.48, 2.18), radius: (0.78, 0.32), stroke: 1.10pt + ink, fill: rgb("#f7f7f7"))
+  for x in (1.12, 1.34, 1.56) {
+    line((x, 1.90), (x + 0.30, 2.44), stroke: 0.48pt + rgb("#aeb5ba"))
+  }
+  circle((1.48, 2.18), radius: (0.78, 0.32), stroke: 1.10pt + ink, fill: none, mark: (end: ">"))
+  line((1.48, 2.18), (1.48, 3.34), stroke: 1.15pt + green, mark: (end: ">"))
+  axis-label((1.68, 3.30), [$vec(mu)$], placement: "west")
+  axis-label((1.46, 1.62), [$vec(mu)=i vec(S)$], placement: "north")
+
+  line((3.08, 0.58), (3.08, 3.90), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((5.18, 3.82), [spira in $vec(B)$ uniforme], placement: "south")
+  line((4.00, 1.72), (5.96, 1.72), stroke: 1.0pt + ink)
+  line((4.00, 2.82), (5.96, 2.82), stroke: 1.0pt + ink)
+  line((4.00, 1.72), (4.00, 2.82), stroke: 1.0pt + ink)
+  line((5.96, 1.72), (5.96, 2.82), stroke: 1.0pt + ink)
+  line((4.10, 2.82), (5.00, 2.82), stroke: 1.0pt + green, mark: (end: ">"))
+  line((5.86, 1.72), (4.96, 1.72), stroke: 1.0pt + green, mark: (end: ">"))
+  line((4.00, 2.20), (3.48, 1.58), stroke: 1.10pt + red, mark: (end: ">"))
+  line((5.96, 2.34), (6.48, 2.96), stroke: 1.10pt + red, mark: (end: ">"))
+  line((4.40, 1.22), (6.18, 1.22), stroke: 1.05pt + blue, mark: (end: ">"))
+  axis-label((5.28, 0.94), [$vec(B)$], placement: "north")
+  line((4.98, 2.22), (5.82, 3.06), stroke: 1.10pt + green, mark: (end: ">"))
+  axis-label((5.92, 3.12), [$vec(mu)$], placement: "west")
+  arc((4.94, 2.16), radius: 0.60, start: 210deg, stop: 320deg, stroke: 1.0pt + red, mark: (end: ">"))
+  axis-label((4.74, 1.36), [$vec(tau)$], placement: "north")
+
+  line((7.00, 0.58), (7.00, 3.90), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((7.46, 3.18), [$vec(tau)=vec(mu) times vec(B)$], placement: "west")
+  axis-label((7.46, 2.42), [$U=-vec(mu) dot vec(B)$], placement: "west")
+  axis-label((7.46, 1.60), [stabile: $vec(mu) parallel vec(B)$], placement: "west")
+  axis-label((7.46, 0.88), [instabile: versi opposti], placement: "west")
+})))
+
+== Confronto elettrostatica e magnetostatica
+
+In elettrostatica il campo elettrico è conservativo e le sorgenti sono le cariche. In magnetostatica, invece, le sorgenti sono le correnti: non ci sono monopoli magnetici e le linee di $vec(B)$ sono chiuse.
+
+#align(center, graph-card([Equazioni integrali utili: $vec(E)$ e $vec(B)$], cetz.canvas({
+  import cetz.draw: *
+
+  axis-label((1.90, 3.72), [elettrostatica], placement: "south")
+  circle((1.18, 2.58), radius: 0.62, stroke: 1.0pt + ink, fill: rgb("#f7f7f7"))
+  for p in ((0.98, 2.72), (1.22, 2.92), (1.42, 2.54), (1.10, 2.30)) {
+    circle(p, radius: 0.04, fill: ink, stroke: none)
+  }
+  axis-label((1.18, 1.68), [$integral_S vec(E) dot dif vec(S)=Q_"int"/epsilon_0$], placement: "north")
+  axis-label((1.18, 0.96), [$integral_Gamma vec(E) dot dif vec(ell)=0$], placement: "north")
+
+  line((3.72, 0.62), (3.72, 3.90), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((5.92, 3.72), [magnetostatica], placement: "south")
+  circle((5.20, 2.52), radius: (0.72, 0.30), stroke: 1.10pt + blue, fill: none, mark: (end: ">"))
+  line((5.20, 1.72), (5.20, 3.20), stroke: 1.10pt + ink, mark: (end: ">"))
+  axis-label((5.42, 3.12), [$i_"conc"$], placement: "west")
+  axis-label((5.18, 1.34), [$integral_Gamma vec(B) dot dif vec(ell)=mu_0 i_"conc"$], placement: "north")
+  axis-label((5.18, 0.66), [$integral_S vec(B) dot dif vec(S)=0$], placement: "north")
+
+  line((7.86, 0.62), (7.86, 3.90), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((8.30, 3.02), [$vec(F)=q vec(E)$], placement: "west")
+  axis-label((8.30, 2.22), [$vec(F)=q vec(v) times vec(B)$], placement: "west")
+  axis-label((8.30, 1.42), [$dif vec(F)=i dif vec(ell) times vec(B)$], placement: "west")
+})))
+
+== Esempio: campo magnetico di un filo/cilindro indefinito
+
+Consideriamo un cilindro indefinito di raggio $R$, percorso da corrente stazionaria lungo il suo asse. Per simmetria cilindrica le linee di $vec(B)$ sono circonferenze centrate sull'asse del cilindro e il modulo dipende solo dalla distanza $r$ dall'asse.
+
+Scegliendo come linea amperiana una circonferenza di raggio $r$:
+
+$ integral_Gamma vec(B) dot dif vec(ell) = B(r) 2 pi r = mu_0 i_"conc". $
+
+Se la corrente è distribuita uniformemente nel volume, con densità $J$:
+
+$ i = J pi R^2. $
+
+Per $r > R$ la corrente concatenata è tutta la corrente $i$, quindi
+
+$ B(r)=mu_0 i/(2 pi r). $
+
+Per $r < R$ è concatenata solo la corrente dentro il cerchio di raggio $r$:
+
+$ i_"conc" = J pi r^2, quad
+  B(r)=mu_0 J r / 2 = mu_0 i r/(2 pi R^2). $
+
+#align(center, graph-card([Ampère su un cilindro indefinito: corrente volumica], cetz.canvas({
+  import cetz.draw: *
+
+  axis-label((1.68, 3.78), [cilindro indefinito], placement: "south")
+  line((1.12, 0.72), (1.12, 3.10), stroke: 1.10pt + ink)
+  line((2.10, 0.72), (2.10, 3.10), stroke: 1.10pt + ink)
+  circle((1.61, 2.22), radius: (0.48, 0.18), stroke: 1.05pt + ink, fill: rgb("#edf8ef"))
+  line((1.61, 2.22), (2.04, 2.22), stroke: 0.85pt + ink, mark: (start: "|", end: "|"))
+  axis-label((1.86, 2.50), [$R$], placement: "south")
+  for x in (1.32, 1.58, 1.84) {
+    line((x, 2.04), (x, 2.64), stroke: 1.0pt + green, mark: (end: ">"))
+  }
+  axis-label((1.62, 3.30), [$i$], placement: "south")
+  axis-label((1.62, 0.34), [corrente volumica $J$], placement: "north")
+
+  line((3.06, 0.62), (3.06, 3.90), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((5.02, 3.78), [linea amperiana], placement: "south")
+  circle((4.98, 2.20), radius: (1.06, 0.44), stroke: 1.15pt + ink, fill: none, mark: (end: ">"))
+  line((4.98, 2.20), (5.82, 2.20), stroke: 1.0pt + ink, mark: (end: ">"))
+  axis-label((5.42, 2.48), [$r$], placement: "south")
+  line((4.98, 1.20), (4.98, 3.08), stroke: 1.05pt + ink)
+  line((4.74, 1.72), (5.22, 1.72), stroke: 1.05pt + ink)
+  line((4.74, 2.70), (5.22, 2.70), stroke: 1.05pt + ink)
+  axis-label((6.26, 2.20), [$B(r) 2 pi r = mu_0 i_"conc"$], placement: "west")
+
+  line((7.18, 0.62), (7.18, 3.90), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  line((7.72, 0.92), (10.22, 0.92), stroke: 0.9pt + ink, mark: (end: ">"))
+  line((7.72, 0.92), (7.72, 3.42), stroke: 0.9pt + ink, mark: (end: ">"))
+  axis-label((10.34, 0.84), [$r$], placement: "north")
+  axis-label((7.48, 3.42), [$abs(B)$], placement: "east")
+  line((7.72, 0.92), (8.86, 2.96), stroke: 1.20pt + blue)
+  catmull((8.86, 2.96), (9.18, 2.26), (9.66, 1.72), (10.16, 1.42), stroke: 1.20pt + blue)
+  line((8.86, 0.92), (8.86, 3.12), stroke: (paint: ink, thickness: 0.75pt, dash: "dashed"))
+  axis-label((8.86, 0.66), [$R$], placement: "north")
+  axis-label((8.20, 2.12), [~ $r$], placement: "west")
+  axis-label((9.82, 2.08), [~ $1/r$], placement: "west")
+})))
+
+Se invece la corrente scorre solo sulla superficie cilindrica, per $r<R$ non c'è corrente concatenata e il campo interno è nullo:
+
+$ B(r)=0 quad (r<R). $
+
+Per $r>R$ la linea amperiana concatena tutta la corrente:
+
+$ B(r)=mu_0 i/(2 pi r). $
+
+#align(center, graph-card([Corrente superficiale su cilindro: campo interno nullo], cetz.canvas({
+  import cetz.draw: *
+
+  axis-label((1.64, 3.48), [corrente solo sulla superficie], placement: "south")
+  line((0.88, 1.18), (0.88, 2.96), stroke: 1.10pt + ink)
+  line((2.10, 1.18), (2.10, 2.96), stroke: 1.10pt + ink)
+  circle((1.49, 2.08), radius: (0.62, 0.22), stroke: 1.05pt + ink, fill: none)
+  line((0.88, 2.20), (0.88, 2.86), stroke: 1.0pt + green, mark: (end: ">"))
+  line((2.10, 2.20), (2.10, 2.86), stroke: 1.0pt + green, mark: (end: ">"))
+  axis-label((1.48, 1.38), [$B=0$ interno], placement: "north")
+
+  line((3.18, 0.64), (3.18, 3.64), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((3.68, 2.82), [$r<R:$], placement: "west")
+  axis-label((4.72, 2.82), [$i_"conc"=0$], placement: "west")
+  axis-label((4.72, 2.22), [$B=0$], placement: "west")
+  axis-label((3.68, 1.42), [$r>R:$], placement: "west")
+  axis-label((4.72, 1.42), [$B=mu_0 i/(2 pi r)$], placement: "west")
+
+  line((7.00, 0.64), (7.00, 3.64), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  line((7.48, 0.92), (10.00, 0.92), stroke: 0.9pt + ink, mark: (end: ">"))
+  line((7.48, 0.92), (7.48, 3.16), stroke: 0.9pt + ink, mark: (end: ">"))
+  line((7.48, 0.92), (8.50, 0.92), stroke: 1.2pt + blue)
+  line((8.50, 2.72), (8.50, 0.92), stroke: 1.2pt + blue)
+  catmull((8.50, 2.72), (8.86, 2.10), (9.34, 1.60), (9.92, 1.30), stroke: 1.2pt + blue)
+  axis-label((8.50, 0.66), [$R$], placement: "north")
+  axis-label((9.36, 2.26), [~ $1/r$], placement: "west")
+})))
+
+== Solenoide toroidale e solenoide rettilineo
+
+In un solenoide toroidale le spire sono avvolte attorno a una corona. Usando una circonferenza amperiana coassiale al toroide:
+
+$ B(r) 2 pi r = mu_0 N i. $
+
+Nel materiale attraversato dalle spire, cioè per $R<r<R+ell$:
+
+#blue-box([Campo nel solenoide toroidale])[
+  $ B(r)= (mu_0 N i)/(2 pi r). $
+]
+
+Nel foro interno $r<R$ e all'esterno $r>R+ell$ la corrente concatenata complessiva è nulla, quindi idealmente $B=0$.
+
+Per un solenoide rettilineo lungo, lontano dai bordi, il campo è quasi uniforme all'interno e quasi nullo all'esterno:
+
+#blue-box([Campo nel solenoide rettilineo lungo])[
+  $ B_"int" = mu_0 n i, quad B_"est" approx 0. $
+]
+
+Qui $n=N/L$ è il numero di spire per unità di lunghezza.
+
+#align(center, graph-card([Solenoide toroidale e solenoide rettilineo], cetz.canvas({
+  import cetz.draw: *
+
+  axis-label((2.46, 3.82), [solenoide toroidale], placement: "south")
+  circle((2.28, 2.18), radius: 1.18, stroke: 1.10pt + ink, fill: none)
+  circle((2.28, 2.18), radius: 0.58, stroke: (paint: ink, thickness: 0.8pt, dash: "dashed"), fill: none)
+  circle((2.28, 2.18), radius: 1.64, stroke: (paint: ink, thickness: 0.8pt, dash: "dashed"), fill: none)
+  for a in (30deg, 70deg, 110deg, 150deg) {
+    line((2.28 + calc.cos(a) * 0.86, 2.18 + calc.sin(a) * 0.86), (2.28 + calc.cos(a) * 1.42, 2.18 + calc.sin(a) * 1.42), stroke: 1.05pt + green, mark: (end: ">"))
+  }
+  line((2.28, 2.18), (3.34, 2.18), stroke: 0.95pt + ink, mark: (end: ">"))
+  axis-label((2.92, 2.46), [$r$], placement: "south")
+  axis-label((2.28, 0.64), [$R<r<R+ell$], placement: "north")
+
+  line((4.82, 0.62), (4.82, 3.92), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((6.18, 3.82), [andamento], placement: "south")
+  line((5.28, 0.92), (7.62, 0.92), stroke: 0.9pt + ink, mark: (end: ">"))
+  line((5.28, 0.92), (5.28, 3.20), stroke: 0.9pt + ink, mark: (end: ">"))
+  line((5.90, 0.92), (5.90, 2.90), stroke: 1.1pt + blue)
+  catmull((5.90, 2.90), (6.18, 2.42), (6.62, 2.10), (6.94, 1.92), stroke: 1.1pt + blue)
+  line((6.94, 1.92), (6.94, 0.92), stroke: 1.1pt + blue)
+  axis-label((5.90, 0.66), [$R$], placement: "north")
+  axis-label((6.94, 0.66), [$R+ell$], placement: "north")
+  axis-label((6.48, 2.58), [~ $1/r$], placement: "west")
+
+  line((8.10, 0.62), (8.10, 3.92), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((9.46, 3.82), [solenoide rettilineo], placement: "south")
+  line((8.88, 1.02), (8.88, 3.18), stroke: 1.05pt + ink)
+  line((10.00, 1.02), (10.00, 3.18), stroke: 1.05pt + ink)
+  for y in (1.28, 1.64, 2.00, 2.36, 2.72, 3.08) {
+    circle((9.44, y), radius: (0.56, 0.15), stroke: 1.0pt + ink, fill: none)
+  }
+  line((9.44, 1.20), (9.44, 3.00), stroke: 1.15pt + blue, mark: (end: ">"))
+  axis-label((9.74, 2.14), [$B_"int"$], placement: "west")
+  axis-label((10.30, 2.76), [$B_"est" approx 0$], placement: "west")
+  axis-label((9.44, 0.62), [$B_"int"=mu_0 n i$], placement: "north")
+})))
+
+== Azione meccanica tra fili percorsi da corrente
+
+Due fili rettilinei paralleli percorsi da corrente esercitano forze magnetiche reciproche. Il primo filo genera, alla distanza $d$, un campo
+
+$ B_1(d)=mu_0 i_1/(2 pi d). $
+
+Il secondo filo, percorso da corrente $i_2$, subisce la forza magnetica
+
+$ dif vec(F) = i_2 dif vec(ell) times vec(B)_1. $
+
+Per unità di lunghezza:
+
+#green-box([Forza per unità di lunghezza tra fili paralleli])[
+  $ F/ell = (mu_0 i_1 i_2)/(2 pi d). $
+]
+
+Correnti nello stesso verso si attraggono; correnti in verso opposto si respingono.
+
+#align(center, graph-card([Forza magnetica tra due fili paralleli], cetz.canvas({
+  import cetz.draw: *
+
+  axis-label((2.48, 3.82), [due fili paralleli], placement: "south")
+  line((1.28, 0.72), (1.28, 3.24), stroke: 1.20pt + ink, mark: (end: ">"))
+  line((3.70, 0.72), (3.70, 3.24), stroke: 1.20pt + ink, mark: (end: ">"))
+  axis-label((1.08, 3.12), [$i_1$], placement: "east")
+  axis-label((3.90, 3.12), [$i_2$], placement: "west")
+  line((1.28, 3.50), (3.70, 3.50), stroke: 0.9pt + ink, mark: (start: "|", end: "|"))
+  axis-label((2.48, 3.74), [$d$], placement: "south")
+  circle((1.28, 1.60), radius: (0.70, 0.28), stroke: 1.0pt + blue, fill: none, mark: (end: ">"))
+  circle((3.70, 1.40), radius: (0.70, 0.28), stroke: 1.0pt + blue, fill: none, mark: (end: ">"))
+  line((3.70, 2.20), (2.90, 2.20), stroke: 1.15pt + red, mark: (end: ">"))
+  line((1.28, 2.20), (2.08, 2.20), stroke: 1.15pt + red, mark: (end: ">"))
+  axis-label((2.48, 1.78), [stesso verso: attrazione], placement: "north")
+
+  line((5.12, 0.62), (5.12, 3.90), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((5.58, 2.92), [$B_1(d)=mu_0 i_1/(2 pi d)$], placement: "west")
+  axis-label((5.58, 2.14), [$F/ell=i_2 B_1(d)$], placement: "west")
+  axis-label((5.58, 1.36), [$F/ell=mu_0 i_1 i_2/(2 pi d)$], placement: "west")
+})))
+
+== Induzione elettromagnetica
+
+Finora abbiamo visto che una corrente genera un campo magnetico e che un campo magnetico esercita forze su cariche in moto. L'osservazione sperimentale successiva è che un campo magnetico variabile, oppure un circuito che si muove in un campo magnetico, può generare una F.E.M. e quindi una corrente indotta.
+
+Il fenomeno si descrive con il *flusso magnetico* attraverso una superficie $S$:
+
+#blue-box([Flusso magnetico])[
+  $ Phi_B = integral_S vec(B) dot dif vec(S). $
+]
+
+Per un campo uniforme perpendicolare alla superficie, $Phi_B = B S$. In generale il flusso cambia se cambia il campo $vec(B)$, se cambia l'area della superficie, oppure se cambia l'orientazione della superficie rispetto al campo.
+
+La legge di Faraday-Lenz afferma che una variazione del flusso magnetico genera una F.E.M. indotta:
+
+#green-box([Legge di Faraday-Lenz])[
+  $ cal(E)_"ind" = - (dif Phi_B)/(dif t). $
+]
+
+Il segno meno è la *legge di Lenz*: la corrente indotta ha verso tale da opporsi alla variazione di flusso che l'ha generata. Se il flusso aumenta, il campo indotto tende a ridurlo; se il flusso diminuisce, il campo indotto tende a mantenerlo.
+
+#align(center, graph-card([Induzione: variazione del flusso magnetico], cetz.canvas({
+  import cetz.draw: *
+
+  axis-label((1.50, 3.72), [campo variabile], placement: "south")
+  rect((0.64, 1.30), (2.36, 2.38), stroke: 1.05pt + ink, fill: rgb("#fbfcfd"))
+  for x in (0.95, 1.35, 1.75, 2.15) {
+    line((x, 1.42), (x, 2.26), stroke: 1.05pt + blue, mark: (end: ">"))
+  }
+  axis-label((1.50, 2.72), [$B(t)$], placement: "south")
+  axis-label((1.50, 0.82), [$dif Phi_B/dif t != 0$], placement: "north")
+
+  line((3.04, 0.64), (3.04, 3.88), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((4.68, 3.72), [area variabile], placement: "south")
+  rect((3.74, 1.40), (5.20, 2.30), stroke: 1.05pt + ink, fill: rgb("#fbfcfd"))
+  rect((4.12, 1.18), (5.90, 2.52), stroke: 0.90pt + ink, fill: none)
+  line((5.26, 1.84), (5.88, 1.84), stroke: 1.05pt + green, mark: (end: ">"))
+  axis-label((4.74, 0.82), [$S(t)$ cambia], placement: "north")
+
+  line((6.44, 0.64), (6.44, 3.88), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((8.34, 3.72), [orientazione variabile], placement: "south")
+  line((7.28, 1.22), (8.62, 1.72), stroke: 1.05pt + ink)
+  line((8.62, 1.72), (9.42, 2.52), stroke: 1.05pt + ink)
+  line((9.42, 2.52), (8.02, 2.02), stroke: 1.05pt + ink)
+  line((8.02, 2.02), (7.28, 1.22), stroke: 1.05pt + ink)
+  for y in (1.36, 1.74, 2.12) {
+    line((7.00, y), (9.58, y), stroke: 1.0pt + blue, mark: (end: ">"))
+  }
+  line((8.34, 1.86), (8.34, 2.82), stroke: 1.0pt + ink, mark: (end: ">"))
+  axis-label((8.50, 2.78), [$hat(n)$], placement: "west")
+  axis-label((8.34, 0.82), [$vec(B) dot dif vec(S)$ cambia], placement: "north")
+})))
+
+== Esempio: circuito mobile di Faraday
+
+Consideriamo una barretta conduttrice di lunghezza $a$ che scorre con velocità $v$ su due guide conduttrici, chiuse da un resistore $R$, in un campo magnetico uniforme perpendicolare al circuito.
+
+Se la posizione della barretta è $x(t)$, l'area del circuito è $S=a x$, quindi
+
+$ Phi_B = B a x. $
+
+La F.E.M. indotta vale
+
+$ cal(E)_"ind" = - (dif Phi_B)/(dif t) = - B a v. $
+
+In modulo la corrente indotta è
+
+#yellow-box([Corrente indotta nella barretta mobile])[
+  $ i_"ind" = (B a v)/R. $
+]
+
+La forza magnetica sulla barretta è opposta al moto: agisce come un attrito elettromagnetico. In modulo
+
+$ F = i a B = (B^2 a^2/R) v. $
+
+Se si vuole mantenere la velocità costante, una forza esterna deve fornire la potenza meccanica
+
+$ P_"mecc" = F v = (B^2 a^2 v^2)/R. $
+
+Questa potenza coincide con la potenza dissipata per effetto Joule:
+
+$ P_"Joule" = R i_"ind"^2 = (B^2 a^2 v^2)/R. $
+
+#align(center, graph-card([Circuito mobile di Faraday], cetz.canvas({
+  import cetz.draw: *
+
+  axis-label((2.38, 3.74), [barretta mobile], placement: "south")
+  line((0.58, 2.80), (4.18, 2.80), stroke: 1.15pt + ink)
+  line((0.58, 1.20), (4.18, 1.20), stroke: 1.15pt + ink)
+  line((0.58, 1.20), (0.58, 2.80), stroke: 1.15pt + ink)
+  // resistore a sinistra
+  line((0.58, 2.20), (0.36, 2.04), stroke: 1.0pt + ink)
+  line((0.36, 2.04), (0.80, 1.84), stroke: 1.0pt + ink)
+  line((0.80, 1.84), (0.36, 1.64), stroke: 1.0pt + ink)
+  line((0.36, 1.64), (0.58, 1.48), stroke: 1.0pt + ink)
+  axis-label((0.18, 1.86), [$R$], placement: "east")
+  // barretta
+  line((3.10, 1.12), (3.10, 2.88), stroke: 2.0pt + ink)
+  line((3.10, 2.00), (4.00, 2.00), stroke: 1.15pt + green, mark: (end: ">"))
+  axis-label((4.12, 2.00), [$v$], placement: "west")
+  line((0.58, 0.78), (3.10, 0.78), stroke: 0.9pt + ink, mark: (start: "|", end: "|"))
+  axis-label((1.84, 0.54), [$x$], placement: "north")
+  line((3.34, 1.20), (3.34, 2.80), stroke: 0.9pt + ink, mark: (start: "|", end: "|"))
+  axis-label((3.56, 2.00), [$a$], placement: "west")
+  for p in ((1.20, 1.64), (1.82, 2.16), (2.42, 1.58), (2.80, 2.34)) {
+    circle(p, radius: 0.06, stroke: 1.0pt + blue, fill: none)
+  }
+  axis-label((2.22, 3.18), [$vec(B)$ uscente], placement: "south")
+  line((3.10, 2.42), (2.58, 2.42), stroke: 1.15pt + red, mark: (end: ">"))
+  axis-label((2.48, 2.42), [$vec(F)$], placement: "east")
+  arc((1.58, 1.98), radius: 0.42, start: 40deg, stop: 300deg, stroke: 1.0pt + green, mark: (end: ">"))
+  axis-label((1.38, 1.40), [$i_"ind"$], placement: "north")
+
+  line((4.74, 0.62), (4.74, 3.86), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((5.20, 3.16), [$Phi_B=B a x$], placement: "west")
+  axis-label((5.20, 2.42), [$cal(E)_"ind"=-B a v$], placement: "west")
+  axis-label((5.20, 1.68), [$i_"ind"=B a v/R$], placement: "west")
+  axis-label((5.20, 0.94), [$F=(B^2 a^2/R)v$], placement: "west")
+})))
+
+== Autoflusso, induttanza e autoinduzione
+
+Quando una corrente attraversa un circuito, genera un campo magnetico. Il flusso del campo prodotto dal circuito attraverso il circuito stesso si chiama *autoflusso*.
+
+Per circuiti lineari l'autoflusso è proporzionale alla corrente:
+
+#green-box([Induttanza])[
+  $ Phi_B = L i. $
+]
+
+La costante $L$ è l'*induttanza* e si misura in henry:
+
+$ [L] = "H". $
+
+Se la corrente varia nel tempo, varia anche l'autoflusso e quindi nasce una F.E.M. autoindotta:
+
+#blue-box([Autoinduzione])[
+  $ cal(E)_L = - (dif Phi_B)/(dif t) = - L (dif i)/(dif t). $
+]
+
+Il segno meno indica che l'induttore si oppone alla variazione della corrente: si oppone all'aumento quando il circuito si accende e si oppone alla diminuzione quando il circuito si spegne.
+
+#align(center, graph-card([Autoflusso e autoinduzione], cetz.canvas({
+  import cetz.draw: *
+
+  axis-label((1.92, 3.72), [autoflusso], placement: "south")
+  circle((1.62, 2.08), radius: (1.00, 0.42), stroke: 1.10pt + ink, fill: none, mark: (end: ">"))
+  for x in (1.18, 1.56, 1.94) {
+    catmull((x, 1.82), (x - 0.10, 2.24), (x + 0.10, 2.72), stroke: 1.0pt + blue, mark: (end: ">"))
+  }
+  line((1.62, 2.08), (1.62, 3.20), stroke: 1.05pt + ink, mark: (end: ">"))
+  axis-label((1.82, 3.16), [$hat(n)$], placement: "west")
+  axis-label((1.60, 1.18), [$Phi_B=L i$], placement: "north")
+
+  line((3.40, 0.62), (3.40, 3.86), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((4.00, 3.02), [se $i(t)$ varia], placement: "west")
+  line((4.16, 2.24), (4.16, 3.22), stroke: 1.15pt + green, mark: (end: ">"))
+  axis-label((4.34, 3.14), [$i$], placement: "west")
+  circle((4.16, 2.24), radius: (0.55, 0.24), stroke: 1.0pt + blue, fill: none, mark: (end: ">"))
+  axis-label((4.82, 2.24), [$vec(B)$], placement: "west")
+  axis-label((3.92, 1.36), [$cal(E)_L=-L dif i/dif t$], placement: "north")
+
+  line((6.16, 0.62), (6.16, 3.86), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((6.62, 2.80), [si oppone a], placement: "west")
+  axis-label((6.62, 2.16), [aumenti e diminuzioni di corrente], placement: "west")
+  axis-label((6.62, 1.36), [effetto di Lenz sul circuito stesso], placement: "west")
+})))
+
+== Circuito RL
+
+In un circuito formato da un generatore ideale $V_0$, una resistenza $R$ e un'induttanza $L$, la legge di maglia durante l'accensione è
+
+#yellow-box([Legge di Ohm generalizzata per RL])[
+  $ V_0 - L (dif i)/(dif t) = R i. $
+]
+
+La corrente non passa istantaneamente da zero al valore di regime: cresce esponenzialmente con tempo caratteristico
+
+$ tau = L/R. $
+
+Durante l'accensione:
+
+#blue-box([Accensione RL])[
+  $ i(t)=V_0/R (1-e^(-t/tau)), quad tau=L/R. $
+]
+
+Durante lo spegnimento, l'energia accumulata nel campo magnetico dell'induttore viene restituita e dissipata nel resistore. La corrente decade:
+
+#blue-box([Spegnimento RL])[
+  $ i(t)=i_0 e^(-t/tau). $
+]
+
+La potenza associata all'induttore è
+
+$ P_L = cal(E)_L i = - L i (dif i)/(dif t). $
+
+Il segno dipende dal fatto che l'induttore stia assorbendo energia dal circuito oppure restituendola.
+
+#align(center, graph-card([Circuito RL: accensione e spegnimento], cetz.canvas({
+  import cetz.draw: *
+
+  axis-label((1.56, 3.74), [circuito RL], placement: "south")
+  rect((0.56, 1.02), (2.80, 3.12), stroke: 1.05pt + ink, fill: none)
+  line((1.00, 0.66), (1.00, 1.38), stroke: 1.25pt + ink)
+  line((1.44, 0.84), (1.44, 1.20), stroke: 1.25pt + ink)
+  axis-label((0.84, 0.44), [$+$], placement: "north")
+  axis-label((1.60, 0.44), [$-$], placement: "north")
+  axis-label((1.22, 0.16), [$V_0$], placement: "north")
+  line((0.56, 2.24), (0.76, 2.08), stroke: 1.0pt + ink)
+  line((0.76, 2.08), (0.36, 1.88), stroke: 1.0pt + ink)
+  line((0.36, 1.88), (0.76, 1.68), stroke: 1.0pt + ink)
+  line((0.76, 1.68), (0.56, 1.52), stroke: 1.0pt + ink)
+  axis-label((0.18, 1.88), [$R$], placement: "east")
+  for x in (1.42, 1.64, 1.86, 2.08) {
+    circle((x, 3.12), radius: (0.13, 0.20), stroke: 1.0pt + ink, fill: none)
+  }
+  axis-label((1.76, 3.44), [$L$], placement: "south")
+  line((2.16, 1.02), (2.48, 1.34), stroke: 1.05pt + ink)
+  circle((2.56, 1.40), radius: 0.05, fill: ink, stroke: none)
+
+  line((3.42, 0.62), (3.42, 3.88), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((4.96, 3.70), [accensione], placement: "south")
+  line((3.96, 1.00), (6.06, 1.00), stroke: 0.9pt + ink, mark: (end: ">"))
+  line((3.96, 1.00), (3.96, 3.10), stroke: 0.9pt + ink, mark: (end: ">"))
+  line((3.96, 2.68), (5.90, 2.68), stroke: (paint: ink, thickness: 0.75pt, dash: "dashed"))
+  catmull((3.96, 1.00), (4.34, 1.64), (4.90, 2.16), (5.52, 2.50), (5.94, 2.62), stroke: 1.25pt + blue)
+  axis-label((5.86, 2.92), [$V_0/R$], placement: "south")
+  axis-label((4.92, 1.76), [$1-e^(-t/tau)$], placement: "west")
+
+  line((6.64, 0.62), (6.64, 3.88), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((8.10, 3.70), [spegnimento], placement: "south")
+  line((7.08, 1.00), (9.18, 1.00), stroke: 0.9pt + ink, mark: (end: ">"))
+  line((7.08, 1.00), (7.08, 3.10), stroke: 0.9pt + ink, mark: (end: ">"))
+  catmull((7.08, 2.76), (7.48, 2.10), (8.10, 1.56), (8.78, 1.18), (9.12, 1.06), stroke: 1.25pt + red)
+  axis-label((7.28, 2.90), [$i_0$], placement: "south")
+  axis-label((8.20, 1.72), [$e^(-t/tau)$], placement: "west")
+})))
+
+== Mutua induzione
+
+Se due circuiti sono vicini, una corrente variabile nel primo può modificare il flusso magnetico concatenato con il secondo. Si parla di *mutua induzione*.
+
+Per circuiti lineari:
+
+#green-box([Coefficiente di mutua induzione])[
+  $ Phi_(1,2) = M i_1, quad Phi_(2,1) = M i_2. $
+]
+
+La costante $M$ misura quanto i due circuiti sono accoppiati magneticamente. Se la corrente in un circuito varia nel tempo, nell'altro può nascere una F.E.M. indotta.
+
+#align(center, graph-card([Mutua induzione tra due circuiti], cetz.canvas({
+  import cetz.draw: *
+
+  circle((1.62, 2.08), radius: (0.92, 0.42), stroke: 1.10pt + ink, fill: none, mark: (end: ">"))
+  axis-label((1.62, 1.42), [$Gamma_1$], placement: "north")
+  line((1.62, 2.08), (2.38, 2.84), stroke: 1.10pt + green, mark: (end: ">"))
+  axis-label((2.50, 2.88), [$i_1(t)$], placement: "west")
+  catmull((2.28, 2.74), (3.00, 3.28), (3.88, 3.06), (4.40, 2.46), stroke: 1.05pt + blue, mark: (end: ">"))
+  axis-label((3.36, 3.38), [$vec(B)_1$], placement: "south")
+  circle((4.62, 2.08), radius: (0.92, 0.42), stroke: 1.10pt + ink, fill: none, mark: (end: ">"))
+  axis-label((4.62, 1.42), [$Gamma_2$], placement: "north")
+  axis-label((3.04, 0.72), [$Phi_(1,2)=M i_1$], placement: "north")
+
+  line((5.90, 0.62), (5.90, 3.68), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((6.40, 2.76), [variazione di corrente], placement: "west")
+  axis-label((6.40, 2.12), [$dif i_1/dif t != 0$], placement: "west")
+  axis-label((6.40, 1.40), [F.E.M. indotta nel circuito 2], placement: "west")
+})))
+
+== Equazioni di Maxwell
+
+Le equazioni di Maxwell riuniscono elettrostatica, magnetostatica e induzione. In regime stazionario non compaiono derivate temporali: i campi non cambiano nel tempo.
+
+#align(center, graph-card([Equazioni di Maxwell stazionarie], cetz.canvas({
+  import cetz.draw: *
+
+  axis-label((2.18, 3.50), [forma integrale], placement: "south")
+  axis-label((0.62, 2.72), [$integral_Gamma vec(E) dot dif vec(ell)=0$], placement: "west")
+  axis-label((0.62, 2.02), [$integral_S vec(E) dot dif vec(S)=Q_"int"/epsilon_0$], placement: "west")
+  axis-label((0.62, 1.32), [$integral_Gamma vec(B) dot dif vec(ell)=mu_0 i$], placement: "west")
+  axis-label((0.62, 0.62), [$integral_S vec(B) dot dif vec(S)=0$], placement: "west")
+
+  line((4.96, 0.50), (4.96, 3.68), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((7.00, 3.50), [forma locale], placement: "south")
+  axis-label((5.46, 2.72), [$nabla times vec(E)=0$], placement: "west")
+  axis-label((5.46, 2.02), [$nabla dot vec(E)=rho/epsilon_0$], placement: "west")
+  axis-label((5.46, 1.32), [$nabla times vec(B)=mu_0 vec(J)$], placement: "west")
+  axis-label((5.46, 0.62), [$nabla dot vec(B)=0$], placement: "west")
+})))
+
+Quando i campi variano nel tempo, le equazioni cambiano in due punti essenziali:
+
+- Faraday sostituisce la circuitazione nulla di $vec(E)$;
+- Ampère deve essere corretto con la *corrente di spostamento*.
+
+#green-box([Maxwell non stazionario])[
+  $ integral_Gamma vec(E) dot dif vec(ell) = - (dif Phi_B)/(dif t), quad
+    integral_Gamma vec(B) dot dif vec(ell) = mu_0 i + mu_0 epsilon_0 (dif Phi_E)/(dif t). $
+]
+
+In forma locale:
+
+#blue-box([Maxwell in forma locale])[
+  $ nabla times vec(E) = - partial_t vec(B), quad
+    nabla times vec(B) = mu_0 vec(J) + mu_0 epsilon_0 partial_t vec(E), $
+  $ nabla dot vec(E) = rho/epsilon_0, quad
+    nabla dot vec(B)=0. $
+]
+
+#align(center, graph-card([Maxwell non stazionario e corrente di spostamento], cetz.canvas({
+  import cetz.draw: *
+
+  axis-label((1.90, 3.48), [Faraday], placement: "south")
+  circle((1.40, 2.28), radius: (0.92, 0.38), stroke: 1.10pt + ink, fill: none, mark: (end: ">"))
+  for x in (1.06, 1.38, 1.70) {
+    line((x, 1.74), (x, 2.86), stroke: 1.05pt + blue, mark: (end: ">"))
+  }
+  axis-label((1.40, 1.14), [$dif Phi_B/dif t -> vec(E)_"ind"$], placement: "north")
+
+  line((3.42, 0.58), (3.42, 3.66), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((5.10, 3.48), [corrente di spostamento], placement: "south")
+  line((4.46, 1.18), (4.46, 2.82), stroke: 1.10pt + ink)
+  line((5.56, 1.18), (5.56, 2.82), stroke: 1.10pt + ink)
+  for y in (1.48, 1.86, 2.24, 2.62) {
+    line((4.62, y), (5.40, y), stroke: 1.0pt + blue, mark: (end: ">"))
+  }
+  circle((5.00, 2.00), radius: (0.86, 0.32), stroke: (paint: ink, thickness: 0.8pt, dash: "dashed"), fill: none)
+  axis-label((5.00, 0.92), [$epsilon_0 dif Phi_E/dif t$], placement: "north")
+
+  line((6.78, 0.58), (6.78, 3.66), stroke: 0.55pt + rgb("#ccd4d8"))
+
+  axis-label((7.18, 2.80), [$vec(E)$ variabile genera $vec(B)$], placement: "west")
+  axis-label((7.18, 2.04), [$vec(B)$ variabile genera $vec(E)$], placement: "west")
+  axis-label((7.18, 1.28), [i campi si accoppiano], placement: "west")
+})))
+
+== Onde elettromagnetiche nel vuoto
+
+Nel vuoto non ci sono cariche libere né correnti:
+
+$ rho = 0, quad vec(J)=0. $
+
+Le equazioni di Maxwell diventano
+
+$ nabla dot vec(E)=0, quad nabla dot vec(B)=0, $
+
+$ nabla times vec(E)=-partial_t vec(B), quad
+  nabla times vec(B)=mu_0 epsilon_0 partial_t vec(E). $
+
+Da queste equazioni segue che i campi $vec(E)$ e $vec(B)$ possono propagarsi come onde elettromagnetiche. La velocità di propagazione nel vuoto è
+
+#purple-box([Velocità della luce])[
+  $ c = 1/sqrt(epsilon_0 mu_0). $
+]
+
+Nel vuoto, per un'onda piana, i campi sono perpendicolari tra loro e alla direzione di propagazione. I moduli sono legati da
+
+#blue-box([Relazione tra i campi nell'onda])[
+  $ abs(vec(B)) = abs(vec(E))/c. $
+]
+
+La luce è un'onda elettromagnetica.
+
+#align(center, graph-card([Onda elettromagnetica nel vuoto], cetz.canvas({
+  import cetz.draw: *
+
+  line((0.70, 1.10), (8.90, 1.10), stroke: 1.0pt + ink, mark: (end: ">"))
+  axis-label((9.02, 1.10), [propagazione $v=c$], placement: "west")
+  line((1.20, 1.10), (1.20, 3.40), stroke: 0.9pt + ink, mark: (end: ">"))
+  axis-label((1.02, 3.40), [$vec(E)$], placement: "east")
+  line((1.20, 1.10), (0.54, 0.28), stroke: 0.9pt + ink, mark: (end: ">"))
+  axis-label((0.44, 0.20), [$vec(B)$], placement: "east")
+
+  // Onda E: sinusoide verticale lungo la direzione di propagazione.
+  catmull(
+    (1.20, 1.10),
+    (1.72, 2.20),
+    (2.24, 1.10),
+    (2.76, 0.10),
+    (3.28, 1.10),
+    (3.80, 2.20),
+    (4.32, 1.10),
+    (4.84, 0.10),
+    (5.36, 1.10),
+    (5.88, 2.20),
+    (6.40, 1.10),
+    (6.92, 0.10),
+    (7.44, 1.10),
+    (7.96, 2.20),
+    (8.48, 1.10),
+    stroke: 1.25pt + blue,
+  )
+  // Onda B: sinusoide inclinata nel piano perpendicolare a E.
+  catmull(
+    (1.20, 1.10),
+    (1.72, 0.46),
+    (2.24, 1.10),
+    (2.76, 1.76),
+    (3.28, 1.10),
+    (3.80, 0.46),
+    (4.32, 1.10),
+    (4.84, 1.76),
+    (5.36, 1.10),
+    (5.88, 0.46),
+    (6.40, 1.10),
+    (6.92, 1.76),
+    (7.44, 1.10),
+    (7.96, 0.46),
+    (8.48, 1.10),
+    stroke: 1.25pt + green,
+  )
+  axis-label((6.76, 2.36), [$vec(E)$], placement: "south")
+  axis-label((6.88, 0.34), [$vec(B)$], placement: "north")
+
+  line((0.68, -0.18), (8.92, -0.18), stroke: 0.55pt + rgb("#ccd4d8"))
+  axis-label((1.10, -0.58), [$rho=0, quad vec(J)=0$], placement: "west")
+  axis-label((4.12, -0.58), [$c=1/sqrt(epsilon_0 mu_0)$], placement: "west")
+  axis-label((7.02, -0.58), [$abs(vec(B))=abs(vec(E))/c$], placement: "west")
+})))
+
+#align(center)[
+  #text(22pt, weight: "bold", fill: red)[Fine corso]
+]
