@@ -183,6 +183,18 @@ Si integrano entrambi i membri tra lo stato iniziale $(t_0,x_0)$ e lo stato gene
 
 $ integral_(x_0)^(x(t)) dif x=integral_(t_0)^t v dif tau. $
 
+#yellow-box([Perché si può integrare così?])[
+  In modo rigoroso, $v=(dif x)/(dif t)$ significa che $v(t)$ è la derivata della funzione posizione $x(t)$ rispetto al tempo:
+  $ v(t)=x'(t). $
+
+  Quindi la scrittura fisica $dif x=v dif t$ va letta come una forma abbreviata del differenziale
+  $ dif x=x'(t) dif t=v(t) dif t, $
+  non come una normale divisione algebrica tra numeri. E' una notazione molto usata in fisica: in analisi, lo stesso passaggio si giustifica integrando direttamente la derivata:
+  $ integral_(t_0)^t x'(tau) dif tau=integral_(t_0)^t v(tau) dif tau. $
+
+  Per il teorema fondamentale del calcolo, il primo membro vale $x(t)-x_0$. Dunque l'integrale della velocità nel tempo rappresenta lo spostamento totale: somma tutti i contributi infinitesimi $dif x$ ed equivale all'area sotto il grafico velocità-tempo.
+]
+
 Poiché $v$ è costante,
 
 $ x(t)-x_0=v(t-t_0), $
