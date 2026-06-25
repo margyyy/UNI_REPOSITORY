@@ -1238,6 +1238,8 @@ Una molla ideale esercita una forza proporzionale e contraria allo spostamento d
   $ vec(F)_"el"=-k x hat(u)_x, $
 
   dove $k>0$ è la *costante elastica*, misurata in $"N/m"$, e $x$ è lo spostamento dalla posizione di equilibrio $x=0$.
+
+  Il simbolo $hat(u)_x$ è il versore dell'asse $x$: ha modulo $1$ e indica la direzione positiva dell'asse della molla. Il segno meno mostra che la forza elastica è sempre opposta allo spostamento: se $x>0$ la forza punta verso $-x$, se $x<0$ punta verso $+x$.
 ]
 
 #align(center, graph-card([Forza elastica opposta allo spostamento], cetz.canvas({
@@ -1267,6 +1269,8 @@ $ (dif^2 x)/(dif t^2)+k/m x=0. $
 
 $ omega=sqrt(k/m), quad T=(2pi)/omega=2pi sqrt(m/k). $
 
+Qui $omega$ è la *pulsazione* dell'oscillazione, cioè la rapidità angolare del ciclo misurata in $"rad"/"s"$. Il simbolo $T$ è invece il *periodo*, cioè il tempo necessario per compiere un'oscillazione completa.
+
 = Reazioni vincolari
 
 Un *vincolo* impedisce alcuni movimenti del corpo e reagisce esercitando una forza. La reazione normale $vec(N)$ è perpendicolare alla superficie di contatto e può esistere soltanto finché il contatto è mantenuto: $N>=0$.
@@ -1291,7 +1295,13 @@ Un *vincolo* impedisce alcuni movimenti del corpo e reagisce esercitando una for
 
 Se il corpo è in equilibrio verticale,
 
-$ m vec(g)+vec(N)=vec(0) quad arrow quad N=m g. $
+$ m vec(g)+vec(N)=vec(0). $
+
+Proiettando sull'asse verticale positivo verso l'alto si ottiene l'equazione scalare
+
+$ N-m g=0 quad arrow quad N=m g. $
+
+Qui $N$ e $m g$ sono i moduli delle due forze: la forma vettoriale tiene conto dei versi, mentre la forma scalare usa i segni delle componenti lungo l'asse scelto.
 
 #align(center, graph-card([Diagramma delle forze: appoggio orizzontale], cetz.canvas({
   import cetz.draw: *
@@ -1304,7 +1314,11 @@ $ m vec(g)+vec(N)=vec(0) quad arrow quad N=m g. $
 
 Se una forza esterna $vec(F)$ spinge ulteriormente il corpo verso il basso,
 
-$ m vec(g)+vec(F)+vec(N)=vec(0) quad arrow quad N=m g+F. $
+$ m vec(g)+vec(F)+vec(N)=vec(0). $
+
+Con asse verticale positivo verso l'alto, il peso e la forza esterna hanno componente negativa, mentre la normale ha componente positiva:
+
+$ N-m g-F=0 quad arrow quad N=m g+F. $
 
 #align(center, graph-card([Appoggio con forza esterna verso il basso], cetz.canvas({
   import cetz.draw: *
@@ -1368,6 +1382,8 @@ $ m vec(g)+vec(F)+vec(N)=vec(0) quad arrow quad N=m g+F. $
 In assenza di accelerazione normale al piano,
 
 $ N-m g cos theta=0 quad arrow quad N=m g cos theta. $
+
+Anche qui l'equazione è scalare: è la proiezione della seconda legge lungo l'asse perpendicolare al piano. La componente del peso lungo quell'asse punta verso il piano, quindi entra con segno negativo rispetto a $vec(N)$.
 
 = Tensione della fune
 
