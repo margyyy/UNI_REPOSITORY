@@ -1464,8 +1464,10 @@ $ vec(T)_A+vec(T)_B+vec(T)_C=vec(0). $
 
 Con $x$ orizzontale verso destra e $y$ verticale verso l'alto:
 
-$ -T_A cos 30 degree+T_B cos 45 degree=0, $
-$ T_A sin 30 degree+T_B sin 45 degree-T_C=0. $
+$ cases(
+  -T_A cos 30 degree+T_B cos 45 degree=0,
+  T_A sin 30 degree+T_B sin 45 degree-T_C=0,
+) $
 
 = Corpo tirato da una fune su superficie liscia
 
@@ -1506,12 +1508,17 @@ Una forza $vec(F)$ tira un blocco di massa $m$ formando un angolo $theta$ con un
 
 La seconda legge, proiettata sugli assi, dà
 
-$ F cos theta=m a_x, $
-$ N+F sin theta-m g=0. $
+$ cases(
+  F cos theta=m a_x,
+  N+F sin theta-m g=0,
+) $
 
 Quindi
 
-$ a_x=(F cos theta)/m, quad N=m g-F sin theta. $
+$ cases(
+  a_x=(F cos theta)/m,
+  N=m g-F sin theta,
+) $
 
 Se $F$ è costante, il moto lungo $x$ è uniformemente accelerato:
 
@@ -1561,24 +1568,35 @@ Consideriamo un blocco su un piano inclinato di angolo $theta$, senza attrito. S
 
 Con la fune e in equilibrio statico:
 
-$ T-m g sin theta=0, quad N-m g cos theta=0, $
+$ cases(
+  T-m g sin theta=0,
+  N-m g cos theta=0,
+) $
 
 da cui
 
-$ T=m g sin theta, quad N=m g cos theta. $
+$ cases(
+  T=m g sin theta,
+  N=m g cos theta,
+) $
 
 Se si taglia la fune, lungo il piano rimane soltanto la componente del peso:
 
-$ m g sin theta=m a_x quad arrow quad a_x=g sin theta, $
-
-mentre normalmente
-
-$ N-m g cos theta=0 quad arrow quad N=m g cos theta. $
+$ cases(
+  m g sin theta=m a_x,
+  N-m g cos theta=0,
+) quad arrow quad
+cases(
+  a_x=g sin theta,
+  N=m g cos theta,
+) $
 
 Il moto lungo $x$ è uniformemente accelerato:
 
-$ x(t)=x_0+v_0t+1/2 g sin theta, t^2, $
-$ v(t)=v_0+g sin theta, t. $
+$ cases(
+  x(t)=x_0+v_0t+1/2 g (sin theta) t^2,
+  v(t)=v_0+g (sin theta) t,
+) $
 
 = Forza di attrito
 
@@ -1632,13 +1650,20 @@ Lungo $y$ il corpo non accelera, quindi
 
 $ N-m g=0 quad arrow quad N=m g. $
 
-Lungo $x$, se il blocco è in quiete, l'attrito statico compensa la forza applicata: $F_"attr,s"=F$. Questa condizione può valere solo finché
+Lungo $x$, se il blocco è in quiete, l'attrito statico compensa la forza applicata. Le condizioni sono
 
-$ F <= mu_s m g. $
+$ cases(
+  N-m g=0,
+  F_"attr,s"=F,
+  F_"attr,s" <= mu_s N,
+) quad arrow quad F <= mu_s m g. $
 
 Se il corpo scivola verso destra, l'attrito dinamico è verso sinistra. L'equazione lungo $x$ diventa
 
-$ F-mu_d m g=m a quad arrow quad a=(F-mu_d m g)/m. $
+$ cases(
+  N-m g=0,
+  F-mu_d N=m a,
+) quad arrow quad a=(F-mu_d m g)/m. $
 
 == Forza inclinata e attrito
 
