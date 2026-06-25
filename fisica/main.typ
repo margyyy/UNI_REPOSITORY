@@ -563,8 +563,7 @@ Le tre funzioni $x(t)$, $y(t)$ e $z(t)$ sono le coordinate cartesiane del punto.
   axis-label((5.2, -0.17), [$x$], placement: "north")
   axis-label((-0.15, 3.7), [$y$], placement: "east")
   axis-label((-2.1, -1.55), [$z$], placement: "north")
-  // traiettoria e due posizioni
-  bezier((-1.15, 2.15), (-0.2, 3.25), (2.5, 1.65), (4.55, 2.85), stroke: 1.5pt + blue)
+  // due posizioni del punto materiale
   circle((1.25, 2.28), radius: 0.08, fill: blue, stroke: none)
   circle((3.15, 2.18), radius: 0.08, fill: red, stroke: none)
   line((0, 0), (1.25, 2.28), stroke: 1.2pt + green, mark: (end: ">"))
@@ -576,6 +575,8 @@ Le tre funzioni $x(t)$, $y(t)$ e $z(t)$ sono le coordinate cartesiane del punto.
   axis-label((1.05, 2.55), [$P(t)$], placement: "south")
   axis-label((3.45, 2.05), [$P(t+Delta t)$], placement: "west")
 })))
+
+Il punto $P(t)$ rappresenta la posizione occupata dal corpo all'istante $t$: geometricamente è l'estremo del vettore posizione $vec(r)(t)$. Allo stesso modo, $P(t+Delta t)$ è la posizione occupata a un istante successivo.
 
 Tra gli istanti $t$ e $t+Delta t$, il *vettore spostamento* è
 
@@ -604,6 +605,14 @@ $ vec(v)=(dif s)/(dif t) hat(u)_T=v hat(u)_T, $
 
 dove $v=norm(vec(v))=(dif s)/(dif t)$ è la velocità scalare e $hat(u)_T$ è il versore tangente.
 
+#yellow-box([Che cos'è $hat(u)_T$?])[
+  Il simbolo $hat(u)_T$ indica il *versore tangente*: un vettore di modulo $1$ applicato nel punto della traiettoria occupato dal corpo. La lettera $T$ sta per "tangente".
+
+  Esso non dice quanto è grande la velocità, ma solo in quale direzione punta. Per questo la velocità vettoriale si scrive
+  $ vec(v)=v hat(u)_T: $
+  il numero $v$ dà il modulo della velocità, mentre $hat(u)_T$ dà la direzione tangente e il verso del moto.
+]
+
 #align(center, graph-card([La velocità è tangente alla traiettoria], cetz.canvas({
   import cetz.draw: *
   // semicirconferenza di centro O e raggio R
@@ -616,9 +625,11 @@ dove $v=norm(vec(v))=(dif s)/(dif t)$ è la velocità scalare e $hat(u)_T$ è il
   // raggio e velocità tangente, tra loro perpendicolari
   line((3, 0), (3, 2.5), stroke: 1.3pt + green, mark: (end: ">"))
   line((3, 2.5), (5.05, 2.5), stroke: 1.6pt + red, mark: (end: ">"))
+  line((3, 2.18), (3.92, 2.18), stroke: 1.3pt + gold, mark: (end: ">"))
   axis-label((2.85, 2.68), [$P$], placement: "east")
   axis-label((2.82, 1.25), [$R$], placement: "east")
   axis-label((5.18, 2.5), [$vec(v)$], placement: "west")
+  axis-label((4.02, 2.18), [$hat(u)_T$], placement: "west")
   axis-label((2.85, -0.15), [$O$], placement: "east")
 })))
 
@@ -660,21 +671,22 @@ $ vec(a)=vec(a)_T+vec(a)_N, quad
 #grid(columns: (1fr, 1fr), gutter: 10pt,
   graph-card([Moto curvilineo generico], cetz.canvas({
     import cetz.draw: *
-    // traiettoria concava verso l'alto; P è il punto comune dei vettori
-    catmull((0.25, 0.25), (1.15, 0.48), (2.2, 1.0), (3.2, 1.38), (4.35, 1.52),
+    // traiettoria locale: in P la tangente ha la direzione di a_T
+    // e la concavita' e' rivolta verso a_N
+    catmull((0.1, 0.68), (1.23, 0.70), (2.2, 1.0), (3.03, 1.60), (3.71, 2.48),
       tension: 0.55, stroke: 1.5pt + blue)
     circle((2.2, 1.0), radius: 0.08, fill: ink, stroke: none)
     // a_T tangente alla traiettoria
-    line((2.2, 1.0), (3.3, 1.55), stroke: 1.4pt + green, mark: (end: ">"))
+    line((2.2, 1.0), (3.45, 1.63), stroke: 1.4pt + green, mark: (end: ">"))
     // a_N normale, rivolta verso la concavità
-    line((2.2, 1.0), (1.65, 2.1), stroke: 1.4pt + red, mark: (end: ">"))
+    line((2.2, 1.0), (1.55, 2.3), stroke: 1.4pt + red, mark: (end: ">"))
     // risultante a = a_T + a_N e parallelogramma tratteggiato
-    line((2.2, 1.0), (2.75, 2.65), stroke: 1.5pt + gold, mark: (end: ">"))
-    line((3.3, 1.55), (2.75, 2.65), stroke: (paint: grid-color, thickness: 0.8pt, dash: "dashed"))
-    line((1.65, 2.1), (2.75, 2.65), stroke: (paint: grid-color, thickness: 0.8pt, dash: "dashed"))
-    axis-label((3.38, 1.52), [$vec(a)_T$], placement: "west")
-    axis-label((1.55, 2.18), [$vec(a)_N$], placement: "east")
-    axis-label((2.86, 2.72), [$vec(a)$], placement: "west")
+    line((2.2, 1.0), (2.8, 2.93), stroke: 1.5pt + gold, mark: (end: ">"))
+    line((3.45, 1.63), (2.8, 2.93), stroke: (paint: grid-color, thickness: 0.8pt, dash: "dashed"))
+    line((1.55, 2.3), (2.8, 2.93), stroke: (paint: grid-color, thickness: 0.8pt, dash: "dashed"))
+    axis-label((3.52, 1.62), [$vec(a)_T$], placement: "west")
+    axis-label((1.48, 2.38), [$vec(a)_N$], placement: "east")
+    axis-label((2.9, 2.98), [$vec(a)$], placement: "west")
     axis-label((2.05, 0.88), [$P$], placement: "east")
   })),
   graph-card([Moto a velocità costante], cetz.canvas({
