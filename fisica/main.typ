@@ -223,6 +223,13 @@ mentre l'accelerazione istantanea è
 
 $ a(t) = (dif v(t))/(dif t) = (dif^2 x(t))/(dif t^2). $
 
+#yellow-box([Significato di $dif^2 x / dif t^2$])[
+  La notazione $(dif^2 x)/(dif t^2)$ indica la derivata seconda della posizione rispetto al tempo. Infatti la velocità è la derivata prima della posizione, $v(t)=x'(t)$; l'accelerazione è la derivata della velocità, quindi
+  $ a(t)=v'(t)=x''(t). $
+
+  Per questo l'accelerazione misura quanto rapidamente cambia la velocità, non quanto è grande la posizione.
+]
+
 La sua unità di misura è $"m"/"s"^2$. L'accelerazione descrive quanto rapidamente varia la velocità; non coincide necessariamente con una velocità elevata.
 
 === Moto uniformemente accelerato
@@ -335,6 +342,20 @@ $ v(t)=v_0-g(t-t_0), $
 $ y(t)=y_0+v_0(t-t_0)-1/2 g(t-t_0)^2, $
 $ v^2=v_0^2-2g(y-y_0). $
 
+#yellow-box([Da dove vengono questi segni?])[
+  Si parte dalle formule generali del moto uniformemente accelerato:
+  $ v(t)=v_0+a(t-t_0), $
+  $ x(t)=x_0+v_0(t-t_0)+1/2 a(t-t_0)^2, $
+  $ v^2=v_0^2+2a(x-x_0). $
+
+  Per il moto verticale si sostituisce la coordinata $x$ con $y$. Inoltre, se l'asse $y$ è positivo verso l'alto, la gravità punta verso il basso: quindi la componente dell'accelerazione è $a_y=-g$, dove $g$ è il modulo positivo dell'accelerazione gravitazionale.
+
+  Sostituendo $x arrow y$ e $a arrow -g$ si ottiene:
+  $ v(t)=v_0-g(t-t_0), $
+  $ y(t)=y_0+v_0(t-t_0)-1/2 g(t-t_0)^2, $
+  $ v^2=v_0^2-2g(y-y_0). $
+]
+
 Queste relazioni non sono nuove leggi: si ottengono dalle formule del moto uniformemente accelerato sostituendo $a=-g$.
 
 #yellow-box([Attenzione ai segni])[
@@ -379,7 +400,12 @@ Il segno negativo della velocità indica che il corpo si muove verso il basso; i
 
 Sia $y_0=0$ e $v_0>0$. Il corpo sale rallentando, raggiunge la quota massima quando $v=0$, poi ricade accelerando verso il basso:
 
-$ v(t)=v_0-g t, quad y(t)=v_0 t-1/2 g t^2. $
+$ cases(
+  v(t)=v_0-g t,
+  y(t)=v_0 t-1/2 g t^2,
+) $
+
+Le due equazioni vanno lette insieme: la prima descrive come cambia la velocità nel tempo, la seconda descrive la posizione verticale nello stesso istante $t$.
 
 All'apice $v(t_"max")=0$, quindi
 
