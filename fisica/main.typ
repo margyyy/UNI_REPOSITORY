@@ -844,6 +844,16 @@ $ a_T=0, quad vec(a)=vec(a)_N, quad a_N=v^2/R. $
 
 Se $theta$ è misurato in radianti, l'arco percorso è $s=R theta$. La velocità angolare è
 
+#yellow-box([Perché usare i radianti?])[
+  Il radiante misura un angolo confrontando l'arco $s$ con il raggio $R$:
+  $ theta=s/R. $
+
+  Per questo, se $theta$ è espresso in radianti, la relazione tra arco e angolo diventa semplicemente $s=R theta$. Un giro completo corrisponde a $2pi$ radianti, quindi
+  $ 360 degree=2pi " rad", quad 180 degree=pi " rad". $
+
+  Nelle formule con derivate e funzioni trigonometriche, come $omega=(dif theta)/(dif t)$ oppure $x=R cos theta$, gli angoli si intendono in radianti.
+]
+
 $ omega=(dif theta)/(dif t)=1/R (dif s)/(dif t)=v/R. $
 
 La sua unità di misura è il radiante al secondo, $"rad"/"s"$; il radiante è adimensionale. Il periodo $T$ si misura in secondi.
@@ -864,7 +874,10 @@ Durante un periodo l'angolo aumenta di $2pi$; dunque $omega T=2pi$. Poiché in u
 
 Le coordinate cartesiane sono
 
-$ x(t)=R cos(omega t+theta_0), quad y(t)=R sin(omega t+theta_0). $
+$ cases(
+  x(t)=R cos(omega t+theta_0),
+  y(t)=R sin(omega t+theta_0),
+) $
 
 Ogni coordinata è dunque un moto armonico semplice: il moto circolare uniforme proiettato su un diametro produce un'oscillazione armonica.
 
@@ -902,6 +915,17 @@ Si introduce il vettore velocità angolare $vec(omega)$, perpendicolare al piano
   axis-label((6.12, 1.55), [$P$], placement: "west")
   axis-label((3.58, 1.48), [$O$], placement: "east")
 })))
+
+#yellow-box([Perché $vec(omega)$ è perpendicolare al piano?])[
+  La velocità angolare scalare $omega$ dice solo quanto rapidamente cambia l'angolo. Il vettore $vec(omega)$ aggiunge anche l'informazione sull'asse e sul verso della rotazione: per questo è perpendicolare al piano del moto. Il verso si sceglie con la regola della mano destra.
+
+  Il prodotto vettoriale serve invece a costruire automaticamente la velocità tangenziale. Infatti $vec(v)$ deve essere tangente alla circonferenza, quindi perpendicolare al raggio $vec(R)$, e deve avere modulo $v=omega R$. Poiché $vec(omega)$ è perpendicolare a $vec(R)$,
+  $ norm(vec(omega) times vec(R))=omega R. $
+
+  Perciò
+  $ vec(v)=vec(omega) times vec(R) $
+  dà nello stesso momento modulo, direzione tangente e verso corretto del moto.
+]
 
 $ vec(v)=vec(omega) times vec(R). $
 
@@ -979,6 +1003,14 @@ La massa si misura in kilogrammi, $"kg"$, e quantifica l'inerzia del corpo, cio�
 A parità di forza l'accelerazione è inversamente proporzionale alla massa:
 
 $ a prop 1/m, quad (m_2)/(m_1)=(a_1)/(a_2). $
+
+#yellow-box([Il simbolo $prop$])[
+  Il simbolo $prop$ si legge "è proporzionale a". Indica che due grandezze variano insieme secondo un fattore costante.
+
+  Per esempio $a prop F$ significa che, a massa fissata, se la forza raddoppia allora raddoppia anche l'accelerazione: è una proporzionalità diretta.
+
+  Invece $a prop 1/m$ significa che, a forza fissata, aumentando la massa l'accelerazione diminuisce: è una proporzionalità inversa.
+]
 
 La massa definita attraverso questa risposta dinamica prende il nome di *massa inerziale*.
 
