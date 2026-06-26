@@ -3837,40 +3837,60 @@ $ vec(F)_(1 -> 2)=-vec(F)_(2 -> 1). $
 
 Per più cariche vale il principio di sovrapposizione: la forza totale è la somma vettoriale delle forze prodotte dalle singole cariche.
 
-#align(center, graph-card([Legge di Coulomb e sovrapposizione], cetz.canvas({
+#align(center, graph-card([Legge di Coulomb: vettore relativo e forze], cetz.canvas({
   import cetz.draw: *
-  circle((1.00, 1.55), radius: 0.11, fill: ink, stroke: none)
-  circle((3.30, 1.55), radius: 0.11, fill: ink, stroke: none)
-  line((1.00, 1.55), (3.30, 1.55), stroke: 0.9pt + ink)
-  line((0.90, 1.55), (0.25, 1.55), stroke: 1.2pt + red, mark: (end: ">"))
-  line((3.40, 1.55), (4.05, 1.55), stroke: 1.2pt + red, mark: (end: ">"))
-  axis-label((0.95, 1.85), [$q_1$], placement: "south")
-  axis-label((3.30, 1.85), [$q_2$], placement: "south")
-  axis-label((2.15, 1.32), [$r_(1 2)$], placement: "north")
-  axis-label((0.42, 1.85), [$vec(F)_(2 -> 1)$], placement: "south")
-  axis-label((3.82, 1.85), [$vec(F)_(1 -> 2)$], placement: "south")
+  // riferimento e posizioni delle due cariche
+  line((0.75, 0.65), (2.05, 0.65), stroke: 0.85pt + ink, mark: (end: ">"))
+  line((0.75, 0.65), (0.75, 1.85), stroke: 0.85pt + ink, mark: (end: ">"))
+  line((0.75, 0.65), (0.20, 0.28), stroke: 0.85pt + ink, mark: (end: ">"))
+  axis-label((0.60, 0.52), [$O$], placement: "east")
+  axis-label((2.08, 0.50), [$y$], placement: "north")
+  axis-label((0.58, 1.90), [$z$], placement: "east")
+  axis-label((0.15, 0.18), [$x$], placement: "north")
 
-  circle((5.30, 1.15), radius: 0.12, fill: ink, stroke: none)
-  circle((4.80, 2.25), radius: 0.09, fill: ink, stroke: none)
-  circle((6.05, 2.35), radius: 0.09, fill: ink, stroke: none)
-  circle((6.25, 0.75), radius: 0.09, fill: ink, stroke: none)
-  line((5.30, 1.15), (5.30, 2.05), stroke: 1.0pt + green, mark: (end: ">"))
-  line((5.30, 1.15), (6.10, 1.85), stroke: 1.0pt + green, mark: (end: ">"))
-  line((5.30, 1.15), (6.05, 0.80), stroke: 1.0pt + green, mark: (end: ">"))
-  line((5.30, 1.15), (6.65, 1.35), stroke: 1.2pt + blue, mark: (end: ">"))
-  axis-label((5.18, 0.84), [$q_0$], placement: "north")
-  axis-label((6.70, 1.42), [$vec(F)_"tot"$], placement: "west")
+  circle((3.15, 2.35), radius: 0.12, fill: ink, stroke: none)
+  circle((5.85, 1.30), radius: 0.12, fill: ink, stroke: none)
+  axis-label((3.05, 2.68), [$q_1$], placement: "south")
+  axis-label((5.92, 1.58), [$q_2$], placement: "south")
+
+  line((0.75, 0.65), (3.15, 2.35), stroke: 1.15pt + blue, mark: (end: ">"))
+  line((0.75, 0.65), (5.85, 1.30), stroke: 1.15pt + blue, mark: (end: ">"))
+  axis-label((1.92, 1.70), [$vec(r)_1$], placement: "south")
+  axis-label((3.33, 0.92), [$vec(r)_2$], placement: "north")
+
+  // vettore relativo da q_1 a q_2
+  line((3.15, 2.35), (5.85, 1.30), stroke: 1.15pt + gold, mark: (end: ">"))
+  axis-label((4.70, 2.04), [$vec(r)_(1 2)=vec(r)_2-vec(r)_1$], placement: "south")
+
+  // forze elettriche: esempio repulsivo per q_1 q_2 > 0
+  line((5.85, 1.30), (7.00, 0.85), stroke: 1.35pt + red, mark: (end: ">"))
+  line((3.15, 2.35), (2.00, 2.80), stroke: 1.35pt + red, mark: (end: ">"))
+  axis-label((7.05, 0.88), [$vec(F)_(1 -> 2)$], placement: "west")
+  axis-label((1.95, 2.82), [$vec(F)_(2 -> 1)$], placement: "east")
+
+  axis-label((6.45, 2.70), [$vec(F)_(1 -> 2)= (q_1 q_2)/(4 pi epsilon_0 r_(1 2)^2) hat(r)_(1 2)$], placement: "west")
+  axis-label((6.45, 2.02), [$vec(F)_(2 -> 1)=-vec(F)_(1 -> 2)$], placement: "west")
 })))
 
 == Campo elettrostatico
 
-Il campo elettrostatico descrive la proprietà dello spazio generata dalle cariche sorgenti. Si definisce mediante una carica di prova $q_0$:
+Il campo elettrostatico descrive l'effetto prodotto nello spazio dalle cariche sorgenti. Per definirlo si immagina di mettere nel punto osservato una piccola carica di prova positiva $q_0$, così piccola da non modificare la distribuzione delle cariche sorgenti.
 
 #blue-box([Campo elettrico])[
-  $ vec(E)(vec(r)_0)=vec(F)_"su " q_0/(q_0) quad ["N"/"C"]. $
+  $ vec(E)(vec(r)_0)=vec(F)_0/q_0 quad ["N"/"C"]. $
 ]
 
-La forza su una carica di prova è quindi
+Dove $vec(F)_0$ è la forza elettrica esercitata dalle cariche sorgenti sulla carica di prova posta in $vec(r)_0$. Quindi il campo elettrico è forza per unità di carica positiva.
+
+#yellow-box([Come si legge il campo elettrico])[
+  Il campo $vec(E)(vec(r)_0)$ non è una forza: è una grandezza vettoriale associata al punto $vec(r)_0$ dello spazio. Dice quale forza subirebbe una carica positiva unitaria posta in quel punto.
+
+  Una volta noto il campo, la forza su una carica qualunque $q$ posta in quel punto è
+  $ vec(F)=q vec(E). $
+  Se $q>0$, la forza ha lo stesso verso del campo; se $q<0$, ha verso opposto.
+]
+
+La forza su una carica $q_0$ è quindi
 
 $ vec(F)=q_0 vec(E). $
 
@@ -3892,11 +3912,11 @@ $ vec(E)(vec(r))=q/(4 pi epsilon_0 r^2) hat(r). $
   axis-label((3.20, 0.78), [$vec(E)(vec(r))=q/(4 pi epsilon_0 r^2) hat(r)$], placement: "north")
 })))
 
-Per una distribuzione discreta di cariche:
+Per una distribuzione discreta di cariche sorgenti:
 
 $ vec(E)(vec(r)_0)=sum_i q_i/(4 pi epsilon_0 r_(i 0)^2) hat(r)_(i 0), $
 
-dove $vec(r)_(i 0)=vec(r)_0-vec(r)_i$.
+dove $vec(r)_(i 0)=vec(r)_0-vec(r)_i$ va dalla carica sorgente $q_i$ al punto di osservazione e $hat(r)_(i 0)=vec(r)_(i 0)/r_(i 0)$.
 
 #align(center, graph-card([Campo elettrico di sorgenti discrete], cetz.canvas({
   import cetz.draw: *
@@ -3930,7 +3950,7 @@ $ dif q=sigma dif S quad ["C"/"m"^2], $
 
 $ dif q=rho dif V quad ["C"/"m"^3]. $
 
-Il campo si ottiene integrando i contributi elementari:
+Il campo si ottiene integrando i contributi elementari. Se $vec(r)$ è il vettore dal piccolo elemento sorgente $dif q$ al punto di osservazione,
 
 $ vec(E)(vec(r)_0)=1/(4 pi epsilon_0) integral (dif q)/r^2 hat(r). $
 
