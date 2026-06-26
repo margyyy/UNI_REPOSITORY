@@ -3729,6 +3729,8 @@ $ I=(T^2 M g d)/(4 pi^2). $
 
 L'elettromagnetismo studia i fenomeni dovuti alla carica elettrica e ai campi elettrici e magnetici. Iniziamo dal caso elettrostatico, cioè cariche ferme.
 
+L'idea di base è questa: le cariche generano un campo elettrico nello spazio, e il campo elettrico esercita una forza sulle altre cariche. Per questo conviene distinguere sempre tra *cariche sorgenti*, che producono il campo, e *cariche di prova*, usate per misurarlo.
+
 == Carica elettrica
 
 Esistono due tipi di carica elettrica:
@@ -3737,6 +3739,10 @@ Esistono due tipi di carica elettrica:
 - cariche di segno opposto si attraggono.
 
 La carica si indica con $q$ e si misura in coulomb, $"C"$.
+
+Per convenzione il protone ha carica positiva e l'elettrone ha carica negativa:
+
+$ q_p=+e, quad q_e=-e, quad e approx 1.60 dot 10^(-19) " C". $
 
 #blue-box([Segno della forza elettrica])[
   Due cariche positive o due cariche negative generano una forza repulsiva. Una carica positiva e una negativa generano una forza attrattiva.
@@ -3770,6 +3776,8 @@ Un corpo può essere elettrizzato in tre modi principali.
 *Induzione.* Una carica esterna ridistribuisce le cariche in un corpo senza contatto diretto. Il corpo resta globalmente neutro se isolato, ma le cariche si separano spazialmente.
 
 *Contatto.* Un corpo carico tocca un conduttore e trasferisce parte della propria carica.
+
+Nei solidi ordinari sono soprattutto gli elettroni a spostarsi o trasferirsi: i protoni restano legati ai nuclei. Per questo un corpo diventa negativo se acquista elettroni e positivo se ne perde.
 
 #align(center, graph-card([Elettrizzazione: strofinio, induzione, contatto], cetz.canvas({
   import cetz.draw: *
@@ -3808,7 +3816,8 @@ $ abs(q_p)=abs(q_e). $
 La carica totale di un sistema isolato si conserva. Questo significa che l'elettrizzazione non crea carica dal nulla: redistribuisce o trasferisce cariche già presenti nei costituenti elementari.
 
 #green-box([Conservazione della carica])[
-  In un sistema isolato la carica totale resta costante.
+  In un sistema isolato la carica totale resta costante:
+  $ Q_"tot"=sum_i q_i="costante". $
 ]
 
 == Legge di Coulomb
@@ -3835,7 +3844,11 @@ Qui $vec(r)_(1 2)=vec(r)_2-vec(r)_1$ e $hat(r)_(1 2)=vec(r)_(1 2)/abs(vec(r)_(1 
 
 $ vec(F)_(1 -> 2)=-vec(F)_(2 -> 1). $
 
+Il segno del prodotto $q_1 q_2$ decide il verso della forza nella formula vettoriale: se $q_1 q_2>0$ la forza su $q_2$ ha il verso di $hat(r)_(1 2)$, quindi è repulsiva; se $q_1 q_2<0$ ha verso opposto, quindi è attrattiva.
+
 Per più cariche vale il principio di sovrapposizione: la forza totale è la somma vettoriale delle forze prodotte dalle singole cariche.
+
+$ vec(F)_"tot su " q_0=sum_i vec(F)_(i -> 0). $
 
 #align(center, graph-card([Legge di Coulomb: vettore relativo e forze], cetz.canvas({
   import cetz.draw: *
@@ -3942,6 +3955,8 @@ dove $vec(r)_(i 0)=vec(r)_0-vec(r)_i$ va dalla carica sorgente $q_i$ al punto di
 
 Per distribuzioni continue si usa un elemento infinitesimo di carica $dif q$.
 
+L'idea è sostituire una somma su tante cariche puntiformi con un integrale su una distribuzione continua. Ogni pezzettino di linea, superficie o volume contiene una piccola carica $dif q$ e produce un piccolo contributo $dif vec(E)$ al campo.
+
 Le densità di carica più comuni sono:
 
 $ dif q=lambda dif ell quad ["C"/"m"], $
@@ -4017,6 +4032,14 @@ Per due cariche puntiformi $Q$ e $q$:
 
 $ vec(F)=Q q/(4 pi epsilon_0 r^2) hat(r). $
 
+Nel lavoro compare il prodotto scalare $vec(F) dot dif vec(s)$. Poiché la forza di Coulomb è radiale, conta solo la parte dello spostamento nella direzione di $hat(r)$:
+
+$ dif vec(s)=dif r hat(r)+"parte tangenziale"
+  quad -> quad
+  vec(F) dot dif vec(s)=F(r) dif r. $
+
+La parte tangenziale dello spostamento non cambia la distanza $r$ dalla carica sorgente, quindi non contribuisce al lavoro. Per questo l'integrale lungo il percorso può essere riscritto come integrale tra le distanze $r_A$ e $r_B$.
+
 Il lavoro da $A$ a $B$ lungo un qualsiasi percorso è
 
 $ L_(A B)=integral_A^B vec(F) dot dif vec(s)
@@ -4086,12 +4109,14 @@ Per una carica unitaria positiva, la differenza di potenziale è il lavoro per u
   $ V_B-V_A=-integral_A^B vec(E) dot dif vec(ell). $
 ]
 
+Questa formula dice che il potenziale diminuisce nel verso del campo elettrico. Una carica positiva lasciata libera tende quindi a muoversi verso potenziali più bassi; una carica negativa tende invece nel verso opposto.
+
 #align(center, graph-card([Da forza ed energia a campo e potenziale], cetz.canvas({
   import cetz.draw: *
   axis-label((0.85, 2.35), [$vec(F)_"el"$], placement: "south")
   line((1.20, 2.20), (2.55, 2.20), stroke: 1.0pt + ink, mark: (end: ">"))
   axis-label((3.00, 2.35), [$U$], placement: "south")
-  axis-label((1.75, 1.82), [dividi per $q_0$], placement: "north")
+  axis-label((1.82, 0.78), [dividi per $q_0$], placement: "north")
   line((1.20, 1.15), (2.55, 1.15), stroke: 1.0pt + ink, mark: (end: ">"))
   axis-label((0.85, 1.30), [$vec(E)=vec(F)/q_0$], placement: "south")
   axis-label((3.00, 1.30), [$V=U/q_0$], placement: "south")
@@ -4126,6 +4151,8 @@ $ V(r)=-integral_infinity^r q/(4 pi epsilon_0 r^2) dif r
 
 Il potenziale è positivo attorno a una carica positiva e negativo attorno a una carica negativa.
 
+Il valore di $V$ non è una forza: descrive quanta energia potenziale avrebbe ogni coulomb di carica positiva messo in quel punto. La forza si ottiene solo dopo aver introdotto una carica di prova, tramite $vec(F)=q_0 vec(E)$.
+
 #align(center, graph-card([Potenziale di una carica puntiforme], cetz.canvas({
   import cetz.draw: *
   line((0.85, 0.65), (1.45, 0.65), stroke: 0.8pt + ink, mark: (end: ">"))
@@ -4147,6 +4174,8 @@ Il potenziale è una grandezza scalare, quindi la sovrapposizione è algebrica:
 
 $ V(vec(r))=sum_i V_i(vec(r)). $
 
+Qui non si sommano frecce, ma numeri con segno. Le cariche positive danno contributi positivi al potenziale, le cariche negative contributi negativi.
+
 Per $N$ cariche puntiformi:
 
 #purple-box([Potenziale di una distribuzione discreta])[
@@ -4156,6 +4185,8 @@ Per $N$ cariche puntiformi:
 Per una distribuzione continua, sommando i contributi degli elementi di carica sorgente:
 
 $ V(vec(r))=1/(4 pi epsilon_0) integral (dif q)/abs(vec(r)-vec(r)_"s"). $
+
+Il punto $vec(r)$ è il punto in cui si misura il potenziale; $vec(r)_"s"$ indica invece dove si trova il pezzetto di carica sorgente. Il denominatore è quindi la distanza tra sorgente e punto di osservazione.
 
 Nel caso volumico, con $dif q=rho(vec(r)_"s") dif V_"s"$:
 
@@ -4194,6 +4225,8 @@ Le linee di campo sono curve tangenti al vettore $vec(E)$ in ogni punto. Sono un
 - non si incrociano;
 - in elettrostatica sono linee aperte: partono da cariche positive e finiscono su cariche negative oppure all'infinito.
 
+La densità delle linee dà un'indicazione qualitativa del modulo del campo: dove le linee sono più fitte, il campo è più intenso. Non bisogna però contare le linee come oggetti fisici: sono una rappresentazione grafica.
+
 Per una carica puntiforme positiva le linee sono radiali uscenti. Per una carica negativa sono radiali entranti.
 
 #align(center, graph-card([Linee di campo di cariche puntiformi], cetz.canvas({
@@ -4222,6 +4255,8 @@ $ V(vec(r))="costante". $
 Se una carica si sposta lungo una superficie equipotenziale, $Delta V=0$ e quindi
 
 $ L=-q Delta V=0. $
+
+Muoversi lungo un'equipotenziale significa cambiare posizione senza cambiare energia potenziale elettrica. Per questo il campo non può avere una componente tangente alla superficie: altrimenti compirebbe lavoro lungo di essa.
 
 Poiché $L=integral q vec(E) dot dif vec(s)$, il campo elettrico è perpendicolare alle superfici equipotenziali.
 
@@ -4272,6 +4307,8 @@ Il flusso attraverso una superficie estesa è la somma dei contributi elementari
 
 Se la superficie è chiusa, per convenzione $hat(n)$ è sempre la normale uscente.
 
+Con una superficie chiusa il flusso è un bilancio: le linee che escono danno contributo positivo, quelle che entrano danno contributo negativo. Il flusso netto misura quindi quanto campo esce complessivamente dalla superficie, non quanto campo passa in totale ignorando il verso.
+
 L'unità di misura del flusso è $"N" "m"^2/"C"$, equivalente a $"V" "m"$.
 
 #align(center, graph-card([Elemento di superficie e flusso], cetz.canvas({
@@ -4301,6 +4338,8 @@ Il flusso dipende dall'angolo tra il campo e la normale alla superficie:
 - è massimo se $vec(E)$ è parallelo a $hat(n)$;
 - vale $E cos theta dif S$ se la superficie è inclinata;
 - è nullo se $vec(E)$ è tangente alla superficie.
+
+Il caso di flusso nullo non significa necessariamente che il campo sia nullo: significa che il campo scorre lungo la superficie e non la attraversa.
 
 #align(center, graph-card([Flusso massimo, obliquo e nullo], cetz.canvas({
   import cetz.draw: *
@@ -4388,6 +4427,8 @@ $ dif Omega=(hat(r) dot dif vec(S))/r^2 $
 
 è l'angolo solido sotto cui la carica vede l'elemento di superficie. Il termine $hat(r) dot dif vec(S)$ è la proiezione dell'elemento di superficie sul piano perpendicolare alla direzione radiale. Quindi
 
+L'angolo solido è l'analogo tridimensionale dell'angolo piano: misura quanto una superficie appare "aperta" vista dalla carica. A parità di carica, il flusso dipende da questa apertura apparente.
+
 #green-box([Flusso e angolo solido])[
   $ dif Phi=q/(4 pi epsilon_0) dif Omega. $
 ]
@@ -4463,6 +4504,8 @@ Il teorema di Gauss lega il flusso del campo elettrico attraverso una qualunque 
 
 La superficie $S$ deve essere chiusa. La carica $Q_"int"$ è la somma algebrica delle cariche interne alla superficie; le cariche esterne possono modificare localmente il campo, ma non il flusso netto attraverso $S$.
 
+Attenzione: nell'integrale compare il campo totale $vec(E)$, prodotto sia da cariche interne sia da cariche esterne. Nel secondo membro, invece, compare solo la carica interna. Le cariche esterne fanno entrare e uscire linee di campo dalla superficie, quindi il loro contributo netto al flusso è nullo.
+
 Il teorema vale sempre, anche senza simmetria. La simmetria serve però per ricavare il modulo del campo dall'integrale: senza una superficie su cui $E$ è costante o nullo per tratti, l'integrale resta difficile da calcolare.
 
 Il teorema è particolarmente utile per calcolare $vec(E)$ quando la distribuzione di carica ha simmetria. In questi casi si sceglie una *superficie gaussiana* su cui:
@@ -4500,6 +4543,16 @@ La scelta della superficie gaussiana dipende dalla simmetria della distribuzione
 - *simmetria piana*: piano carico infinito o coppie di piani paralleli.
 
 Negli esercizi degli appunti consideriamo densità costanti: densità superficiale $sigma$ per cariche su superfici e densità volumica $rho$ per cariche distribuite in un volume.
+
+Il metodo pratico è sempre lo stesso: si sceglie una superficie gaussiana coerente con la simmetria, si calcola $Q_"int"$, poi si semplifica l'integrale di flusso.
+
+#purple-box([Schema d'uso di Gauss])[
+  $ cases(
+    Phi=integral_S vec(E) dot dif vec(S),
+    Phi=Q_"int"/epsilon_0,
+    "simmetria" -> Phi=E dot "area utile".
+  ) $
+]
 
 Nel caso sferico, i casi tipici sono:
 
@@ -4785,6 +4838,8 @@ Il moto delle cariche continua finché il campo totale all'interno del conduttor
 
 La condizione $vec(E)_"int"=0$ non significa che non ci siano cariche sul conduttore: significa che il campo prodotto dalle cariche ridistribuite annulla il campo applicato all'interno del materiale.
 
+La parola "equilibrio" è importante: durante lo spostamento iniziale delle cariche può esserci campo interno; quando il moto si ferma, il campo interno deve essere nullo, altrimenti le cariche libere continuerebbero ad accelerare.
+
 #align(center, graph-card([Ridistribuzione delle cariche in un conduttore], cetz.canvas({
   import cetz.draw: *
   // transiente
@@ -4934,6 +4989,8 @@ In equilibrio:
 - sulla superficie interna del guscio, a raggio $R_2$, compare $-Q_A$ per induzione;
 - poiché il guscio esterno era neutro, sulla superficie esterna $R_3$ compare $+Q_A$.
 
+Il modo più sicuro per non sbagliare i segni è usare una superficie gaussiana dentro il metallo del guscio: lì $vec(E)=0$, quindi la carica totale racchiusa deve essere nulla. Perciò la superficie interna deve portare esattamente $-Q_A$.
+
 Le densità superficiali sono
 
 $ sigma_(R_1)=Q_A/(4 pi R_1^2) approx 8 dot 10^(-5) " C"/"m"^2, $
@@ -5032,6 +5089,8 @@ dove $V$ è il potenziale del conduttore rispetto al riferimento scelto, di soli
 
 $ [C] = "F" = "C"/"V". $
 
+Dire che un conduttore ha capacità grande significa che può accumulare molta carica aumentando poco il proprio potenziale.
+
 #blue-box([Capacità])[
   La capacità non dipende da quanta carica si mette sul conduttore: dipende solo dalla geometria e dal mezzo che lo circonda.
 ]
@@ -5066,6 +5125,8 @@ Se il conduttore non è isolato ma è vicino ad altri conduttori o alla terra, l
 == Condensatori
 
 Un *condensatore* è formato da due conduttori posti in *induzione completa*: le linee di campo che partono da un conduttore terminano sull'altro. I due conduttori portano cariche opposte $+Q$ e $-Q$.
+
+Il condensatore non serve solo ad accumulare carica: serve soprattutto ad accumulare energia nel campo elettrico creato tra le armature.
 
 La capacità di un condensatore si definisce usando la differenza di potenziale fra le armature:
 
@@ -5164,6 +5225,8 @@ e quindi
 
 Per una lastra piana infinita con densità superficiale uniforme $sigma$, la simmetria impone che il campo sia perpendicolare al piano e abbia lo stesso modulo sui due lati. Si usa una superficie gaussiana cilindrica che attraversa il piano.
 
+La superficie laterale del cilindro non contribuisce al flusso perché lì il campo è parallelo alla superficie, quindi perpendicolare alla normale laterale.
+
 Il flusso passa solo dalle due basi:
 
 $ integral_S vec(E) dot dif vec(S) = 2 E Sigma. $
@@ -5256,6 +5319,8 @@ Un *dielettrico* è un materiale isolante. Le cariche non sono libere di muovers
 
 Questo spostamento microscopico separa i centri delle cariche positive e negative: l'atomo o la molecola si *polarizza* e si comporta come un piccolo dipolo elettrico.
 
+La differenza rispetto a un conduttore è fondamentale: nel conduttore le cariche libere si spostano macroscopicamente; nel dielettrico le cariche restano legate, ma si separano leggermente dentro atomi o molecole.
+
 #blue-box([Polarizzazione])[
   La polarizzazione è la comparsa di dipoli elettrici microscopici orientati dal campo esterno. Non produce cariche libere nel volume: produce cariche di polarizzazione, soprattutto sulle superfici del dielettrico.
 ]
@@ -5304,6 +5369,8 @@ dove $sigma_l$ è la densità superficiale di carica libera sulle armature.
 Se si scollega la batteria, il sistema diventa isolato e la carica libera resta costante. Inserendo un dielettrico lineare con costante dielettrica $k>1$:
 
 $ V = V_0/k < V_0, quad E = E_0/k < E_0, quad C = k C_0 > C_0. $
+
+Qui la carica libera sulle armature non cambia perché non c'è più un collegamento con l'esterno. Cambiano invece campo e potenziale perché il dielettrico polarizzato genera un campo indotto opposto al campo originario.
 
 #green-box([Effetto del dielettrico nel condensatore isolato])[
   A carica libera fissata, il dielettrico riduce campo e differenza di potenziale, quindi aumenta la capacità.
@@ -5368,6 +5435,8 @@ Il vettore $vec(d)$ è diretto dalla carica negativa alla carica positiva, quind
 
 Nel materiale si introduce il campo di polarizzazione $vec(P)$, cioè il momento di dipolo per unità di volume:
 
+Quindi $vec(P)$ descrive l'effetto medio di moltissimi dipoli microscopici: non è il momento di un singolo dipolo, ma una grandezza macroscopica del materiale.
+
 #blue-box([Vettore di polarizzazione])[
   $ vec(P) = ("momento di dipolo")/("volume"). $
 
@@ -5427,6 +5496,8 @@ Nel vuoto il teorema di Gauss lega il flusso di $vec(E)$ alla carica totale racc
 - cariche *di polarizzazione*, dovute alla risposta del materiale.
 
 Per separare i due contributi si introduce il vettore spostamento elettrico:
+
+Il campo $vec(D)$ è utile perché "assorbe" nella sua definizione l'effetto medio della polarizzazione. In questo modo, nel teorema di Gauss resta solo la carica libera.
 
 #yellow-box([Spostamento elettrico])[
   $ vec(D)=epsilon_0 vec(E)+vec(P). $
@@ -5515,6 +5586,8 @@ $ vec(p)=q vec(d). $
 Consideriamo un punto $P$ lontano dal dipolo. Indichiamo con $r_+$ la distanza di $P$ dalla carica positiva e con $r_-$ la distanza dalla carica negativa. Il potenziale è la somma dei potenziali delle due cariche:
 
 $ V(P)=V_+ + V_- = 1/(4 pi epsilon_0) (q/r_+ - q/r_-). $
+
+Il dipolo ha carica totale nulla, quindi da lontano i contributi delle due cariche si compensano quasi del tutto. Rimane solo un effetto direzionale, descritto dal prodotto scalare con $vec(p)$.
 
 Portando a denominatore comune:
 
@@ -5703,6 +5776,8 @@ Ponendo $U_infinity=0$, l'energia elettrostatica di un sistema è il lavoro tota
 
 $ U_"sistema" = - L_"campo". $
 
+Se le cariche si respingono, il lavoro esterno per avvicinarle è positivo e l'energia del sistema aumenta. Se si attraggono, il campo aiuta l'avvicinamento e l'energia può risultare negativa rispetto al riferimento all'infinito.
+
 == Distribuzione discreta di cariche
 
 Per costruire una distribuzione di $N$ cariche puntiformi, si porta una carica alla volta dall'infinito. La prima carica non richiede lavoro, perché non ci sono ancora altre cariche:
@@ -5748,6 +5823,8 @@ Nel termine $V_i$ non si include il potenziale generato dalla carica $q_i$ stess
 Per passare a una distribuzione continua si sostituisce la somma con un integrale. Se la densità volumica è $rho(vec(r))$, allora
 
 $ dif q = rho(vec(r)) dif tau. $
+
+Il simbolo $dif tau$ indica un piccolo elemento di volume. Ha lo stesso ruolo di $dif V$, ma qui si evita la lettera $V$ per non confonderla con il potenziale.
 
 L'energia elettrostatica della distribuzione diventa
 
@@ -6050,6 +6127,8 @@ Il fattore $A h$ è il volume compreso tra le armature: l'energia non va pensata
 
 Il risultato del condensatore piano suggerisce una forma generale: l'energia elettrostatica può essere descritta come energia distribuita nello spazio in cui esiste il campo elettrico.
 
+Questa è una lettura più fisica: non si guarda solo alle cariche, ma allo spazio attorno ad esse, dove il campo contiene energia.
+
 Se $dif tau$ è un elemento di volume, la densità di energia elettrostatica è
 
 #yellow-box([Densità di energia del campo elettrico])[
@@ -6141,6 +6220,8 @@ $ integral_Gamma vec(E) dot dif vec(ell) != 0, $
 
 allora il campo compie lavoro netto su una carica che percorre il circuito. In questo caso il campo elettrico non è conservativo e non si può descrivere tutto il fenomeno con il solo potenziale elettrostatico $V$.
 
+La differenza concettuale è questa: in elettrostatica il potenziale basta perché il lavoro dipende solo dagli estremi; in un circuito con generatore conta invece il giro completo, perché il generatore reinserisce energia nel sistema.
+
 #yellow-box([Idea chiave])[
   In un circuito percorso da corrente serve un agente non elettrostatico, come un generatore, capace di mantenere il moto delle cariche contro il campo elettrostatico.
 ]
@@ -6183,6 +6264,8 @@ allora il campo compie lavoro netto su una carica che percorre il circuito. In q
 == Forza elettromotrice
 
 La *forza elettromotrice* non è una forza meccanica: è il lavoro per unità di carica compiuto da forze non elettrostatiche per mantenere separate le cariche e alimentare il circuito. Si indica con $cal(E)$ e si misura in volt.
+
+Il nome è storico e può confondere: $cal(E)$ ha unità di potenziale, non di forza.
 
 #green-box([Forza elettromotrice])[
   $ cal(E) = integral_-^+ vec(F)_"non el"/q dot dif vec(ell)
@@ -6336,6 +6419,8 @@ Per convenzione il verso della corrente è il verso del moto delle cariche posit
 
 La densità di corrente descrive la carica che attraversa una superficie unitaria nell'unità di tempo. È un vettore e si misura in ampere su metro quadrato.
 
+Il verso di $vec(J)$ è il verso della corrente convenzionale locale. Il modulo dice quanto intensa è la corrente per unità di area.
+
 #green-box([Densità di corrente])[
   $ i = integral_"sup" vec(J) dot dif vec(S), quad [J] = "A"/"m"^2. $
 ]
@@ -6443,6 +6528,8 @@ anche se le velocità istantanee sono elevate, dell'ordine di $10^2 " m"/"s"$.
 
 Quando si applica un campo elettrico, al moto termico si sovrappone un piccolo moto ordinato: la *velocità di deriva*. Per gli elettroni il verso della deriva è opposto al campo, ma la corrente convenzionale è nel verso di $vec(E)$.
 
+La corrente non richiede che gli elettroni viaggino velocemente lungo tutto il filo: basta una piccola velocità media ordinata sovrapposta al moto termico disordinato.
+
 #blue-box([Modello microscopico])[
   $ vec(J) = n q overline(vec(v)_d). $
 ]
@@ -6485,6 +6572,8 @@ In molti materiali ordinari, detti *ohmici*, si osserva sperimentalmente una rel
 #green-box([Legge di Ohm])[
   $ V = R i. $
 ]
+
+La legge di Ohm non è una legge universale come Coulomb o Gauss: è un modello sperimentale valido per materiali e condizioni in cui il rapporto $V/i$ resta costante.
 
 La costante $R$ è la resistenza elettrica e si misura in ohm:
 
@@ -6530,6 +6619,8 @@ La grandezza $rho$ è la resistività del materiale. A parità di materiale, un 
 Se una carica $dif q$ attraversa un elemento con differenza di potenziale $V$, il lavoro elettrico vale
 
 $ dif L = V dif q. $
+
+Il segno della potenza dipende dalla convenzione scelta per corrente e tensione. Nei resistori si usa di solito la potenza assorbita, che risulta positiva.
 
 La potenza elettrica è il lavoro per unità di tempo:
 
@@ -6616,6 +6707,8 @@ Per resistori in parallelo la differenza di potenziale è la stessa:
 
 $ V_1=V_2. $
 
+Queste due frasi sono spesso il criterio pratico più rapido: stessa corrente significa serie; stessa tensione significa parallelo.
+
 #align(center, graph-card([Reti lineari: serie e parallelo], cetz.canvas({
   import cetz.draw: *
 
@@ -6665,6 +6758,8 @@ $ V_1=V_2. $
 == Resistenza equivalente
 
 Una rete di resistori vista da due morsetti può spesso essere sostituita da un unico resistore equivalente $R_"eq"$, scelto in modo che, a parità di tensione applicata, assorba la stessa corrente totale.
+
+La resistenza equivalente non dice che il circuito interno è sparito fisicamente: dice solo che, guardato dai morsetti esterni, il comportamento corrente-tensione è lo stesso.
 
 Per resistori in serie la corrente è la stessa in ogni elemento. Le cadute di tensione si sommano:
 
@@ -6744,6 +6839,8 @@ Le reti lineari si risolvono fissando una convenzione prima di scrivere le equaz
 2. si sceglie un verso per le correnti incognite;
 3. si assegna il segno alle F.E.M. $cal(E)_k$;
 4. si assegna il segno alle cadute ohmiche $R_k i_k$.
+
+Se alla fine una corrente viene negativa, non è un errore: significa solo che il verso reale è opposto a quello scelto come positivo.
 
 La prima legge è una forma della conservazione della carica: in un nodo non si accumula carica.
 
@@ -6924,6 +7021,8 @@ Integrando:
 
 Il tempo $tau=R C$ è il *tempo caratteristico*: indica la scala temporale della scarica. Dopo un tempo molto grande il condensatore è praticamente scarico.
 
+Più precisamente, dopo un tempo $tau$ resta una frazione $e^(-1) approx 0.37$ del valore iniziale; dopo alcuni multipli di $tau$ la scarica è quasi completa.
+
 #align(center, graph-card([Scarica RC: circuito e andamenti], cetz.canvas({
   import cetz.draw: *
 
@@ -7005,6 +7104,8 @@ La corrente invece è massima all'inizio e poi decresce:
 
 $ i(t)=cal(E)/R e^(-t/tau). $
 
+All'inizio il condensatore scarico si comporta quasi come un corto circuito; a regime, quando è carico, si comporta come un circuito aperto per la corrente continua.
+
 #align(center, graph-card([Carica RC: circuito e grafici], cetz.canvas({
   import cetz.draw: *
 
@@ -7073,6 +7174,8 @@ Un magnete ha sempre due poli, nord e sud. Se lo si divide, non si separa un pol
 
 Il vettore $vec(B)$ è il *campo magnetico*. Le sue linee non cominciano e non finiscono su sorgenti isolate: formano anelli chiusi.
 
+Questo è il primo grande contrasto con il campo elettrico: le linee di $vec(E)$ possono partire o finire su cariche, mentre le linee di $vec(B)$ non hanno estremi.
+
 #align(center, graph-card([Magneti, poli e linee chiuse di campo], cetz.canvas({
   import cetz.draw: *
 
@@ -7127,6 +7230,8 @@ La bussola è un piccolo ago magnetico: tende ad allinearsi al campo magnetico t
 
 Oersted osservò che una corrente elettrica devia un ago magnetico: le sorgenti del campo magnetico sono le cariche in moto, cioè le correnti.
 
+Questa osservazione collega elettricità e magnetismo: una carica ferma genera solo campo elettrico, mentre una carica in moto contribuisce anche al campo magnetico.
+
 #blue-box([Idea fondamentale])[
   Una corrente stazionaria genera un campo magnetico $vec(B)$ le cui linee circondano il filo.
 ]
@@ -7162,13 +7267,17 @@ Oersted osservò che una corrente elettrica devia un ago magnetico: le sorgenti 
 
 Nel caso magnetostatico, cioè con correnti stazionarie, la circuitazione del campo magnetico lungo una linea chiusa $Gamma$ è proporzionale alla corrente concatenata con quella linea.
 
+La parola "concatenata" significa che la corrente attraversa una superficie che ha $Gamma$ come bordo. Non basta che una corrente sia vicina alla linea: deve bucare la superficie scelta.
+
 #green-box([Teorema di Ampère])[
   $ integral_Gamma vec(B) dot dif vec(ell) = mu_0 i_"conc". $
 ]
 
-La costante $mu_0$ è la *permeabilità magnetica del vuoto*. Nel sistema SI vale
+La costante $mu_0$ è la *permeabilità magnetica del vuoto*. Nei calcoli di base si usa
 
-$ mu_0 = 4 pi dot 10^(-7) " N"/"A"^2. $
+$ mu_0 approx 4 pi dot 10^(-7) " N"/"A"^2. $
+
+Dopo la ridefinizione del SI del 2019 questo valore non è più esatto per definizione, ma l'approssimazione è quella usata normalmente negli esercizi.
 
 La corrente concatenata $i_"conc"$ è la corrente totale che attraversa una qualsiasi superficie avente bordo $Gamma$, contando il segno rispetto all'orientazione scelta. In forma locale il teorema diventa
 
@@ -7217,6 +7326,8 @@ Il campo magnetico è prodotto da cariche in moto e agisce su cariche in moto. L
 La forza è perpendicolare sia alla velocità sia al campo magnetico. Per questo motivo la potenza istantanea della forza magnetica è nulla:
 
 $ P = vec(F)_B dot vec(v) = 0. $
+
+Il prodotto vettoriale serve proprio a codificare questa geometria: modulo $q v B sin theta$, direzione perpendicolare al piano formato da $vec(v)$ e $vec(B)$, verso dato dalla regola della mano destra e dal segno di $q$.
 
 Il campo magnetico può deviare la traiettoria, ma non cambia direttamente il modulo della velocità né l'energia cinetica della carica.
 
@@ -7275,6 +7386,8 @@ Una spira elementare percorsa da corrente si comporta come un *dipolo magnetico*
 
 Il vettore $vec(S)$ è perpendicolare al piano della spira e ha modulo pari all'area della spira; il verso si sceglie con la regola della mano destra rispetto al verso della corrente.
 
+Il momento $vec(mu)$ riassume l'effetto magnetico della spira: invece di seguire ogni tratto di filo, si descrive la spira come un piccolo dipolo magnetico.
+
 In un campo magnetico esterno uniforme, i lati della spira paralleli al campo non subiscono forza. Gli altri lati subiscono forze opposte che formano una coppia: la spira ruota fino ad allineare $vec(mu)$ con $vec(B)$.
 
 #blue-box([Coppia ed energia del dipolo magnetico])[
@@ -7327,6 +7440,8 @@ L'equilibrio stabile si ha per $vec(mu)$ parallelo a $vec(B)$; l'equilibrio inst
 
 In elettrostatica il campo elettrico è conservativo e le sorgenti sono le cariche. In magnetostatica, invece, le sorgenti sono le correnti: non ci sono monopoli magnetici e le linee di $vec(B)$ sono chiuse.
 
+Quindi le equazioni si leggono a coppie: il flusso di $vec(E)$ misura carica racchiusa, mentre il flusso di $vec(B)$ è sempre nullo; la circuitazione di $vec(E)$ è nulla in elettrostatica, mentre quella di $vec(B)$ misura corrente concatenata.
+
 #align(center, graph-card([Equazioni integrali utili: $vec(E)$ e $vec(B)$], cetz.canvas({
   import cetz.draw: *
 
@@ -7357,6 +7472,8 @@ In elettrostatica il campo elettrico è conservativo e le sorgenti sono le caric
 == Esempio: campo magnetico di un filo/cilindro indefinito
 
 Consideriamo un cilindro indefinito di raggio $R$, percorso da corrente stazionaria lungo il suo asse. Per simmetria cilindrica le linee di $vec(B)$ sono circonferenze centrate sull'asse del cilindro e il modulo dipende solo dalla distanza $r$ dall'asse.
+
+La scelta della linea amperiana è analoga alla scelta della superficie gaussiana: si sceglie una curva che segue la simmetria, così $B$ è costante lungo la curva e può uscire dall'integrale.
 
 Scegliendo come linea amperiana una circonferenza di raggio $r$:
 
@@ -7458,6 +7575,8 @@ $ B(r)=mu_0 i/(2 pi r). $
 In un solenoide toroidale le spire sono avvolte attorno a una corona. Usando una circonferenza amperiana coassiale al toroide:
 
 $ B(r) 2 pi r = mu_0 N i. $
+
+Ogni spira attraversa la superficie delimitata dalla linea amperiana: per questo la corrente concatenata totale è $N i$.
 
 Nel materiale attraversato dalle spire, cioè per $R<r<R+ell$:
 
@@ -7566,6 +7685,8 @@ Il fenomeno si descrive con il *flusso magnetico* attraverso una superficie $S$:
   $ Phi_B = integral_S vec(B) dot dif vec(S). $
 ]
 
+Non è il valore del flusso in sé a produrre corrente, ma la sua variazione nel tempo.
+
 Per un campo uniforme perpendicolare alla superficie, $Phi_B = B S$. In generale il flusso cambia se cambia il campo $vec(B)$, se cambia l'area della superficie, oppure se cambia l'orientazione della superficie rispetto al campo.
 
 La legge di Faraday-Lenz afferma che una variazione del flusso magnetico genera una F.E.M. indotta:
@@ -7575,6 +7696,8 @@ La legge di Faraday-Lenz afferma che una variazione del flusso magnetico genera 
 ]
 
 Il segno meno è la *legge di Lenz*: la corrente indotta ha verso tale da opporsi alla variazione di flusso che l'ha generata. Se il flusso aumenta, il campo indotto tende a ridurlo; se il flusso diminuisce, il campo indotto tende a mantenerlo.
+
+Questa opposizione non è una regola arbitraria: esprime la conservazione dell'energia. Se la corrente indotta aiutasse la variazione, il sistema amplificherebbe spontaneamente il moto o il campo.
 
 #align(center, graph-card([Induzione: variazione del flusso magnetico], cetz.canvas({
   import cetz.draw: *
@@ -7617,6 +7740,8 @@ Consideriamo una barretta conduttrice di lunghezza $a$ che scorre con velocità 
 Se la posizione della barretta è $x(t)$, l'area del circuito è $S=a x$, quindi
 
 $ Phi_B = B a x. $
+
+Qui l'induzione nasce dal moto: il campo $B$ è costante, ma cambia l'area del circuito e quindi cambia il flusso.
 
 La F.E.M. indotta vale
 
@@ -7688,6 +7813,8 @@ Per circuiti lineari l'autoflusso è proporzionale alla corrente:
   $ Phi_B = L i. $
 ]
 
+L'induttanza è per il campo magnetico ciò che la capacità è per il campo elettrico: misura quanto facilmente il circuito accumula energia nel campo, ma ora attraverso la corrente.
+
 La costante $L$ è l'*induttanza* e si misura in henry:
 
 $ [L] = "H". $
@@ -7739,6 +7866,8 @@ In un circuito formato da un generatore ideale $V_0$, una resistenza $R$ e un'in
 La corrente non passa istantaneamente da zero al valore di regime: cresce esponenzialmente con tempo caratteristico
 
 $ tau = L/R. $
+
+Il motivo fisico è l'autoinduzione: quando la corrente cambia rapidamente, l'induttore genera una F.E.M. che si oppone a quel cambiamento.
 
 Durante l'accensione:
 
@@ -7810,7 +7939,7 @@ Per circuiti lineari:
   $ Phi_(1,2) = M i_1, quad Phi_(2,1) = M i_2. $
 ]
 
-La costante $M$ misura quanto i due circuiti sono accoppiati magneticamente. Se la corrente in un circuito varia nel tempo, nell'altro può nascere una F.E.M. indotta.
+La costante $M$ misura quanto i due circuiti sono accoppiati magneticamente. Se la corrente in un circuito varia nel tempo, nell'altro può nascere una F.E.M. indotta. Se i circuiti sono lontani o orientati male, il flusso concatenato è piccolo e anche $M$ è piccolo.
 
 #align(center, graph-card([Mutua induzione tra due circuiti], cetz.canvas({
   import cetz.draw: *
@@ -7836,6 +7965,8 @@ La costante $M$ misura quanto i due circuiti sono accoppiati magneticamente. Se 
 
 Le equazioni di Maxwell riuniscono elettrostatica, magnetostatica e induzione. In regime stazionario non compaiono derivate temporali: i campi non cambiano nel tempo.
 
+Il loro valore non è solo riassuntivo: mostrano quali sorgenti producono divergenza e quali producono circuitazione dei campi.
+
 #align(center, graph-card([Equazioni di Maxwell stazionarie], cetz.canvas({
   import cetz.draw: *
 
@@ -7858,6 +7989,8 @@ Quando i campi variano nel tempo, le equazioni cambiano in due punti essenziali:
 
 - Faraday sostituisce la circuitazione nulla di $vec(E)$;
 - Ampère deve essere corretto con la *corrente di spostamento*.
+
+La correzione di Maxwell dice che anche un campo elettrico variabile produce campo magnetico, perfino dove non c'è corrente di conduzione.
 
 #green-box([Maxwell non stazionario])[
   $ integral_Gamma vec(E) dot dif vec(ell) = - (dif Phi_B)/(dif t), quad
@@ -7920,13 +8053,15 @@ Da queste equazioni segue che i campi $vec(E)$ e $vec(B)$ possono propagarsi com
   $ c = 1/sqrt(epsilon_0 mu_0). $
 ]
 
+Il punto concettuale è che i campi si sostengono a vicenda: un $vec(E)$ variabile genera $vec(B)$ e un $vec(B)$ variabile genera $vec(E)$. Per questo l'onda può propagarsi anche nel vuoto.
+
 Nel vuoto, per un'onda piana, i campi sono perpendicolari tra loro e alla direzione di propagazione. I moduli sono legati da
 
 #blue-box([Relazione tra i campi nell'onda])[
   $ abs(vec(B)) = abs(vec(E))/c. $
 ]
 
-La luce è un'onda elettromagnetica.
+Inoltre $vec(E)$ e $vec(B)$ oscillano in fase: quando uno è massimo, anche l'altro è massimo. La luce è un'onda elettromagnetica; onde radio, microonde, infrarosso, ultravioletto, raggi X e raggi gamma sono lo stesso tipo di fenomeno, ma con frequenze e lunghezze d'onda diverse.
 
 #align(center, graph-card([Onda elettromagnetica nel vuoto], cetz.canvas({
   import cetz.draw: *
