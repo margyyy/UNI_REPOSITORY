@@ -2852,6 +2852,8 @@ Confrontando con $theta''+omega^2 theta=0$:
 
 $ omega^2=g/ell, quad omega=sqrt(g/ell). $
 
+Qui $omega$ è la *pulsazione* delle piccole oscillazioni: misura quanto rapidamente procede l'oscillazione nel tempo e si esprime in $"rad"/"s"$. Non è la velocità angolare di un moto circolare della massa, ma il parametro dell'oscillazione armonica approssimata.
+
 Il periodo delle piccole oscillazioni è
 
 #green-box([Periodo del pendolo semplice])[
@@ -3379,7 +3381,7 @@ Nel caso continuo si introduce la densità volumica
 
 La massa totale è
 
-$ M=integral_V rho dif V. $
+$ M=integral_V rho(vec(r)) dif V. $
 
 Se la densità è costante,
 
@@ -3388,7 +3390,15 @@ $ M=rho V. $
 Il centro di massa diventa
 
 $ vec(r)_"CM"=(integral vec(r) dif m)/(integral dif m)
-  =(1/M) integral_V rho vec(r) dif V. $
+  =(1/M) integral_V rho(vec(r)) vec(r) dif V. $
+
+#yellow-box([Perché compare $vec(r)$ nella densità?])[
+  Nel caso continuo la massa non è concentrata in particelle isolate, ma distribuita nello spazio. Il vettore $vec(r)$ indica la posizione del piccolo elemento di volume $dif V$ rispetto all'origine scelta.
+
+  Se la densità non è uniforme, può cambiare da punto a punto: per questo si scrive $rho(vec(r))$. La massa dell'elemento è quindi $dif m=rho(vec(r)) dif V$.
+
+  Nell'integrale del centro di massa, $vec(r) rho(vec(r)) dif V$ pesa la posizione di ogni pezzettino di corpo con la massa contenuta in quel punto.
+]
 
 Se $rho$ è costante:
 
@@ -3478,9 +3488,14 @@ dove $R_i$ è la distanza dall'asse. Il momento angolare della singola particell
 
 $ vec(ell)_i=vec(r)_i times m_i vec(v)_i. $
 
-La componente utile per la rotazione attorno all'asse è la componente lungo $z$:
+Qui $vec(r)_i$ è il vettore posizione rispetto al polo scelto, mentre $R_i$ è solo la distanza perpendicolare dall'asse di rotazione. Per una rotazione attorno all'asse $z$, la componente utile del momento angolare è quella lungo $z$:
 
-$ ell_(i,z)=ell_i cos phi=m_i R_i^2 omega. $
+$ ell_(i,z)=vec(ell)_i dot hat(k)
+  =(vec(r)_i times m_i vec(v)_i) dot hat(k). $
+
+Poiché $vec(v)_i$ è tangente alla circonferenza descritta dalla particella e $v_i=omega R_i$, la componente lungo l'asse vale
+
+$ ell_(i,z)=m_i R_i v_i=m_i R_i^2 omega. $
 
 Sommando tutte le particelle:
 
@@ -3488,23 +3503,36 @@ $ ell_z=sum_i ell_(i,z)=omega sum_i m_i R_i^2. $
 
 #align(center, graph-card([Rotazione attorno a un asse fisso: componente di $vec(ell)$], cetz.canvas({
   import cetz.draw: *
-  line((1.10, 0.45), (1.10, 3.20), stroke: 1.25pt + ink, mark: (end: ">"))
-  axis-label((1.25, 3.10), [$z$], placement: "west")
-  circle((1.10, 0.90), radius: 0.08, fill: ink, stroke: none)
-  line((1.10, 0.90), (3.25, 1.70), stroke: 1.1pt + blue, mark: (end: ">"))
-  line((1.10, 1.70), (3.25, 1.70), stroke: 0.95pt + blue, mark: (end: ">"))
-  circle((3.25, 1.70), radius: 0.10, fill: ink, stroke: none)
-  line((3.25, 1.70), (2.78, 2.50), stroke: 1.15pt + green, mark: (end: ">"))
-  line((3.25, 1.70), (2.45, 2.72), stroke: 1.15pt + gold, mark: (end: ">"))
-  line((3.25, 1.70), (3.25, 2.82), stroke: 0.95pt + gold, mark: (end: ">"))
-  arc((1.10, 1.70), start: 0deg, stop: 360deg, radius: 2.15, stroke: (paint: grid-color, thickness: 0.75pt, dash: "dashed"))
-  arc((1.10, 2.92), start: 40deg, stop: 330deg, radius: 0.25, stroke: 1.0pt + red, mark: (end: ">"))
-  axis-label((1.32, 2.92), [$vec(omega)$], placement: "west")
-  axis-label((2.18, 1.52), [$R_i$], placement: "north")
-  axis-label((2.25, 1.48), [$vec(r)_i$], placement: "south")
-  axis-label((2.72, 2.58), [$m_i vec(v)_i$], placement: "east")
-  axis-label((2.18, 2.78), [$vec(ell)_i$], placement: "east")
-  axis-label((3.42, 2.70), [$ell_(i,z)$], placement: "west")
+  // asse fisso z e verso della velocita' angolare
+  line((1.25, 0.40), (1.25, 3.35), stroke: 1.25pt + ink, mark: (end: ">"))
+  axis-label((1.40, 3.25), [$z$], placement: "west")
+  arc((1.25, 3.02), start: 45deg, stop: 330deg, radius: 0.28, stroke: 1.0pt + red, mark: (end: ">"))
+  axis-label((1.48, 3.05), [$vec(omega)$], placement: "west")
+
+  // polo O, piano della circonferenza e particella i
+  circle((1.25, 0.70), radius: 0.07, fill: ink, stroke: none)
+  axis-label((1.05, 0.62), [$O$], placement: "east")
+  circle((1.25, 1.70), radius: (2.15, 0.58), stroke: (paint: grid-color, thickness: 0.75pt, dash: "dashed"))
+  circle((3.40, 1.70), radius: 0.10, fill: ink, stroke: none)
+  axis-label((3.52, 1.52), [$m_i$], placement: "north")
+
+  // vettore posizione e distanza dall'asse
+  line((1.25, 0.70), (3.40, 1.70), stroke: 1.1pt + blue, mark: (end: ">"))
+  line((1.25, 1.70), (3.40, 1.70), stroke: 1.0pt + blue, mark: (end: ">"))
+  axis-label((2.30, 1.03), [$vec(r)_i$], placement: "south")
+  axis-label((2.33, 1.55), [$R_i$], placement: "north")
+
+  // quantita' di moto tangente alla traiettoria
+  line((3.40, 1.70), (3.40, 2.55), stroke: 1.2pt + green, mark: (end: ">"))
+  axis-label((3.55, 2.45), [$m_i vec(v)_i$], placement: "west")
+
+  // momento angolare e sua componente assiale
+  line((3.40, 1.70), (2.60, 2.78), stroke: 1.15pt + gold, mark: (end: ">"))
+  line((3.40, 1.70), (3.40, 2.78), stroke: 1.0pt + gold, mark: (end: ">"))
+  line((2.60, 2.78), (3.40, 2.78), stroke: (paint: grid-color, thickness: 0.7pt, dash: "dashed"))
+  axis-label((2.48, 2.86), [$vec(ell)_i$], placement: "east")
+  axis-label((3.55, 2.70), [$ell_(i,z)$], placement: "west")
+
   axis-label((5.20, 2.25), [$ell_(i,z)=m_i R_i^2 omega$], placement: "west")
   axis-label((5.20, 1.48), [$ell_z=I_z omega$], placement: "west")
 })))
