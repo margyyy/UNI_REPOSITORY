@@ -1361,7 +1361,7 @@ $ N-m g-F=0 quad arrow quad N=m g+F. $
   // componenti del peso parallela e normale
   line((3.0, 1.67), (1.9, 1.08), stroke: (paint: gold, thickness: 1.2pt, dash: "dashed"), mark: (end: ">"))
   line((3.0, 1.67), (3.7, 0.37), stroke: (paint: gold, thickness: 1.2pt, dash: "dashed"), mark: (end: ">"))
-  line((0.95, 1.72), (1.62, 2.08), stroke: 0.8pt + ink, mark: (end: ">"))
+  line((1.62, 2.08), (0.95, 1.72), stroke: 0.8pt + ink, mark: (end: ">"))
   line((0.95, 1.72), (0.60, 2.38), stroke: 0.8pt + ink, mark: (end: ">"))
   arc((1.15, 0.35), start: 0deg, stop: 28deg, radius: 0.6, stroke: 1pt + blue)
   axis-label((1.2, 0.58), [$theta$], placement: "south")
@@ -1569,7 +1569,7 @@ Consideriamo un blocco su un piano inclinato di angolo $theta$, senza attrito. S
 Con la fune e in equilibrio statico:
 
 $ cases(
-  T-m g sin theta=0,
+  m g sin theta-T=0,
   N-m g cos theta=0,
 ) $
 
@@ -1746,7 +1746,7 @@ L'attrito è parallelo al piano e si oppone alla tendenza al moto. Se il blocco 
   line((2.7, 1.65), (2.7, 0.4), stroke: 1.35pt + red, mark: (end: ">"))
   line((2.7, 1.65), (1.62, 1.06), stroke: (paint: gold, thickness: 1.0pt, dash: "dashed"), mark: (end: ">"))
   line((2.7, 1.65), (3.32, 0.55), stroke: (paint: gold, thickness: 1.0pt, dash: "dashed"), mark: (end: ">"))
-  line((1.05, 1.3), (1.75, 1.68), stroke: 0.8pt + ink, mark: (end: ">"))
+  line((1.75, 1.68), (1.05, 1.3), stroke: 0.8pt + ink, mark: (end: ">"))
   line((1.05, 1.3), (0.66, 1.98), stroke: 0.8pt + ink, mark: (end: ">"))
   arc((1.02, 0.45), start: 0deg, stop: 28deg, radius: 0.58, stroke: 0.9pt + gold)
   axis-label((1.05, 0.68), [$theta$], placement: "south")
@@ -1759,7 +1759,7 @@ L'attrito è parallelo al piano e si oppone alla tendenza al moto. Se il blocco 
   axis-label((3.42, 0.58), [$m g cos theta$], placement: "west")
   // corpo libero
   circle((7.15, 1.55), radius: 0.08, fill: ink, stroke: none)
-  line((7.15, 1.55), (8.05, 2.05), stroke: 0.8pt + ink, mark: (end: ">"))
+  line((8.05, 2.05), (7.15, 1.55), stroke: 0.8pt + ink, mark: (end: ">"))
   line((7.15, 1.55), (6.65, 2.38), stroke: 0.8pt + ink, mark: (end: ">"))
   line((7.15, 1.55), (8.18, 2.1), stroke: 1.35pt + red, mark: (end: ">"))
   line((7.15, 1.55), (6.48, 2.65), stroke: 1.35pt + green, mark: (end: ">"))
@@ -1906,7 +1906,7 @@ $ a=((m_1-m_2) g)/(m_1+m_2), quad T=(2m_1 m_2 g)/(m_1+m_2). $
 
 == Piano inclinato con massa sospesa
 
-Nel caso degli appunti, $m_1$ è su un piano liscio inclinato di $theta$ e $m_2$ è sospesa. Se $m_2$ scende, $m_1$ sale lungo il piano. Per $m_1$ conviene usare assi locali: $x$ parallelo al piano verso l'alto e $y$ perpendicolare al piano verso l'esterno.
+Nel caso degli appunti, $m_1$ è su un piano liscio inclinato di $theta$ e $m_2$ è sospesa. Usiamo per $m_1$ assi locali con $x$ parallelo al piano verso valle e $y$ perpendicolare al piano verso l'esterno, come negli altri piani inclinati.
 
 #align(center, graph-card([Piano inclinato e massa sospesa], cetz.canvas({
   import cetz.draw: *
@@ -1932,7 +1932,7 @@ Nel caso degli appunti, $m_1$ è su un piano liscio inclinato di $theta$ e $m_2$
   axis-label((4.42, 0.05), [$m_2 vec(g)$], placement: "west")
   // diagrammi isolati
   circle((6.25, 1.55), radius: 0.08, fill: ink, stroke: none)
-  line((6.25, 1.55), (7.05, 2.05), stroke: 0.8pt + ink, mark: (end: ">"))
+  line((7.05, 2.05), (6.25, 1.55), stroke: 0.8pt + ink, mark: (end: ">"))
   line((6.25, 1.55), (5.75, 2.35), stroke: 0.8pt + ink, mark: (end: ">"))
   line((6.25, 1.55), (7.25, 2.2), stroke: 1.35pt + blue, mark: (end: ">"))
   line((6.25, 1.55), (5.6, 2.65), stroke: 1.35pt + green, mark: (end: ">"))
@@ -1953,10 +1953,12 @@ Per $m_1$ il peso si scompone in:
 $ m_1 g sin theta quad "lungo il piano verso valle", $
 $ m_1 g cos theta quad "perpendicolare al piano verso l'interno". $
 
-Lungo $y$ non c'è accelerazione, quindi $N=m_1 g cos theta$. Le equazioni lungo le direzioni di moto sono invece
+Lungo $y$ non c'è accelerazione, quindi $N=m_1 g cos theta$. Se $m_2$ scende, $m_1$ sale lungo il piano: il verso dell'accelerazione di $m_1$ è quindi opposto all'asse $x$ scelto. Indicando con $a>0$ il modulo dell'accelerazione,
 
-$ T-m_1 g sin theta=m_1 a, $
-$ m_2 g-T=m_2 a. $
+$ cases(
+  m_1 g sin theta-T=-m_1 a,
+  m_2 g-T=m_2 a,
+) $
 
 Quindi
 
@@ -2034,20 +2036,44 @@ Nel pendolo conico una massa ruota con velocità costante su una circonferenza o
   axis-label((6.0, 2.82), [$y$], placement: "south")
 })))
 
-Scegliendo $x$ radiale verso il centro e $y$ verticale:
+La massa descrive una circonferenza orizzontale di raggio
 
-$ T sin theta=m v^2/R, $
-$ T cos theta-m g=0. $
+$ R=ell sin theta, $
 
-Da qui
+dove $ell$ è la lunghezza della fune e $theta$ è l'angolo rispetto alla verticale. Le forze reali sulla massa sono soltanto la tensione $vec(T)$ e il peso $m vec(g)$.
 
-$ T=(m g)/(cos theta), quad tan theta=v^2/(R g), $
+Scegliamo due assi locali:
+- $x$ orizzontale, radiale e diretto verso il centro della circonferenza;
+- $y$ verticale verso l'alto.
 
-e quindi
+Lungo $y$ la massa non accelera, perché resta sempre alla stessa quota. Lungo $x$ invece serve l'accelerazione centripeta $a_c=v^2/R$. La seconda legge diventa quindi
+
+$ cases(
+  T sin theta=m v^2/R,
+  T cos theta-m g=0,
+) $
+
+La seconda equazione dà la tensione:
+
+$ T cos theta=m g quad arrow quad T=(m g)/(cos theta). $
+
+Per eliminare $T$ e trovare la velocità, si divide la prima equazione per la seconda:
+
+$ (T sin theta)/(T cos theta)=((m v^2)/R)/(m g). $
+
+Semplificando $T$ e $m$:
+
+$ tan theta=v^2/(R g). $
+
+Quindi
 
 $ v=sqrt(R g tan theta). $
 
-Poiché $T_"periodo"=(2 pi R)/v$,
+Il periodo è il tempo necessario per compiere un giro completo. Poiché in un giro la massa percorre una circonferenza di lunghezza $2 pi R$,
+
+$ T_"periodo"=(2 pi R)/v. $
+
+Sostituendo la velocità appena trovata:
 
 $ T_"periodo"=2 pi sqrt(R/(g tan theta)). $
 
@@ -2147,7 +2173,7 @@ $ L=F s. $
 
 == Esempio: blocco su piano inclinato liscio
 
-Un blocco sale lungo un piano inclinato liscio per uno spostamento $s$, con velocità costante. Usiamo $x$ parallelo al piano verso l'alto e $y$ perpendicolare al piano verso l'esterno. Il peso si scompone in $m g sin theta$ lungo il piano verso il basso e $m g cos theta$ lungo la normale entrante.
+Un blocco sale lungo un piano inclinato liscio per uno spostamento $s$, con velocità costante. Usiamo $x$ parallelo al piano verso valle e $y$ perpendicolare al piano verso l'esterno. Il peso si scompone in $m g sin theta$ lungo $+x$ e $m g cos theta$ lungo la normale entrante.
 
 Poiché $v$ è costante, la risultante è nulla: la forza esterna lungo il piano compensa la componente tangenziale del peso.
 
@@ -2179,13 +2205,13 @@ Con $v$ costante, $sum vec(F)=vec(0)$. Lungo $y$:
 
 $ N-m g cos theta=0. $
 
-Lungo $x$:
+Lungo $x$ la forza esterna è diretta verso monte, quindi ha componente negativa rispetto all'asse scelto:
 
-$ F-m g sin theta=0. $
+$ m g sin theta-F=0. $
 
 Il lavoro della forza esterna è
 
-$ L=F s=m g sin theta, s=m g h. $
+$ L=F s=(m g sin theta) s=m g h. $
 
 == Lavoro della forza elastica
 
@@ -2372,9 +2398,25 @@ Per attrito dinamico su una superficie con normale costante,
 
 $ F_"attr"=mu_d N $
 
-e il verso è sempre opposto allo spostamento relativo. Se il corpo percorre una lunghezza $s$,
+e il verso è sempre opposto allo spostamento relativo. Se $hat(u)_v$ è il versore tangente al moto, cioè orientato come la velocità e lo spostamento infinitesimo, allora
 
-$ L_"attr"=-mu_d N s. $
+$ vec(F)_"attr"=-mu_d N hat(u)_v, quad dif vec(s)=hat(u)_v dif s. $
+
+Il lavoro lungo il percorso da $A$ a $B$ si calcola con l'integrale di linea:
+
+$ L_"attr"=integral_A^B vec(F)_"attr" dot dif vec(s). $
+
+Sostituendo:
+
+$ L_"attr"=integral_A^B (-mu_d N hat(u)_v) dot (hat(u)_v dif s). $
+
+Poiché $hat(u)_v dot hat(u)_v=1$,
+
+$ L_"attr"=-integral_A^B mu_d N dif s. $
+
+Se $mu_d$ e $N$ sono costanti lungo il tratto, si possono portare fuori dall'integrale:
+
+$ L_"attr"=-mu_d N integral_A^B dif s=-mu_d N s<0. $
 
 #yellow-box([Attrito e percorso])[
   Il lavoro dell'attrito dipende dalla lunghezza del percorso seguito. Per questo l'attrito non è una forza conservativa.
