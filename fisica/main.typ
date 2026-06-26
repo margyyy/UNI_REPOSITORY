@@ -3638,28 +3638,59 @@ $ E_k=ell_z^2/(2 I_z). $
 
 Un *pendolo fisico* o *pendolo composto* è un corpo rigido che oscilla attorno a un punto fisso non coincidente con il centro di massa.
 
-La forza peso agisce sul centro di massa e genera un momento torcente di richiamo:
+Indichiamo con:
+- $O$ il punto di sospensione;
+- $"CM"$ il centro di massa;
+- $d$ la distanza tra $O$ e $"CM"$;
+- $I$ il momento d'inerzia del corpo rispetto all'asse di rotazione passante per $O$.
+
+Quando il corpo viene spostato di un angolo $theta$ dalla verticale, la forza peso $M vec(g)$ agisce sul centro di massa. La tensione o reazione del vincolo passa per il punto $O$, quindi non produce momento rispetto a $O$. Il momento torcente responsabile dell'oscillazione è quindi quello del peso:
 
 $ vec(tau)=vec(r) times vec(F), $
 
-in modulo, rispetto al punto di sospensione:
+dove $vec(r)$ va dal punto di sospensione al centro di massa. Il braccio del peso rispetto a $O$ vale $d sin theta$, quindi il modulo del momento del peso è $M g d sin theta$.
+
+Il segno è negativo perché il momento è di richiamo: se $theta>0$, tende a riportare il corpo verso $theta=0$:
 
 $ tau=-M g d sin theta, $
 
-dove $d$ è la distanza tra il punto di sospensione e il centro di massa.
+La legge del moto rotatorio attorno all'asse fisso è
 
-Per piccoli angoli $sin theta approx theta$, quindi
+$ tau=I alpha=I (dif^2 theta)/(dif t^2). $
+
+Quindi l'equazione esatta del pendolo fisico è
+
+$ I (dif^2 theta)/(dif t^2)=-M g d sin theta. $
+
+Per piccoli angoli, misurati in radianti, $sin theta approx theta$. L'equazione diventa
 
 $ I (dif^2 theta)/(dif t^2)=-M g d theta. $
 
-Questa è l'equazione di un moto armonico:
+Portando tutto al primo membro:
+
+$ (dif^2 theta)/(dif t^2)+(M g d)/I theta=0. $
+
+Questa ha la stessa forma dell'equazione del moto armonico,
+
+$ theta''+omega^2 theta=0, $
+
+perciò
 
 $ omega^2=(M g d)/I. $
+
+Qui $omega$ è la pulsazione delle piccole oscillazioni del pendolo fisico.
 
 Il periodo è
 
 #green-box([Periodo del pendolo fisico])[
   $ T=2 pi sqrt(I/(M g d)). $
+]
+
+#yellow-box([Confronto con il pendolo semplice])[
+  Nel pendolo semplice la massa è concentrata a distanza $ell$ dal punto di sospensione, quindi $I=m ell^2$ e $d=ell$. Sostituendo nella formula del pendolo fisico:
+  $ T=2 pi sqrt((m ell^2)/(m g ell))=2 pi sqrt(ell/g). $
+
+  Quindi il pendolo semplice è un caso particolare del pendolo fisico.
 ]
 
 Dal periodo misurato si può ricavare il momento d'inerzia del corpo rispetto all'asse di sospensione:
