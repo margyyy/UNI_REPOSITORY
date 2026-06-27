@@ -4990,13 +4990,53 @@ $ R_1=0.1 " cm"=10^(-3) " m", quad R_2=0.5 " cm"=5 dot 10^(-3) " m", quad R_3=1 
 
 $ Q_A=+10^(-9) " C". $
 
-In equilibrio:
+Conviene leggere l'esempio a passaggi, perché stiamo determinando prima le cariche indotte e solo dopo il campo.
 
-- la carica $+Q_A$ del conduttore interno sta sulla superficie $R_1$;
-- sulla superficie interna del guscio, a raggio $R_2$, compare $-Q_A$ per induzione;
-- poiché il guscio esterno era neutro, sulla superficie esterna $R_3$ compare $+Q_A$.
+#gray-box([Step 1: separo le superfici])[
+  Le superfici da distinguere sono tre:
 
-Il modo più sicuro per non sbagliare i segni è usare una superficie gaussiana dentro il metallo del guscio: lì $vec(E)=0$, quindi la carica totale racchiusa deve essere nulla. Perciò la superficie interna deve portare esattamente $-Q_A$.
+  - $R_1$: superficie del conduttore interno;
+  - $R_2$: superficie interna del guscio esterno;
+  - $R_3$: superficie esterna del guscio esterno.
+
+  Sul conduttore interno è già presente la carica assegnata:
+
+  $ Q_(R_1)=+Q_A. $
+]
+
+#gray-box([Step 2: uso Gauss nel metallo])[
+  In equilibrio elettrostatico, dentro il materiale conduttore il campo è nullo.
+
+  Scelgo allora una superficie gaussiana nel metallo del guscio, cioè con $R_2<r<R_3$. Poiché lì $vec(E)=vec(0)$, il flusso è nullo e quindi anche la carica racchiusa deve essere nulla:
+
+  $ Q_"int"=0. $
+
+  Questa superficie racchiude il conduttore interno e la superficie interna del guscio:
+
+  $ Q_A+Q_(R_2)=0. $
+
+  Quindi
+
+  $ Q_(R_2)=-Q_A. $
+]
+
+#gray-box([Step 3: sulla superficie $R_3$ aggiungo la carica mancante])[
+  Il guscio esterno era neutro. Questo significa che la somma delle cariche sulle sue due superfici deve restare zero:
+
+  $ Q_(R_2)+Q_(R_3)=0. $
+
+  Siccome su $R_2$ si è indotta $-Q_A$, sulla superficie esterna $R_3$ deve comparire $+Q_A$:
+
+  $ -Q_A+Q_(R_3)=0 quad -> quad Q_(R_3)=+Q_A. $
+]
+
+#purple-box([Cariche sulle superfici])[
+  $ cases(
+    Q_(R_1)=+Q_A,
+    Q_(R_2)=-Q_A,
+    Q_(R_3)=+Q_A.
+  ) $
+]
 
 Le densità superficiali sono
 
@@ -5008,37 +5048,62 @@ $ sigma_(R_3)=Q_A/(4 pi R_3^2) approx 8 dot 10^(-7) " C"/"m"^2. $
 
 #align(center, graph-card([Gusci sferici conduttori: cariche indotte], cetz.canvas({
   import cetz.draw: *
-  circle((2.10, 1.80), radius: 0.42, stroke: 1.0pt + ink, fill: rgb("#f4f4f4"))
-  circle((2.10, 1.80), radius: 1.00, stroke: 1.0pt + ink)
-  circle((2.10, 1.80), radius: 1.42, stroke: 1.0pt + ink, fill: none)
-  circle((2.10, 1.80), radius: 1.78, stroke: (paint: blue, thickness: 0.8pt, dash: "dashed"))
-  for p in ((1.92, 2.08), (2.28, 2.06), (2.08, 1.48)) { axis-label(p, [$+$]) }
-  for p in ((1.42, 2.35), (2.78, 2.35), (2.95, 1.42), (1.25, 1.38)) { axis-label(p, [$-$]) }
-  for p in ((0.75, 2.52), (1.55, 3.18), (2.70, 3.05), (3.48, 2.10), (2.72, 0.55), (1.18, 0.72)) { axis-label(p, [$+$]) }
-  line((2.10, 1.80), (2.52, 1.80), stroke: 0.8pt + ink, mark: (end: ">"))
-  line((2.10, 1.80), (3.10, 1.80), stroke: 0.8pt + ink, mark: (end: ">"))
-  line((2.10, 1.80), (3.52, 1.80), stroke: 0.8pt + ink, mark: (end: ">"))
-  axis-label((2.36, 1.60), [$R_1$], placement: "north")
-  axis-label((2.82, 1.58), [$R_2$], placement: "north")
-  axis-label((3.42, 1.58), [$R_3$], placement: "north")
-  axis-label((5.00, 2.58), [$+Q_A$ su $R_1$], placement: "west")
-  axis-label((5.00, 1.78), [$-Q_A$ su $R_2$], placement: "west")
-  axis-label((5.00, 0.98), [$+Q_A$ su $R_3$], placement: "west")
+  // Sezione dei conduttori: sfera piena interna e guscio conduttore.
+  let O = (4.05, 2.95)
+  circle(O, radius: 2.45, stroke: 1.15pt + ink, fill: rgb("#f2f4f5"))
+  circle(O, radius: 1.55, stroke: 1.15pt + ink, fill: rgb("#fbfcfd"))
+  circle(O, radius: 0.70, stroke: 1.15pt + ink, fill: rgb("#e7e9eb"))
+  circle(O, radius: 2.00, stroke: (paint: blue, thickness: 0.95pt, dash: "dashed"), fill: none)
+
+  // Cariche sulle tre superfici.
+  for p in ((4.05, 3.67), (3.57, 2.95), (4.53, 2.95), (4.05, 2.23)) {
+    axis-label(p, text(fill: red, weight: "bold")[$+$])
+  }
+  for p in ((2.58, 3.76), (2.54, 1.76), (4.05, 1.40), (5.56, 1.76), (5.56, 3.72)) {
+    axis-label(p, text(fill: blue, weight: "bold")[$-$])
+  }
+  for p in ((1.70, 4.02), (2.22, 4.94), (4.05, 5.40), (5.88, 4.94), (6.40, 4.02), (6.66, 1.84), (4.05, 0.48), (1.44, 1.84)) {
+    axis-label(p, text(fill: red, weight: "bold")[$+$])
+  }
+
+  // Raggi ben separati.
+  line(O, (4.75, 2.95), stroke: 0.9pt + ink, mark: (end: ">"))
+  line(O, (5.60, 2.95), stroke: 0.9pt + ink, mark: (end: ">"))
+  line(O, (6.50, 2.95), stroke: 0.9pt + ink, mark: (end: ">"))
+  axis-label((4.40, 2.58), [$R_1$], placement: "north")
+  axis-label((5.08, 2.48), [$R_2$], placement: "north")
+  axis-label((6.08, 2.48), [$R_3$], placement: "north")
+
+  // Etichette esterne, collegate alle superfici.
+  line((4.05, 3.67), (4.05, 4.48), stroke: 0.8pt + red)
+  axis-label((4.05, 4.64), [$Q_(R_1)=+Q_A$], placement: "south")
+  line((2.58, 3.76), (1.58, 4.42), stroke: 0.8pt + blue)
+  axis-label((1.42, 4.48), [$Q_(R_2)=-Q_A$], placement: "east")
+  line((6.40, 4.02), (7.26, 4.55), stroke: 0.8pt + red)
+  axis-label((7.40, 4.60), [$Q_(R_3)=+Q_A$], placement: "west")
+
+  axis-label((4.05, 5.92), [sezione: conduttore interno + guscio conduttore neutro], placement: "south")
+  axis-label((4.05, -0.22), [linea blu tratteggiata: superficie gaussiana nel metallo, dove $vec(E)=0$], placement: "north")
 })))
 
-Per calcolare il campo si usano sfere gaussiane concentriche. Per simmetria
+Per calcolare il campo si usano di nuovo sfere gaussiane concentriche. Per simmetria
 
 $ integral_(S(r)) vec(E) dot dif vec(S)=E(r) 4 pi r^2=Q_"int"/epsilon_0. $
 
-Quindi
+Quindi, in ogni regione, basta guardare quanta carica è racchiusa dalla sfera gaussiana scelta.
 
 #green-box([Campo nel sistema di gusci])[
-  $ vec(E)(r)=cases(
-    0, & r<R_1,
-    Q_A/(4 pi epsilon_0 r^2) hat(r), & R_1<r<R_2,
-    0, & R_2<r<R_3,
-    Q_A/(4 pi epsilon_0 r^2) hat(r), & r>R_3.
-  ) $
+  Il campo è definito a tratti:
+
+  #align(center)[
+    $ vec(E)(r)=vec(0) quad "per " r<R_1 $
+    #v(3pt)
+    $ vec(E)(r)=Q_A/(4 pi epsilon_0 r^2) hat(r) quad "per " R_1<r<R_2 $
+    #v(3pt)
+    $ vec(E)(r)=vec(0) quad "per " R_2<r<R_3 $
+    #v(3pt)
+    $ vec(E)(r)=Q_A/(4 pi epsilon_0 r^2) hat(r) quad "per " r>R_3 $
+  ]
 ]
 
 Nei tratti conduttori il campo è nullo. Nelle regioni vuote il campo è radiale uscente perché la carica racchiusa è positiva.
@@ -5102,7 +5167,14 @@ Dire che un conduttore ha capacità grande significa che può accumulare molta c
   La capacità non dipende da quanta carica si mette sul conduttore: dipende solo dalla geometria e dal mezzo che lo circonda.
 ]
 
-Per un conduttore sferico isolato di raggio $R$ nel vuoto,
+=== Esempio: calcolo della capacità
+
+Il procedimento è sempre lo stesso:
+
+1. si calcola il potenziale del conduttore, oppure la differenza di potenziale tra due conduttori;
+2. si sostituisce nella definizione di capacità.
+
+Per un *conduttore sferico isolato* di raggio $R$ nel vuoto, con riferimento $V(infinity)=0$,
 
 $ V(R)=Q/(4 pi epsilon_0 R), $
 
@@ -5111,6 +5183,8 @@ quindi
 #green-box([Conduttore sferico isolato])[
   $ C = Q/V = 4 pi epsilon_0 R. $
 ]
+
+La carica $Q$ si semplifica: resta solo la geometria, cioè il raggio $R$, e il mezzo, cioè $epsilon_0$ nel vuoto.
 
 #align(center, graph-card([Conduttore isolato e capacità], cetz.canvas({
   import cetz.draw: *
@@ -5140,32 +5214,53 @@ La capacità di un condensatore si definisce usando la differenza di potenziale 
 #yellow-box([Capacità di un condensatore])[
   $ C = Q/(Delta V). $
 
-  Per convenzione $Q$ è preso positivo, cioè si usa il modulo della carica presente su una delle due armature.
+  Si sceglie $Delta V = V_+ - V_- > 0$, cioè la differenza di potenziale è presa positiva.
 ]
 
 #align(center, graph-card([Condensatore e induzione completa], cetz.canvas({
   import cetz.draw: *
-  // Due conduttori in induzione completa: tutte le linee partono dal + e terminano sul -.
-  circle((1.85, 1.85), radius: 0.58, stroke: 1.0pt + ink, fill: rgb("#fbfcfd"))
-  circle((1.85, 1.85), radius: 1.25, stroke: 1.0pt + ink, fill: none)
-  circle((1.85, 1.85), radius: 1.46, stroke: (paint: rgb("#ccd4d8"), thickness: 0.7pt, dash: "dashed"))
-  for p in ((1.52, 2.12), (1.85, 2.24), (2.18, 2.12), (1.54, 1.55), (2.16, 1.55)) {
-    axis-label(p, [$+$])
-  }
-  for p in ((0.78, 2.35), (1.28, 2.82), (1.90, 3.05), (2.56, 2.72), (3.02, 2.02), (2.65, 0.92), (1.22, 0.86), (0.64, 1.50)) {
-    axis-label(p, [$-$])
-  }
-  for a in ((1.85, 2.43), (2.35, 2.22), (2.43, 1.82), (2.00, 1.28), (1.33, 1.48), (1.28, 2.12)) {
-    line((1.85, 1.85), a, stroke: 0.8pt + blue, mark: (end: ">"))
-  }
-  line((3.65, 0.55), (3.65, 3.08), stroke: 0.55pt + rgb("#ccd4d8"))
-  axis-label((1.85, 0.36), [conduttore interno: $+Q$], placement: "north")
-  axis-label((1.85, 0.04), [conduttore esterno: $-Q$], placement: "north")
+  // Condensatore sferico come negli appunti: due conduttori concentrici.
+  // L'induzione è completa perché tutte le linee partono dal conduttore 1
+  // e terminano sulla superficie interna del conduttore 2.
+  let O = (2.05, 1.85)
+  circle(O, radius: 1.46, stroke: 1.15pt + ink, fill: rgb("#e9edf0"))
+  circle(O, radius: 1.08, stroke: 1.05pt + ink, fill: rgb("#fbfcfd"))
+  circle(O, radius: 0.58, stroke: 1.05pt + ink, fill: rgb("#e9edf0"))
 
-  axis-label((4.45, 2.72), [induzione completa], placement: "west")
-  axis-label((4.45, 2.02), [ogni linea di campo del conduttore 1], placement: "west")
-  axis-label((4.45, 1.66), [finisce sul conduttore 2], placement: "west")
-  axis-label((4.45, 0.96), [$C=Q/(Delta V)$], placement: "west")
+  for p in ((2.05, 2.22), (1.72, 1.85), (2.38, 1.85), (2.05, 1.48)) {
+    axis-label(p, text(size: 10pt, weight: "bold", fill: red)[$+$])
+  }
+  for p in ((2.05, 2.94), (2.80, 2.60), (2.80, 1.10), (2.05, 0.76), (1.30, 1.10), (1.30, 2.60)) {
+    axis-label(p, text(size: 10pt, weight: "bold", fill: blue)[$-$])
+  }
+
+  line((2.05, 2.46), (2.05, 2.82), stroke: 0.95pt + blue, mark: (end: ">"))
+  line((2.48, 2.28), (2.72, 2.52), stroke: 0.95pt + blue, mark: (end: ">"))
+  line((2.66, 1.85), (3.02, 1.85), stroke: 0.95pt + blue, mark: (end: ">"))
+  line((2.48, 1.42), (2.72, 1.18), stroke: 0.95pt + blue, mark: (end: ">"))
+  line((2.05, 1.24), (2.05, 0.88), stroke: 0.95pt + blue, mark: (end: ">"))
+  line((1.62, 1.42), (1.38, 1.18), stroke: 0.95pt + blue, mark: (end: ">"))
+  line((1.44, 1.85), (1.08, 1.85), stroke: 0.95pt + blue, mark: (end: ">"))
+  line((1.62, 2.28), (1.38, 2.52), stroke: 0.95pt + blue, mark: (end: ">"))
+
+  axis-label((2.05, 3.54), [conduttore 2: $-Q$], placement: "south")
+  axis-label((2.05, 1.86), [$+Q$], placement: "center")
+  axis-label((0.94, 3.03), [$V_-$], placement: "south")
+  axis-label((2.84, 0.62), [$V_+$], placement: "north")
+
+  line((0.59, 0.78), (0.28, 0.78), stroke: 0.9pt + ink)
+  line((0.28, 0.78), (0.28, 0.34), stroke: 0.9pt + ink)
+  line((0.04, 0.34), (0.52, 0.34), stroke: 0.9pt + ink)
+  line((0.10, 0.20), (0.46, 0.20), stroke: 0.9pt + ink)
+  line((0.17, 0.08), (0.39, 0.08), stroke: 0.9pt + ink)
+
+  line((3.90, 0.48), (3.90, 3.42), stroke: 0.55pt + rgb("#ccd4d8"))
+  axis-label((4.30, 2.92), [condensatore $=$ due conduttori], placement: "west")
+  axis-label((4.30, 2.56), [in induzione completa], placement: "west")
+  axis-label((4.30, 1.98), [tutte le linee di campo], placement: "west")
+  axis-label((4.30, 1.64), [del conduttore $1$ finiscono nel $2$], placement: "west")
+  axis-label((4.30, 0.98), [$C := Q/(Delta V) quad [F]$], placement: "west")
+  axis-label((5.96, 0.58), text(fill: rgb("#c77898"))[$Delta V>0$], placement: "west")
 })))
 
 Nella pratica si usano geometrie semplici perché permettono di calcolare il campo e quindi la differenza di potenziale. Gli appunti distinguono tre casi fondamentali:
@@ -5218,15 +5313,25 @@ Nella pratica si usano geometrie semplici perché permettono di calcolare il cam
   })),
 )
 
-Per il condensatore sferico, con raggi $R_1$ e $R_2$ e cariche $+Q$ e $-Q$, nel vuoto:
+=== Esempio: condensatore sferico
 
-$ V_1 - V_2 = Q/(4 pi epsilon_0) (1/R_1 - 1/R_2), $
+Per il *condensatore sferico*, con raggi $R_1$ e $R_2$ e cariche $+Q$ e $-Q$, si calcola prima la differenza di potenziale tra le armature.
 
-e quindi
+Tra le due superfici il campo è radiale e vale
+
+$ E(r)=Q/(4 pi epsilon_0 r^2). $
+
+Poiché $R_2>R_1$, scegliamo positiva la differenza
+
+$ Delta V = V_1 - V_2 = integral_(R_1)^(R_2) E(r) dif r = Q/(4 pi epsilon_0) (1/R_1 - 1/R_2). $
+
+Ora si usa la definizione $C=Q/(Delta V)$:
 
 #green-box([Condensatore sferico])[
   $ C = Q/(Delta V) = (4 pi epsilon_0 R_1 R_2)/(R_2 - R_1). $
 ]
+
+Anche qui $Q$ si semplifica: la capacità dipende solo da $R_1$, $R_2$ e dal mezzo tra le armature.
 
 == Campo di un piano infinito carico
 
@@ -5246,30 +5351,7 @@ La carica racchiusa è $Q_"int"=sigma Sigma$. Dal teorema di Gauss:
   Se $sigma>0$ il campo è uscente dai due lati; se $sigma<0$ è entrante.
 ]
 
-#align(center, graph-card([Gauss per il piano infinito], cetz.canvas({
-  import cetz.draw: *
-  // piano carico
-  line((0.55, 1.42), (4.55, 1.42), stroke: 1.0pt + ink)
-  line((0.92, 1.72), (4.92, 1.72), stroke: 1.0pt + ink)
-  line((0.55, 1.42), (0.92, 1.72), stroke: 1.0pt + ink)
-  line((4.55, 1.42), (4.92, 1.72), stroke: 1.0pt + ink)
-  for x in (1.10, 1.80, 2.50, 3.20, 3.90, 4.45) {
-    axis-label((x, 1.83), [$+$])
-  }
-  // cilindro gaussiano
-  arc((2.75, 2.20), radius: 0.38, start: 0deg, stop: 360deg, stroke: (paint: blue, thickness: 0.8pt, dash: "dashed"))
-  arc((2.75, 0.90), radius: 0.38, start: 0deg, stop: 360deg, stroke: (paint: blue, thickness: 0.8pt, dash: "dashed"))
-  line((2.37, 0.90), (2.37, 2.20), stroke: (paint: blue, thickness: 0.8pt, dash: "dashed"))
-  line((3.13, 0.90), (3.13, 2.20), stroke: (paint: blue, thickness: 0.8pt, dash: "dashed"))
-  for x in (1.20, 2.00, 3.50, 4.30) {
-    line((x, 1.95), (x, 2.70), stroke: 0.95pt + blue, mark: (end: ">"))
-    line((x, 1.15), (x, 0.42), stroke: 0.95pt + blue, mark: (end: ">"))
-  }
-  axis-label((5.35, 2.46), [$vec(E)$], placement: "west")
-  axis-label((5.35, 0.68), [$vec(E)$], placement: "west")
-  axis-label((5.35, 1.58), [$sigma$], placement: "west")
-  axis-label((2.75, 0.18), [$2 E Sigma = sigma Sigma / epsilon_0$], placement: "north")
-})))
+#align(center, graph-card([Gauss per il piano infinito], image("reference/images/piano_indefinito.png", width: 92%)))
 
 == Condensatore piano
 
