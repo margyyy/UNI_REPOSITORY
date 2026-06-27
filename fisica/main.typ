@@ -5374,33 +5374,7 @@ Se l'area delle armature è $A$, allora $sigma=Q/A$ e $Delta V=E d$. La capacit�
   $ C = Q/(Delta V) = (epsilon_0 A)/d. $
 ]
 
-#align(center, graph-card([Condensatore piano: sovrapposizione dei campi], cetz.canvas({
-  import cetz.draw: *
-  // left: two plates field
-  line((0.55, 2.45), (3.25, 2.45), stroke: 1.1pt + ink)
-  line((0.55, 1.05), (3.25, 1.05), stroke: 1.1pt + ink)
-  for x in (0.85, 1.35, 1.85, 2.35, 2.85) {
-    axis-label((x, 2.63), [$+$])
-    axis-label((x, 0.86), [$-$])
-    line((x, 2.25), (x, 1.25), stroke: 1.0pt + blue, mark: (end: ">"))
-  }
-  axis-label((3.55, 1.75), [$E=sigma/epsilon_0$], placement: "west")
-  axis-label((1.90, 0.35), [interno], placement: "north")
-  axis-label((0.22, 2.98), [$E=0$], placement: "south")
-  axis-label((0.22, 0.48), [$E=0$], placement: "north")
-
-  // right: battery-like capacitor
-  line((5.00, 2.28), (7.10, 2.28), stroke: 1.1pt + ink)
-  line((5.00, 1.24), (7.10, 1.24), stroke: 1.1pt + ink)
-  for x in (5.35, 5.80, 6.25, 6.70) {
-    line((x, 2.08), (x, 1.44), stroke: 0.95pt + blue, mark: (end: ">"))
-  }
-  line((7.40, 2.28), (7.40, 1.24), stroke: 0.8pt + ink, mark: (start: "|", end: "|"))
-  axis-label((7.62, 1.76), [$d$], placement: "west")
-  axis-label((5.10, 2.52), [$+Q$], placement: "south")
-  axis-label((5.10, 0.98), [$-Q$], placement: "north")
-  axis-label((6.05, 0.42), [$C=epsilon_0 A/d$], placement: "north")
-})))
+#align(center, graph-card([Condensatore piano: sovrapposizione dei campi], image("reference/images/piani_affiancati.png", width: 92%)))
 
 == Elettrostatica nei dielettrici
 
@@ -6077,83 +6051,7 @@ Se il guscio non è collegato a terra, rimane anche il contributo energetico del
   C_"conduttore" = 4 pi epsilon_0 R_3. $
 ]
 
-#align(center, graph-card([Condensatore sferico: terra e caso isolato], cetz.canvas({
-  import cetz.draw: *
-
-  // Caso R3 scaricato a terra: conduttore centrale + guscio sferico collegato a terra.
-  axis-label((2.05, 5.52), [guscio sferico, $R_3$ scaricato a terra], placement: "south")
-  circle((2.05, 4.16), radius: 0.55, stroke: 1.15pt + ink, fill: rgb("#f7f7f7"))
-  circle((2.05, 4.16), radius: 1.02, stroke: 1.15pt + ink, fill: none)
-  circle((2.05, 4.16), radius: 1.38, stroke: 1.15pt + ink, fill: none)
-  axis-label((2.05, 4.16), [$Q$])
-  axis-label((1.26, 3.78), [$Q$], placement: "center")
-  axis-label((2.78, 3.78), [$-Q$], placement: "center")
-  axis-label((1.86, 4.78), [$R_1$], placement: "south")
-  axis-label((3.00, 4.12), [$R_2$], placement: "west")
-  axis-label((3.36, 4.72), [$R_3$], placement: "west")
-
-  // Simbolo di terra.
-  line((0.67, 4.16), (0.26, 4.16), stroke: 1.0pt + ink)
-  line((0.26, 4.16), (0.26, 3.22), stroke: 1.0pt + ink)
-  line((-0.05, 3.22), (0.57, 3.22), stroke: 1.0pt + ink)
-  line((0.05, 3.02), (0.47, 3.02), stroke: 1.0pt + ink)
-  line((0.15, 2.84), (0.37, 2.84), stroke: 1.0pt + ink)
-
-  line((4.02, 2.78), (4.02, 5.44), stroke: 0.55pt + rgb("#ccd4d8"))
-  axis-label((4.50, 4.90), [$U=Q^2/(2C)=Q Delta V/2$], placement: "west")
-  axis-label((4.50, 4.12), [$=Q^2/(8 pi epsilon_0)(1/R_1-1/R_2)$], placement: "west")
-  axis-label((4.50, 3.34), [conta solo il condensatore tra $R_1$ e $R_2$], placement: "west")
-
-  axis-label((1.64, 2.34), [se non è scaricato a terra], placement: "south")
-  axis-label((4.62, 2.34), [$U=Q^2/(2 C_"condensatore") + Q^2/(2 C_"conduttore")$], placement: "west")
-
-  // Sistema non scaricato = condensatore + conduttore esterno.
-  circle((1.02, 0.90), radius: 0.34, stroke: 1.05pt + ink, fill: rgb("#f7f7f7"))
-  circle((1.02, 0.90), radius: 0.72, stroke: 1.05pt + ink, fill: none)
-  circle((1.02, 0.90), radius: 0.96, stroke: 1.05pt + ink, fill: none)
-  // Tratteggi solo nelle parti conduttrici: sfera interna e guscio esterno.
-  for seg in (((0.84, 0.66), (1.06, 1.20)), ((1.02, 0.58), (1.22, 1.10)), ((0.72, 0.86), (0.90, 1.26))) {
-    line(seg.at(0), seg.at(1), stroke: 0.44pt + rgb("#aeb5ba"))
-  }
-  for seg in (((0.30, 0.62), (0.55, 1.40)), ((0.48, 0.30), (0.74, 0.94)), ((0.68, 1.64), (0.98, 1.90)), ((1.42, 1.74), (1.74, 1.34)), ((1.56, 0.38), (1.82, 1.10))) {
-    line(seg.at(0), seg.at(1), stroke: 0.44pt + rgb("#aeb5ba"))
-  }
-  circle((1.02, 0.90), radius: 0.34, stroke: 1.05pt + ink, fill: none)
-  circle((1.02, 0.90), radius: 0.72, stroke: 1.05pt + ink, fill: none)
-  circle((1.02, 0.90), radius: 0.96, stroke: 1.05pt + ink, fill: none)
-  axis-label((1.02, 0.90), [$Q$])
-  axis-label((0.60, 1.12), [$Q$], placement: "center")
-  axis-label((1.48, 1.08), [$-Q$], placement: "center")
-  axis-label((1.72, 1.70), [$Q$], placement: "center")
-
-  axis-label((2.38, 0.90), [$=$], placement: "center")
-
-  circle((3.58, 0.90), radius: 0.36, stroke: 1.05pt + ink, fill: rgb("#f7f7f7"))
-  circle((3.58, 0.90), radius: 0.84, stroke: 1.05pt + ink, fill: none)
-  for seg in (((3.38, 0.62), (3.62, 1.24)), ((3.58, 0.54), (3.80, 1.12)), ((3.26, 0.88), (3.46, 1.24))) {
-    line(seg.at(0), seg.at(1), stroke: 0.44pt + rgb("#aeb5ba"))
-  }
-  circle((3.58, 0.90), radius: 0.36, stroke: 1.05pt + ink, fill: none)
-  circle((3.58, 0.90), radius: 0.84, stroke: 1.05pt + ink, fill: none)
-  axis-label((3.58, 0.90), [$Q$])
-  axis-label((4.08, 0.54), [$-Q$], placement: "center")
-  axis-label((3.28, 1.44), [$R_1$], placement: "south")
-  axis-label((3.08, 1.78), [$R_2$], placement: "south")
-  axis-label((3.58, -0.24), [condensatore], placement: "north")
-
-  axis-label((4.86, 0.90), [$+$], placement: "center")
-
-  circle((6.08, 0.90), radius: 0.84, stroke: 1.05pt + ink, fill: rgb("#f7f7f7"))
-  // Solo metà del conduttore esterno è tratteggiata, come negli appunti.
-  line((6.08, 0.06), (6.08, 1.74), stroke: 0.72pt + rgb("#aeb5ba"))
-  for seg in (((5.54, 0.36), (5.94, 1.50)), ((5.74, 0.16), (6.08, 1.16)), ((5.96, 0.12), (6.08, 0.48)), ((5.44, 0.72), (5.72, 1.36))) {
-    line(seg.at(0), seg.at(1), stroke: 0.44pt + rgb("#aeb5ba"))
-  }
-  circle((6.08, 0.90), radius: 0.84, stroke: 1.05pt + ink, fill: none)
-  axis-label((5.72, 1.76), [$R_3$], placement: "south")
-  axis-label((6.76, 1.56), [$Q$], placement: "west")
-  axis-label((6.08, -0.24), [conduttore], placement: "north")
-})))
+#align(center, graph-card([Condensatore sferico: terra e caso isolato], image("reference/images/condensatore_sferico_a_terra.png", width: 92%)))
 
 == Esempio: condensatore piano
 
