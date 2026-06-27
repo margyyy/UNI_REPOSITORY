@@ -4114,6 +4114,8 @@ Per una carica unitaria positiva, la differenza di potenziale è il lavoro per u
 
 #purple-box([Differenza di potenziale e campo])[
   $ V_B-V_A=-integral_A^B vec(E) dot dif vec(ell). $
+
+  Qui $dif vec(ell)$ indica un piccolo spostamento vettoriale lungo il percorso da $A$ a $B$. Il prodotto scalare $vec(E) dot dif vec(ell)$ prende solo la componente del campo nella direzione dello spostamento.
 ]
 
 Questa formula dice che il potenziale diminuisce nel verso del campo elettrico. Una carica positiva lasciata libera tende quindi a muoversi verso potenziali più bassi; una carica negativa tende invece nel verso opposto.
