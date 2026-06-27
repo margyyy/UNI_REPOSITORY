@@ -250,6 +250,19 @@ Uno scenario alternativo possiede un identificatore derivato dallo use case prin
 
 Nel template principale si elencano soltanto i nomi delle alternative, per esempio `PINNonValido`, `FondiInsufficienti` e `Annulla`. Identificatore e punto d'innesto rendono esplicita la relazione con il flusso principale.
 
+È possibile definire *gerarchie* tra attori tramite *generalizzazione/specializzazione*.
+
+- Un attore “figlio” *eredita tutte le relazioni* dell'attore “genitore”.
+- Utile per rappresentare ruoli più specifici senza duplicare le associazioni.
+
+#block(
+  width: 100%,
+  inset: (left: 8pt, right: 0pt, top: 2pt, bottom: 2pt),
+  stroke: (left: 1.4pt + rgb("#7a58a6")),
+)[
+  Es. `Cliente` e `Agente` sono specializzazioni di `Acquirente`: entrambi ereditano automaticamente tutte le relazioni di `Acquirente`.
+]
+
 == Relazioni nel diagramma UML
 
 Le relazioni strutturano il modello e riducono duplicazioni. Devono essere usate quando migliorano la comprensione, non come decorazione.

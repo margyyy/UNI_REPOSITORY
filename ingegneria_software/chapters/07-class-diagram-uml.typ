@@ -80,6 +80,11 @@ Un oggetto possiede identità: due persone con gli stessi dati possono essere en
 
 Attributi e operazioni statici appartengono alla classe e sono tradizionalmente sottolineati. I costruttori possono essere indicati come `create`, `make` o col nome della classe, secondo la convenzione adottata.
 
+#figure(
+  image("../fotodaaggiungere/aggiungiquestoesempioapagina58.png", width: 96%),
+  caption: [Esempio di datatype e stereotipi UML.],
+)
+
 == Associazioni e molteplicità
 
 Un'associazione rappresenta una relazione fisica o concettuale tra classi. Può avere nome, ruoli agli estremi, molteplicità e verso di navigazione.
@@ -176,9 +181,19 @@ classDiagram
 
 La distinzione dell'aggregazione è spesso ambigua e a livello software si implementa come un'associazione. Conviene usarla soprattutto quando il significato concettuale tutto-parte è davvero informativo.
 
+#figure(
+  image("../fotodaaggiungere/aggiungiloallafinedipagina61.png", width: 82%),
+  caption: [Esempi e note su aggregazione e composizione.],
+)
+
 === Generalizzazione ed ereditarietà
 
 La generalizzazione esprime una relazione concettuale “è un”: ogni istanza della sottoclasse è anche istanza della superclasse. L'ereditarietà è il meccanismo implementativo con cui la sottoclasse incorpora e specializza struttura e comportamento.
+
+#figure(
+  image("../fotodaaggiungere/aggiungipagina61.png", width: 90%),
+  caption: [Esempio di generalizzazione tra classi.],
+)
 
 #figure(
   [```pintora
@@ -203,6 +218,11 @@ classDiagram
 )
 
 Un oggetto `Studente` può essere trattato come `Persona`; la sottoclasse aggiunge `matricola` e `mediaVoti()` e può ridefinire `stampa()` mediante overriding. Operazione e metodo non coincidono: l'operazione è il contratto invocabile, il metodo una sua implementazione concreta.
+
+#figure(
+  image("../fotodaaggiungere/aggiungipaginaa61.png", width: 90%),
+  caption: [Esempio di ereditarietà e overriding.],
+)
 
 == Dipendenze e traduzione nel codice
 
@@ -242,6 +262,11 @@ Non esiste una traduzione unica. Le associazioni bidirezionali richiedono due st
 #red-box([Gestire le dipendenze])[
   Minimizzare dipendenze e cicli, specialmente tra package. Diagrammi troppo completi sono illeggibili; strumenti automatici possono aiutare a individuare dipendenze effettive nel codice.
 ]
+
+#figure(
+  image("../fotodaaggiungere/aggiungiapagina62.png", width: 96%),
+  caption: [Consigli pratici per controllare le dipendenze.],
+)
 
 == Riepilogo
 

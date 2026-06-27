@@ -67,6 +67,11 @@ UML definisce sia una *notazione* sia un *meta-modello*. La notazione è la sint
 
 Per uno sketch è spesso sufficiente conoscere bene la notazione; strumenti di modellazione, trasformazioni e profili richiedono invece maggiore attenzione alla semantica del meta-modello.
 
+#figure(
+  image("../fotodaaggiungere/esempiometamodellodaaggiungereapagina52.png", width: 96%),
+  caption: [Esempio di meta-modello UML.],
+)
+
 === Viste e modello 4+1
 
 Un sistema complesso viene descritto mediante più *viste*, ciascuna orientata alle esigenze di uno stakeholder. Un diagramma presenta una vista o una sua parte; un modello è l'insieme coordinato dei diagrammi.

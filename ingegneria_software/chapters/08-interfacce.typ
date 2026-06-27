@@ -40,19 +40,7 @@ In Java questa relazione corrisponde a `implements List`. Una classe può realiz
 Una classe *richiede* un'interfaccia quando ha bisogno di un oggetto che la implementi per svolgere il proprio compito. Non richiede necessariamente una particolare classe concreta: qualunque realizzazione compatibile può soddisfare la dipendenza.
 
 #figure(
-  cetz.canvas({
-    import cetz.draw: *
-    content((-3.6, 0), uml-box([Visualizzatore], width: 42mm))
-    content((3.6, 0), uml-box([Motore di ricerca], width: 42mm, fill: uml-pale-green, stroke: uml-green))
-    // Socket richiesto e lollipop fornito.
-    line((-1.9, 0), (-.75, 0), stroke: .9pt + uml-blue)
-    circle((-.5, 0), radius: .25, fill: white, stroke: .9pt + uml-blue)
-    line((1.9, 0), (.25, 0), stroke: .9pt + uml-green)
-    circle((0, 0), radius: .25, fill: white, stroke: .9pt + uml-green)
-    content((0, .55), text(7pt, weight: "bold")[Cerca])
-    content((-3.6, -.65), text(7pt, fill: uml-blue)[richiede])
-    content((3.6, -.65), text(7pt, fill: uml-green)[fornisce])
-  }),
+  image("../fotodaaggiungere/8.1.2sostiotuisciilgraficoconquestafoto.png", width: 94%),
   caption: [Il visualizzatore richiede il servizio `Cerca`, fornito dal motore di ricerca.],
 )
 

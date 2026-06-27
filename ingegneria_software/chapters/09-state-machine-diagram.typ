@@ -161,6 +161,11 @@ Uno stato composito contiene una macchina a stati interna. Permette di nasconder
 
 Gli *entry point* e gli *exit point* consentono di entrare o uscire dal composito in punti nominati diversi. Una giunzione (*junction*) compatta ramificazioni e ricongiungimenti condizionali.
 
+#figure(
+  image("../fotodaaggiungere/aggiungiquestoesempiapagina72.png", width: 96%),
+  caption: [Esempio di stato composito con transizioni interne e dal bordo.],
+)
+
 === Regioni ortogonali
 
 Un composito diviso in regioni ortogonali modella comportamenti concorrenti. L'entità si trova contemporaneamente in uno stato di ogni regione; l'uscita dal composito avviene normalmente quando tutte le regioni hanno raggiunto il proprio stato finale.
@@ -185,6 +190,11 @@ Un composito diviso in regioni ortogonali modella comportamenti concorrenti. L'e
     line((.25, -1.2), (.98, -1.2), mark: (end: ">"), stroke: .8pt + uml-blue)
   }),
   caption: [Due regioni ortogonali controllano prodotti e pagamento in concorrenza.],
+)
+
+#figure(
+  image("../fotodaaggiungere/aggiungiapagina72comesempiodiregioniortogonali.png", width: 90%),
+  caption: [Esempio di regioni ortogonali in uno stato composito.],
 )
 
 #yellow-box([Concorrenza, non necessariamente parallelismo])[
