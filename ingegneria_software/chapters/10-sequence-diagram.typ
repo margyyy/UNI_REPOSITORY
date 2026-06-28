@@ -18,18 +18,8 @@ I *diagrammi di interazione* descrivono come un gruppo di partecipanti collabora
 Ogni partecipante è disposto orizzontalmente nella parte alta. La linea verticale tratteggiata è la sua *lifeline* e il tempo scorre dall'alto verso il basso. Una barra di attivazione indica che il partecipante possiede il controllo o sta eseguendo un'operazione.
 
 #figure(
-  chronos.diagram({
-    import chronos: *
-    _par("Register", display-name: ": Register")
-    _par("Sale", display-name: "s : Sale")
-    _seq("Register", "Sale", comment: "doA()", enable-dst: true)
-    _seq("Sale", "Sale", comment: "doB()", enable-dst: true)
-    _seq("Sale", "Sale", comment: "return", dashed: true, disable-src: true)
-    _seq("Sale", "Register", comment: "doD()", enable-dst: true)
-    _seq("Register", "Sale", comment: "ok", dashed: true, disable-src: true)
-    _seq("Sale", "Register", comment: "done", dashed: true, disable-src: true)
-  }),
-  caption: [Partecipanti anonimi, chiamata annidata, self-message e valori di ritorno.],
+  image("../fotodaaggiungere/alpostodeldiagrammadi10.1.1.png", width: 96%),
+  caption: [Partecipanti, lifeline, attivazioni e chiamate annidate in un Sequence Diagram.],
 )
 
 Un nome come `s : Sale` identifica l'oggetto e il suo tipo; `: Sale` indica un'istanza anonima. Nei diagrammi di design i partecipanti sono tipicamente oggetti, non classi.
@@ -43,6 +33,11 @@ La sintassi più completa di un messaggio è:
 `valore = messaggio(parametro: Tipo): TipoRitornato`
 
 Sono valide anche forme più sintetiche, come `getProduct()`, `d = getProduct(id)` o `d = getProduct(id: ItemID): Product`. La precisione va scelta in base allo scopo del diagramma.
+
+#figure(
+  image("../fotodaaggiungere/aggiungiapagina83.png", width: 96%),
+  caption: [Valori di ritorno e self-message in un Sequence Diagram.],
+)
 
 #pagebreak(weak: true)
 ==== Dal diagramma al codice
@@ -78,18 +73,7 @@ class Sale {
 Un oggetto creato durante l'interazione compare all'altezza del messaggio di creazione, non all'inizio del diagramma. Una `X` termina la lifeline e rappresenta distruzione esplicita oppure il momento dal quale l'oggetto non serve più.
 
 #figure(
-  chronos.diagram({
-    import chronos: *
-    _par("Register", display-name: ": Register")
-    _par("Sale", display-name: ": Sale")
-    _par("Payment", display-name: "p : Payment")
-    _seq("Register", "Sale", comment: "makePayment(cash)", enable-dst: true)
-    _seq("Sale", "Payment", comment: "«create» Payment(cash)", create-dst: true)
-    _seq("Sale", "Payment", comment: "authorize()", enable-dst: true)
-    _seq("Payment", "Sale", comment: "approved", dashed: true, disable-src: true)
-    _seq("Sale", "Payment", comment: "discard", destroy-dst: true)
-    _seq("Sale", "Register", comment: "receipt", dashed: true, disable-src: true)
-  }),
+  image("../fotodaaggiungere/aggiungiapagina83_2.png", width: 96%),
   caption: [Creazione, uso e fine della lifeline di un pagamento.],
 )
 
@@ -128,6 +112,11 @@ I frame racchiudono una parte del diagramma e ne specificano la logica di contro
 )
 
 Lo stesso controllo può essere espresso più precisamente con pseudocodice. Il Sequence Diagram mette in risalto i destinatari delle chiamate; il codice rende più immediata la logica condizionale.
+
+#figure(
+  image("../fotodaaggiungere/aggiungiapagina85.png", width: 96%),
+  caption: [Frame `alt` come equivalente grafico di una scelta `if/else` o `case`.],
+)
 
 #block(breakable: false, width: 100%, inset: 8pt, radius: 4pt, fill: rgb("#f7f9fa"), stroke: .5pt + rgb("#cbd4da"))[
 ```java
@@ -228,24 +217,7 @@ Un ordine contiene linee con quantità e prodotto. Il prezzo totale scontato è 
 Nella prima soluzione `Ordine` coordina ogni dettaglio: legge quantità e prodotto dalle linee, interroga il prodotto, calcola importi, totale e sconto.
 
 #figure(
-  chronos.diagram({
-    import chronos: *
-    _par("Caller", display-name: "chiamante")
-    _par("Order", display-name: "o : Ordine")
-    _par("Line", display-name: "linea : Linea")
-    _par("Product", display-name: "p : Prodotto")
-    _par("Customer", display-name: "cliente : Cliente")
-    _seq("Caller", "Order", comment: "calcolaPrezzo()", enable-dst: true)
-    _loop("per ogni linea", {
-      _seq("Order", "Line", comment: "getQuantità()")
-      _seq("Order", "Line", comment: "getProdotto()")
-      _seq("Order", "Product", comment: "getPrezzoUnitario()")
-      _seq("Order", "Order", comment: "accumulaImporto()")
-    })
-    _seq("Order", "Customer", comment: "getPercSconto()")
-    _seq("Order", "Order", comment: "applicaSconto()")
-    _seq("Order", "Caller", comment: "prezzo", dashed: true, disable-src: true)
-  }),
+  image("../fotodaaggiungere/questoèilgraficodellasoluzionecentralizzataapagina88,mettidirettamentequestafotoecancllailgraficochehaifattotu_aggiornailpsedudocodiceinbaseaquesto.png", width: 96%),
   caption: [Controllo centralizzato: `Ordine` contiene quasi tutta la logica.],
 )
 
@@ -256,25 +228,45 @@ La soluzione funziona, ma rende `Ordine` poco coeso e molto dipendente dai detta
 #block(breakable: false, width: 100%, inset: 8pt, radius: 4pt, fill: rgb("#f7f9fa"), stroke: .5pt + rgb("#cbd4da"))[
 ```java
 class Ordine {
-  Set<Linea> linee;
-  Cliente cliente;
+  private HashSet<Linea> linee;
+  private Cliente cliente;
 
-  Euro calcolaPrezzo() {
-    Euro totale = 0;
+  public Euro calcolaPrezzo() {
+    int quantità;
+    Prodotto p;
+    Euro prezzoUnitario, sconto, totale;
     for (Linea linea : linee) {
-      int quantità = linea.getQuantità();
-      Prodotto prodotto = linea.getProdotto();
-      Euro unitario = prodotto.getPrezzoUnitario();
-      linea.setImporto(quantità * unitario);
-      totale += linea.getImporto();
+      quantità = linea.getQuantità();
+      p = linea.getProdotto();
+      prezzoUnitario = p.getPrezzoUnitario();
+      linea.setImporto(quantità * prezzoUnitario);
     }
-    int percentuale = cliente.getPercSconto();
-    Euro sconto = totale * percentuale / 100;
+
+    totale = calcolaTotale();
+    sconto = calcolaSconto(totale);
     return totale - sconto;
+  }
+
+  private Euro calcolaTotale() {
+    Euro tot = 0;
+    for (Linea linea : linee) {
+      tot = tot + linea.getImporto();
+    }
+    return tot;
+  }
+
+  private Euro calcolaSconto(Euro t) {
+    int perc = cliente.getPercSconto();
+    return t * perc / 100;
   }
 }
 ```
 ]
+
+#figure(
+  image("../fotodaaggiungere/classdiagramprimasoluzionecentralizzatapagina88.png", width: 82%),
+  caption: [Class diagram di supporto alla prima soluzione centralizzata.],
+)
 
 #pagebreak(weak: true)
 === Soluzione distribuita
@@ -282,26 +274,7 @@ class Ordine {
 Nella seconda soluzione ogni oggetto gestisce i dati che possiede: la linea calcola il proprio prezzo, il prodotto applica la politica relativa alla quantità e il cliente calcola il totale scontato.
 
 #figure(
-  chronos.diagram({
-    import chronos: *
-    _par("Caller", display-name: "chiamante")
-    _par("Order", display-name: "o : Ordine")
-    _par("Line", display-name: "linea : Linea")
-    _par("Product", display-name: "p : Prodotto")
-    _par("Customer", display-name: "cliente : Cliente")
-    _seq("Caller", "Order", comment: "calcolaPrezzo()", enable-dst: true)
-    _loop("per ogni linea", {
-      _seq("Order", "Line", comment: "calcolaPrezzo()", enable-dst: true)
-      _seq("Line", "Product", comment: "getPrezzo(quantità)", enable-dst: true)
-      _seq("Product", "Line", comment: "prezzo", dashed: true, disable-src: true)
-      _seq("Line", "Order", comment: "prezzo", dashed: true, disable-src: true)
-    })
-    _seq("Order", "Customer", comment: "getTotaleScontato(this)", enable-dst: true)
-    _seq("Customer", "Order", comment: "getTotale()")
-    _seq("Order", "Customer", comment: "totale", dashed: true)
-    _seq("Customer", "Order", comment: "valoreScontato", dashed: true, disable-src: true)
-    _seq("Order", "Caller", comment: "valoreScontato", dashed: true, disable-src: true)
-  }),
+  image("../fotodaaggiungere/sostituiscigraficoconquestochesarebbelasoluzionedistribuitaapagina90.png", width: 96%),
   caption: [Controllo distribuito: dati e operazioni correlate restano nella stessa classe.],
 )
 
@@ -313,41 +286,65 @@ La soluzione distribuita tende a essere preferibile perché aumenta la coesione,
 #block(breakable: false, width: 100%, inset: 8pt, radius: 4pt, fill: rgb("#f7f9fa"), stroke: .5pt + rgb("#cbd4da"))[
 ```java
 class Ordine {
-  Set<Linea> linee;
-  Cliente cliente;
-  Euro totale;
+  private HashSet<Linea> linee;
+  private Cliente cliente;
+  private Euro totale;
 
-  Euro calcolaPrezzo() {
+  public Euro calcolaPrezzo() {
+    Euro prezzo, sconto;
     totale = 0;
-    for (Linea linea : linee)
-      totale += linea.calcolaPrezzo();
+    for (Linea linea : linee) {
+      prezzo = linea.calcolaPrezzo();
+      totale = totale + prezzo;
+    }
     return cliente.getTotaleScontato(this);
   }
 
-  Euro getTotale() { return totale; }
+  public Euro getTotale() {
+    return totale;
+  }
 }
 
 class Linea {
-  Prodotto prodotto;
-  int quantità;
+  private Prodotto prodotto;
+  private int quantità;
 
-  Euro calcolaPrezzo() {
+  public Euro calcolaPrezzo() {
     return prodotto.getPrezzo(quantità);
   }
 }
 
 class Cliente {
-  int percentualeSconto;
+  private int percSconto;
 
-  Euro getTotaleScontato(Ordine ordine) {
-    Euro totale = ordine.getTotale();
-    return totale - totale * percentualeSconto / 100;
+  public Euro getTotaleScontato(Ordine o) {
+    Euro totale = o.getTotale();
+    Euro sconto = totale * percSconto / 100;
+    return totale - sconto;
   }
 }
 ```
 ]
 
 Ora ogni metodo opera principalmente sui dati della propria classe: `Linea` conosce quantità e prodotto, mentre `Cliente` conosce la politica di sconto.
+
+#figure(
+  image("../fotodaaggiungere/classdiagramsoluzionedistribuitapagina90.png", width: 86%),
+  caption: [Class diagram di supporto alla soluzione distribuita.],
+)
+
+==== Confronto tra le due soluzioni
+
+Nella prima soluzione un partecipante, l'oggetto `Ordine`, svolge tutta l'elaborazione mentre gli altri forniscono soltanto informazioni: è un *controllo centralizzato*.
+
+Nella seconda soluzione ogni partecipante contribuisce invece all'elaborazione dell'algoritmo: è un *controllo distribuito*.
+
+La soluzione distribuita è spesso preferibile per due motivi:
+
+- quando dati e logica che li gestisce cambiano spesso contemporaneamente, raccoglierli nello stesso posto riduce il numero di classi da modificare;
+- raccoglie dati e operazioni nella stessa classe e usa quelle classi per rispettare l'information expert.
+
+Inoltre limita il rischio di *God Class*: una classe come `Ordine`, nella soluzione centralizzata, tende a conoscere troppi dettagli, diventa difficile da capire e modificare, e finisce per assumere responsabilità che dovrebbero appartenere a `Linea`, `Prodotto` o `Cliente`.
 
 == Communication Diagram
 

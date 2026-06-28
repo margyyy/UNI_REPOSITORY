@@ -70,20 +70,23 @@ componentDiagram
   caption: [Notazione compatta e stereotipi specifici per i componenti.],
 )
 
+#figure(
+  image("../fotodaaggiungere/aggiungialpostodelgraficodi12.1.4.png", width: 86%),
+  caption: [Notazioni UML equivalenti per rappresentare un componente.],
+)
+
 === Interfacce fornite e richieste
 
 Il lollipop indica un'interfaccia fornita; il socket indica un'interfaccia richiesta. Collegandoli si crea un *assembly connector*: il componente cliente usa il contratto implementato dal fornitore.
 
 #figure(
-  [```pintora
-componentDiagram
-  [Manager]
-  [Corso]
-  () "iCourseForMan" as ICourse
-  [Manager] --> ICourse : richiede
-  ICourse --> [Corso] : fornisce
-```],
+  image("../fotodaaggiungere/sostituiscicongraficodi12.1.5.png", width: 70%),
   caption: [`Manager` richiede l'interfaccia `iCourseForMan`, fornita da `Corso`.],
+)
+
+#figure(
+  image("../fotodaaggiungere/aggiungidoveparladiinterfaccea12.1.5.png", width: 86%),
+  caption: [Interfacce fornite e richieste con notazione lollipop e socket.],
 )
 
 === Porte e vista interna
@@ -93,23 +96,13 @@ Una *porta* raggruppa un insieme semanticamente coeso di interfacce ed è un pun
 La vista interna specifica come il componente è realizzato ed è utile a chi deve implementarlo. I componenti possono essere costruiti ricorsivamente da altri componenti.
 
 #figure(
-  [```pintora
-componentDiagram
-  component "Student" {
-    [Application] as App
-    [GUI]
-    [Domain]
-    () "iGUI" as IGUI
-    () "iCourseForStud" as ICourse
-    IGUI -- [GUI]
-    ICourse -- [App]
-    [GUI] --> [App]
-    [App] --> [Domain]
-  }
-  () "pStud1: iCourseForStud" as Port1
-  Port1 --> ICourse : delegate
-```],
+  image("../fotodaaggiungere/sostiuiscicongraficodi12.1.6.png", width: 88%),
   caption: [Vista interna ricorsiva con interfacce e porta delegata.],
+)
+
+#figure(
+  image("../fotodaaggiungere/aggiungidoveparladiporteapagina110.png", width: 86%),
+  caption: [Esempi di porte e interfacce collegate ai componenti.],
 )
 
 Una descrizione molto prolissa può mostrare contemporaneamente parola chiave, icona, nome, interfacce richieste e fornite, struttura interna, realizzazioni e artefatti. Questa completezza è utile soltanto quando serve davvero all'implementazione.
@@ -136,48 +129,7 @@ Il sistema è organizzato in tre livelli concettuali, con la business logic ulte
 4. *Utilities*: `java.sql`, `javax.swing` e `Java.util (global)`.
 
 #figure(
-  [```pintora
-componentDiagram
-  package "Presentation level" {
-    [GUI]
-  }
-  package "Business logic - dominio" {
-    [Cliente]
-    [Ordine]
-    [Prodotto]
-  }
-  package "Business logic - servizi" {
-    [Conti]
-    () "GestoreClienti" as IClienti
-    () "GestoreOrdini" as IOrdini
-    () "GestoreProdotti" as IProdotti
-    () "GestoreConti" as IConti
-  }
-  package "Utilities level" {
-    [<<library>> java.sql] as SQL
-    [<<library>> javax.swing] as Swing
-    [<<library>> Java.util (global)] as Util
-  }
-  [GUI] --> IClienti
-  [GUI] --> IOrdini
-  [GUI] --> IProdotti
-  IClienti -- [Cliente]
-  IOrdini -- [Ordine]
-  IProdotti -- [Prodotto]
-  [Ordine] --> IConti
-  [Prodotto] --> IConti
-  IConti -- [Conti]
-  [GUI] ..> Swing
-  [Cliente] ..> SQL
-  [Ordine] ..> SQL
-  [Prodotto] ..> SQL
-  [Conti] ..> SQL
-  [GUI] ..> Util
-  [Cliente] ..> Util
-  [Ordine] ..> Util
-  [Prodotto] ..> Util
-  [Conti] ..> Util
-```],
+  image("../fotodaaggiungere/sostituiscicongraficodi12.3.2.png", width: 96%),
   caption: [Architettura completa del sistema di gestione ordini.],
 )
 
@@ -224,19 +176,13 @@ Gli artefatti sono entità concrete: sorgenti, eseguibili, script, tabelle datab
 La relazione `manifest` non riguarda i manifest file: indica che un artefatto è la rappresentazione fisica di un componente logico. Per esempio, file distinti possono contenere il codice della classe e dell'interfaccia che costituiscono `Course`.
 
 #figure(
-  [```pintora
-componentDiagram
-  package "Entita fisiche" {
-    [<<artifact>> CourseClassFile] as ClassFile
-    [<<artifact>> CourseInterfaceFile] as InterfaceFile
-  }
-  package "Entita logica" {
-    [<<component>> Course] as Course
-  }
-  ClassFile ..> Course : manifest
-  InterfaceFile ..> Course : manifest
-```],
+  image("../fotodaaggiungere/sostituiscicongraficodi12.3.3.png", width: 82%),
   caption: [Due artefatti manifestano il componente logico `Course`.],
+)
+
+#figure(
+  image("../fotodaaggiungere/aggiungiapagina112subitodopolasecondarigadelparagrafo.png", width: 62%),
+  caption: [Artefatti fisici dislocati su nodi e collegati agli elementi logici.],
 )
 
 #pagebreak(weak: true)
@@ -245,30 +191,7 @@ componentDiagram
 I nodi possono essere annidati: un browser viene eseguito in un PC; un EJB container in un application server. Tagged value come `{type = PC}`, `{OS = Linux}` o `{instances = 3}` aggiungono informazioni di deployment.
 
 #figure(
-  [```pintora-small
-componentDiagram
-  node "<<device>> Client {type=PC}" {
-    node "<<executionEnvironment>> Browser" {
-      [Student.jar]
-    }
-  }
-  node "<<device>> Web Server {instances=3}" {
-    [Student.war]
-  }
-  node "<<device>> Application Server {OS=Linux}" {
-    node "<<executionEnvironment>> EJB Container" {
-      [Student.jar]
-      [Registration.xml]
-      [CourseManagement.jar]
-    }
-  }
-  database "<<device>> DB Server {OS=W95}" {
-    [<<artifact>> Legacy Course System]
-  }
-  [Student.jar] --> [Student.war] : HTTP
-  [Student.war] --> [CourseManagement.jar] : RMI
-  [CourseManagement.jar] --> [<<artifact>> Legacy Course System] : message bus
-```],
+  image("../fotodaaggiungere/sostituiscicongraficdi12.4.2.png", width: 88%),
   caption: [Architettura legacy con dispositivi, execution environment, istanze e artefatti.],
 )
 
@@ -284,53 +207,14 @@ Si deve progettare l'architettura software e hardware di un sistema per officina
 === Possibile architettura hardware
 
 #figure(
-  [```pintora
-componentDiagram
-  node "Officina {type=PC}" {
-    [Client Officina]
-  }
-  node "DBServer {type=PC}" {
-    database "Database officina" {
-      [Interventi]
-      [Parti]
-      [Magazzino]
-    }
-  }
-  node "Magazzino {type=PC}" {
-    [Client Magazzino]
-  }
-  [Client Officina] -- [Interventi] : TCP/LAN
-  [Client Magazzino] -- [Magazzino] : TCP/LAN
-  [Client Officina] -- [Client Magazzino] : TCP/LAN
-```],
+  image("../fotodaaggiungere/sostituiscicongraficodi12.4.3.png", width: 88%),
   caption: [Tre personal computer in rete: officina, database e magazzino.],
 )
 
 === Possibile architettura software
 
 #figure(
-  [```pintora
-componentDiagram
-  package "Business logic + GUI" {
-    [GestioneRichieste]
-    [GestioneMagazzino]
-    () "pipe: richieste pezzi" as PipeReq
-    () "pipe: notifiche" as PipeNotify
-  }
-  package "Data logic - Gestore dati" {
-    [DBInterventi]
-    [DBParti]
-    [DBMagazzino]
-  }
-  [GestioneRichieste] --> PipeReq
-  PipeReq --> [GestioneMagazzino]
-  [GestioneMagazzino] --> PipeNotify
-  PipeNotify --> [GestioneRichieste]
-  [GestioneRichieste] ..> [DBInterventi] : dataAccess
-  [GestioneRichieste] ..> [DBParti] : dataAccess
-  [GestioneMagazzino] ..> [DBParti] : dataAccess
-  [GestioneMagazzino] ..> [DBMagazzino] : dataAccess
-```],
+  image("../fotodaaggiungere/sostituiscicongraficodi12.4.4.png", width: 92%),
   caption: [Component Diagram completo dell'officina meccanica.],
 )
 
@@ -404,19 +288,7 @@ componentDiagram
 Un package può essere mostrato vuoto, con l'elenco degli elementi oppure con un diagramma completo al suo interno. Sono equivalenti anche package annidati e nomi qualificati come `java::util::Date`.
 
 #figure(
-  [```pintora
-componentDiagram
-  [package util] as UtilSymbol
-  package "util - contenuto" {
-    [Date]
-  }
-  package "java" {
-    package "util" {
-      [Date class diagram]
-    }
-  }
-  [java_util_Date]
-```],
+  image("../fotodaaggiungere/sostituiscicongraficodi12.5.2.png", width: 92%),
   caption: [Package vuoto, contenuto elencato, gerarchia annidata e nome qualificato.],
 )
 
@@ -480,30 +352,7 @@ In un sistema medio-grande il Package Diagram è uno degli strumenti più utili 
 === Esempio di architettura A/B
 
 #figure(
-  [```pintora
-componentDiagram
-  package "Sistema A" {
-    [A Presentation] as AP
-    [A Business Logic] as AB
-    [A DB Manager] as AD
-  }
-  package "Sistema B" {
-    [B Presentation] as BP
-    [B Business Logic] as BB
-    [B DB Manager] as BD
-  }
-  database "database" {
-    [Schema]
-  }
-  AP --> AB
-  AB --> AD
-  BP --> BB
-  BB --> BD
-  AP ..> BP : framework
-  AB ..> BB
-  AD --> [Schema]
-  BD --> [Schema]
-```],
+  image("../fotodaaggiungere/sostituiscicongraficodi12.6.2.png", width: 82%),
   caption: [Due stack applicativi e dipendenze verso un database condiviso.],
 )
 
@@ -523,17 +372,7 @@ Le strategie mostrate nelle slide sono:
 - separare le entità responsabili del ciclo in un nuovo package condiviso.
 
 #figure(
-  [```pintora
-componentDiagram
-  package "Prima: ciclo" {
-    [Package A] ..> [Package B]
-    [Package B] ..> [Package A]
-  }
-  package "Dopo: separazione" {
-    [Package A2] ..> [Package C]
-    [Package B2] ..> [Package C]
-  }
-```],
+  image("../fotodaaggiungere/sostituiscicongraficodi12.6.4.png", width: 90%),
   caption: [Separazione delle entità condivise per eliminare il ciclo.],
 )
 
@@ -542,21 +381,7 @@ componentDiagram
 I package possono raggruppare qualsiasi elemento UML. Nel caso di un ATM, Use Case come `Withdraw cash`, `Deposit funds`, `Transfer funds` e `Check balance` possono essere raccolti nel package `Transaction`, mentre `Login` e `Problem` appartengono a `Maintenance`.
 
 #figure(
-  [```pintora
-componentDiagram
-  package "ATM System" {
-    package "Transaction" {
-      [Withdraw cash]
-      [Deposit funds]
-      [Transfer funds]
-      [Check balance]
-    }
-    package "Maintenance" {
-      [Login]
-      [Problem]
-    }
-  }
-```],
+  image("../fotodaaggiungere/sostituiscicongrafico12.6.5.png", width: 90%),
   caption: [Package Diagram applicato a gruppi di Use Case.],
 )
 

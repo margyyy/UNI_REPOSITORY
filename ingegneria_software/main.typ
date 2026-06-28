@@ -67,4 +67,7 @@
 #include "chapters/13-design-patterns.typ"
 
 #pagebreak(weak: true)
+#include "chapters/14-refactoring.typ"
+
+#pagebreak(weak: true)
 #include "chapters/14-software-testing.typ"

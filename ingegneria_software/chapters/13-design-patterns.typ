@@ -128,40 +128,7 @@ Una *Factory* nasconde una logica di creazione potenzialmente complessa, la sepa
 Supponiamo di costruire una GUI per due piattaforme. La famiglia 1 contiene `Window1` e `ScrollBar1`; la famiglia 2 contiene `Window2` e `ScrollBar2`. La GUI non deve conoscere le classi concrete né accoppiare per errore `Window1` con `ScrollBar2`.
 
 #figure(
-  [```pintora-micro
-classDiagram
-  class GUI
-  class AbstractFactory {
-    <<interface>>
-    +createWindow() Window
-    +createScrollBar() ScrollBar
-  }
-  class Factory1 {
-    +createWindow() Window1
-    +createScrollBar() ScrollBar1
-  }
-  class Factory2 {
-    +createWindow() Window2
-    +createScrollBar() ScrollBar2
-  }
-  class Window { <<interface>> }
-  class Window1
-  class Window2
-  class ScrollBar { <<interface>> }
-  class ScrollBar1
-  class ScrollBar2
-  GUI --> AbstractFactory : usa
-  AbstractFactory <|.. Factory1
-  AbstractFactory <|.. Factory2
-  Window <|.. Window1
-  Window <|.. Window2
-  ScrollBar <|.. ScrollBar1
-  ScrollBar <|.. ScrollBar2
-  Factory1 ..> Window1 : crea
-  Factory1 ..> ScrollBar1 : crea
-  Factory2 ..> Window2 : crea
-  Factory2 ..> ScrollBar2 : crea
-```],
+  image("../fotodaaggiungere/sostituiscicongrafico13.2.3.png", width: 96%),
   caption: [Una factory concreta crea sempre prodotti appartenenti alla medesima famiglia.],
 )
 
@@ -278,24 +245,7 @@ L'adapter non si limita necessariamente a rinominare le operazioni: può tradurr
 L'*Object Adapter* usa composizione e delega; l'adapter possiede un riferimento all'adattato e sa come invocarlo. Il *Class Adapter* usa ereditarietà: eredita sia dall'interfaccia attesa sia dalla classe adattata e richiede quindi ereditarietà multipla o un linguaggio che consenta una combinazione equivalente tra classe e interfaccia.
 
 #figure(
-  [```pintora-small
-classDiagram
-  class Client
-  class Target {
-    <<interface>>
-    +m()
-  }
-  class ObjectAdapter {
-    -adaptee Adaptee
-    +m()
-  }
-  class Adaptee {
-    +mPrime()
-  }
-  Client --> Target
-  Target <|.. ObjectAdapter
-  ObjectAdapter o-- Adaptee : delega
-```],
+  image("../fotodaaggiungere/sostituiscicongtraficodi13.3.3.png", width: 88%),
   caption: [Struttura generale dell'Object Adapter: `m()` converte la richiesta e invoca `mPrime()`.],
 )
 
@@ -306,21 +256,7 @@ classDiagram
 *Facade* fornisce un'interfaccia unificata e più semplice a un insieme di interfacce complesse di un sottosistema. Il client chiama un solo metodo di alto livello, mentre la facciata coordina le classi interne necessarie.
 
 #figure(
-  [```pintora-small
-classDiagram
-  class Client
-  class Facade {
-    +operazioneSemplice()
-  }
-  class Classe1 { +metodo1() }
-  class Classe2 { +metodo2() }
-  class Classe3 { +metodo3() }
-  Client --> Facade
-  Facade --> Classe1
-  Facade --> Classe2
-  Facade --> Classe3
-  Classe1 --> Classe2
-```],
+  image("../fotodaaggiungere/sostituiscialgraficodi13.4.1.png", width: 96%),
   caption: [La Facade nasconde la rete di collaborazioni necessaria a realizzare un compito.],
 )
 
@@ -398,25 +334,18 @@ Il login dell'applicazione segue cinque passi:
 I passi 1, 3 e 4 sono invarianti; autenticazione e notifica applicativa possono cambiare.
 
 #figure(
-  [```pintora-tiny
-classDiagram
-  class AbstractLogon {
-    +logon()
-    +authenticate(userID String, passwd String) Object
-    +notifyAuth(authToken Object)
-  }
-  class Logon {
-    +authenticate(userID String, passwd String) Object
-    +notifyAuth(authToken Object)
-  }
-  AbstractLogon <|-- Logon
-```],
+  image("../fotodaaggiungere/sostituiscicongraficodi13.5.2.png", width: 86%),
   caption: [`AbstractLogon.logon()` contiene la sequenza comune; `Logon` fornisce soltanto i passi variabili.],
 )
 
 === Inversione di controllo e conseguenze
 
 Template Method realizza il cosiddetto *Hollywood principle*: «non chiamarci, ti chiameremo noi». Normalmente una sottoclasse chiama metodi ereditati; qui è il metodo della superclasse a richiamare operazioni ridefinite nelle sottoclassi.
+
+#figure(
+  image("../fotodaaggiungere/aggiungia13.5.3.png", width: 88%),
+  caption: [Struttura generale di Template Method: lo scheletro invoca operazioni primitive ridefinite.],
+)
 
 - è una tecnica fondamentale di riuso, molto usata in librerie e framework;
 - realizza inversione del flusso di controllo;
@@ -431,6 +360,11 @@ Vogliamo associare più viste o osservatori a un modello e mantenerli coerenti q
 
 *Observer* definisce una dipendenza lasca uno-a-molti: quando il *Subject* cambia stato, tutti gli oggetti dipendenti vengono avvertiti e possono aggiornarsi.
 
+#figure(
+  image("../fotodaaggiungere/sostituisciagraficodi13.6.2.png", width: 82%),
+  caption: [Un osservato notifica gli osservatori, che recuperano lo stato aggiornato.],
+)
+
 #yellow-box([Alla base di MVC])[
   In Model–View–Controller, tabelle, grafici e altre viste osservano lo stesso modello. La notifica garantisce che rappresentazioni differenti rimangano consistenti con i dati.
 ]
@@ -440,57 +374,12 @@ Vogliamo associare più viste o osservatori a un modello e mantenerli coerenti q
 Gli osservatori si registrano dinamicamente presso l'osservato mediante `attach()` e possono rimuoversi con `detach()`. Quando cambia stato, il Subject esegue `notify()`, che invoca `update()` su tutti i registrati. Ogni Observer può non fare nulla oppure chiedere lo stato corrente con `getState()`.
 
 #figure(
-  [```pintora-small
-classDiagram
-  class Subject {
-    <<interface>>
-    +attach(o Observer)
-    +detach(o Observer)
-    +notify()
-  }
-  class ConcreteSubject {
-    -subjectState
-    +getState()
-    +setState()
-  }
-  class Observer {
-    <<interface>>
-    +update()
-  }
-  class ConcreteObserver {
-    -observerState
-    -subject ConcreteSubject
-    +update()
-  }
-  Subject <|.. ConcreteSubject
-  Observer <|.. ConcreteObserver
-  Subject "1" o-- "0..*" Observer : observers
-  ConcreteObserver --> ConcreteSubject : legge lo stato
-```],
+  image("../fotodaaggiungere/sostituiscialgraficodi13.6.2.png", width: 90%),
   caption: [Struttura del pattern Observer: il Subject conosce una collezione di Observer soltanto attraverso l'interfaccia.],
 )
 
 #figure(
-  chronos.diagram({
-    import chronos: *
-    _par("Client", display-name: ": Client")
-    _par("Subject", display-name: "s : ConcreteSubject")
-    _par("O1", display-name: "o1 : ConcreteObserver")
-    _par("O2", display-name: "o2 : ConcreteObserver")
-    _seq("Client", "Subject", comment: "attach(o1)", enable-dst: true)
-    _seq("Subject", "O1", comment: "registra", dashed: true)
-    _seq("Client", "Subject", comment: "attach(o2)")
-    _seq("Subject", "O2", comment: "registra", dashed: true)
-    _seq("Client", "Subject", comment: "setState(x)")
-    _seq("Subject", "Subject", comment: "notify()")
-    _seq("Subject", "O1", comment: "update()", enable-dst: true)
-    _seq("O1", "Subject", comment: "getState()")
-    _seq("Subject", "O1", comment: "x", dashed: true, disable-src: true)
-    _seq("Subject", "O2", comment: "update()", enable-dst: true)
-    _seq("O2", "Subject", comment: "getState()")
-    _seq("Subject", "O2", comment: "x", dashed: true, disable-src: true)
-    _seq("Subject", "Client", comment: "done", dashed: true, disable-src: true)
-  }),
+  image("../fotodaaggiungere/sostituisciaalsequencediagramdi13.6.2.png", width: 76%),
   caption: [Sequence Diagram completo: registrazione, cambiamento di stato, broadcast e recupero dello stato.],
 )
 
@@ -561,29 +450,7 @@ Questa strategia genera molti controlli distribuiti. Aggiungere uno stato richie
 Ogni stato diventa una sottoclasse di `VendingState`; ogni sottoclasse ridefinisce le operazioni significative in quello stato. Le implementazioni ereditate delle transizioni non ammesse producono invece un errore. Il contesto delega tutti gli eventi allo stato corrente.
 
 #figure(
-  [```pintora-tiny
-classDiagram
-  class VendingMachine {
-    -state VendingState
-    +pay()
-    +choose()
-    +dispense()
-    +setState(v VendingState)
-  }
-  class VendingState {
-    +pay()
-    +choose()
-    +dispense()
-  }
-  class Ready { +pay() }
-  class Paid { +choose() }
-  class Chosen { +dispense() }
-  VendingMachine "1" o-- "1" VendingState : state
-  VendingState <|-- Ready
-  VendingState <|-- Paid
-  VendingState <|-- Chosen
-  VendingState --> VendingMachine : vm
-```],
+  image("../fotodaaggiungere/sostituiscigraficodi13.7.3.png", width: 86%),
   caption: [Le classi `Ready`, `Paid` e `Chosen` incapsulano le sole operazioni valide nei rispettivi stati.],
 )
 

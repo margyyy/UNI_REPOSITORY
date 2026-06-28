@@ -198,26 +198,7 @@ Sul sistema integrato, il testing group verifica i requisiti e i bisogni dell'ut
 Ogni modifica può generare effetti collaterali anche in zone apparentemente non coinvolte. Il testing di regressione riesegue test già disponibili per verificare che funzionalità precedentemente corrette non siano regredite. Non è confinato a una sola fase: accompagna correzioni, evoluzione e manutenzione.
 
 #figure(
-  cetz.canvas({
-    import cetz.draw: *
-    let node(pos, title, fill) = {
-      rect((pos.at(0) - 1.05, pos.at(1) - .35), (pos.at(0) + 1.05, pos.at(1) + .35), radius: 4pt, fill: fill, stroke: .7pt + rgb("#245b88"))
-      content(pos, text(7.2pt, weight: "bold", title))
-    }
-    node((-3.6, 1.5), [Requisiti], rgb("#ffe5e5"))
-    node((-2.4, .5), [Design], rgb("#eee8fa"))
-    node((-1.2, -.5), [Implementazione], rgb("#e6f5e9"))
-    node((1.2, -.5), [Unità], rgb("#fff6dc"))
-    node((2.4, .5), [Integrazione], rgb("#fff6dc"))
-    node((3.6, 1.5), [Sistema / accettazione], rgb("#fff6dc"))
-    line((-2.55, 1.5), (-2.4, .85), mark: (end: ">"), stroke: .8pt + rgb("#56616a"))
-    line((-2.4, .15), (-1.65, -.5), mark: (end: ">"), stroke: .8pt + rgb("#56616a"))
-    line((-.15, -.5), (.15, -.5), mark: (end: ">"), stroke: .8pt + rgb("#327a50"))
-    line((2.25, -.5), (2.4, .15), mark: (end: ">"), stroke: .8pt + rgb("#327a50"))
-    line((2.4, .85), (2.55, 1.5), mark: (end: ">"), stroke: .8pt + rgb("#327a50"))
-    line((-3.6, 1.15), (-3.6, -1.35), (3.6, -1.35), (3.6, 1.15), stroke: .7pt + rgb("#b67d0c"), mark: (end: ">"))
-    content((0, -1.7), text(7pt, fill: rgb("#8a5d00"))[regressione dopo ogni modifica])
-  }),
+  image("../fotodaaggiungere/sostyituisicongraficodi14.6.4.png", width: 82%),
   caption: [Relazione concettuale tra fasi di sviluppo e livelli di test; la regressione attraversa l'intero ciclo evolutivo.],
 )
 

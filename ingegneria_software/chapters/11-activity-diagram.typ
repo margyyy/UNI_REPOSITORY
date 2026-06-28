@@ -74,6 +74,11 @@ Un'attività è composta da *azioni*, unità di comportamento che costituiscono 
   [Controllo], [Fork/join], [Avvia e sincronizza flussi concorrenti.],
 )
 
+#figure(
+  image("../fotodaaggiungere/pagina96.png", width: 96%),
+  caption: [Notazione dei principali nodi di un Activity Diagram.],
+)
+
 Un piccolo simbolo a rastrello (*rake*) segnala che un'azione è dettagliata da un altro Activity Diagram. È un meccanismo di decomposizione: il diagramma corrente mostra il livello alto, quello richiamato descrive i passi interni.
 
 #figure(
@@ -356,34 +361,7 @@ UML offre azioni specializzate per inviare e ricevere segnali, compresi eventi t
 )
 
 #figure(
-  diagram(
-    spacing: 14mm,
-    initial((0, 0)),
-    node((0, 1), [], width: 65mm, height: 2mm, fill: flow-blue, stroke: flow-blue),
-    action((-2, 2), [Segui lezioni], width: 34mm),
-    action((0, 2), [Studia], width: 30mm),
-    action((2, 2), [Ricevi specifiche], width: 38mm, fill: flow-pale-gold, stroke: flow-gold),
-    action((2, 3), [Crea progetto], width: 34mm),
-    action((2, 4), [Consegna progetto], width: 38mm),
-    node((0, 5), [], width: 65mm, height: 2mm, fill: flow-blue, stroke: flow-blue),
-    action((-1, 6), [Attendi data scritto], width: 39mm, fill: flow-pale-gold, stroke: flow-gold),
-    action((-1, 7), [Sostieni scritto], width: 36mm),
-    action((1, 7), [Sostieni orale], width: 34mm),
-    activity-final((1, 8)),
-    arrow((0, 0), (0, 1)),
-    arrow((0, 1), (-2, 2)),
-    arrow((0, 1), (0, 2)),
-    arrow((0, 1), (2, 2)),
-    arrow((2, 2), (2, 3)),
-    arrow((2, 3), (2, 4)),
-    arrow((-2, 2), (0, 5)),
-    arrow((0, 2), (0, 5)),
-    arrow((2, 4), (0, 5)),
-    arrow((0, 5), (-1, 6)),
-    arrow((-1, 6), (-1, 7), label: [7 maggio]),
-    arrow((-1, 7), (1, 7)),
-    arrow((1, 7), (1, 8)),
-  ),
+  image("../fotodaaggiungere/sostituiscigraficodipagina102conquesto.png", width: 96%),
   caption: [Ricezione di specifiche ed evento temporale nel processo d'esame.],
 )
 
@@ -479,44 +457,7 @@ L'Activity Diagram rende espliciti il percorso principale e la ripetizione richi
 5. tratta `cancel` come scenario alternativo di annullamento.
 
 #figure(
-  diagram(
-    spacing: 13mm,
-    initial((0, 0)),
-    action((1, 1), [Visualizza menu], width: 36mm),
-    action((-1, 1), [Seleziona importo], width: 38mm),
-    decision((0, 2)),
-    action((-2.4, 3), [Imposta quantità\ = importo], width: 40mm),
-    action((2.4, 3), [Visualizza messaggio\ di errore], width: 43mm, fill: rgb("#f6e9e9"), stroke: flow-red),
-    action((-2.4, 4), [Ottieni saldo\ dal database], width: 40mm),
-    decision((-2.4, 5)),
-    action((-2.4, 6), [Verifica contante\ nello sportello], width: 42mm),
-    decision((-2.4, 7)),
-    action((-2.4, 8), [Addebita prelievo], width: 38mm, fill: flow-pale-green, stroke: flow-green),
-    action((-2.4, 9), [Eroga contanti], width: 36mm, fill: flow-pale-green, stroke: flow-green),
-    action((-2.4, 10), [Ricorda di prendere\ le banconote], width: 43mm),
-    activity-final((-2.4, 11)),
-    decision((0, 11)),
-    arrow((0, 0), (1, 1)),
-    arrow((0, 0), (-1, 1)),
-    arrow((1, 1), (0, 2)),
-    arrow((-1, 1), (0, 2)),
-    arrow((0, 2), (-2.4, 3), label: [[importo]]),
-    arrow((0, 2), (0, 11), label: [[cancel]]),
-    arrow((-2.4, 3), (-2.4, 4)),
-    arrow((-2.4, 4), (-2.4, 5)),
-    arrow((-2.4, 5), (-2.4, 6), label: [[quantità ≤ saldo]]),
-    arrow((-2.4, 5), (2.4, 3), label: [[else]]),
-    arrow((-2.4, 6), (-2.4, 7)),
-    arrow((-2.4, 7), (-2.4, 8), label: [[sufficiente]]),
-    arrow((-2.4, 7), (2.4, 3), label: [[insufficiente]]),
-    edge((2.4, 3), (3.4, 3), (3.4, 1), (1, 1), "-|>", [riprova], stroke: .8pt + flow-blue, label-size: 7pt),
-    arrow((-2.4, 8), (-2.4, 9)),
-    arrow((-2.4, 9), (-2.4, 10)),
-    arrow((-2.4, 10), (-2.4, 11)),
-    arrow((-2.4, 11), (0, 11)),
-    activity-final((1, 11)),
-    arrow((0, 11), (1, 11)),
-  ),
+  image("../fotodaaggiungere/sostituisciongraficodipagina105.png", width: 90%),
   caption: [Use Case `Prelevare contante`: cancel, controllo del saldo e disponibilità dello sportello.],
 )
 
@@ -526,28 +467,7 @@ L'Activity Diagram rende espliciti il percorso principale e la ripetizione richi
 L'esempio delle slide modella l'operazione del bancomat `authenticateUser(login: string, PWD: string): Answer`, dove `Answer` può assumere `invalidUser`, `incorrectPWD` oppure `ok`.
 
 #figure(
-  diagram(
-    spacing: 14mm,
-    object-node((-3, -.7), [login: string], width: 31mm, fill: flow-pale-gold),
-    object-node((-3, .7), [PWD: string], width: 31mm, fill: flow-pale-gold),
-    action((-1.7, 0), [Cerca login e PWD\ nel database], width: 48mm),
-    decision((-.3, 0)),
-    action((1.1, -1), [Imposta\ `invalidUser`], width: 37mm, fill: rgb("#f6e9e9"), stroke: flow-red),
-    action((1.1, 0), [Imposta\ `incorrectPWD`], width: 39mm, fill: flow-pale-gold, stroke: flow-gold),
-    action((1.1, 1), [Imposta `ok`], width: 34mm, fill: flow-pale-green, stroke: flow-green),
-    decision((2.4, 0)),
-    object-node((3.7, 0), [result:\ Answer], width: 31mm, fill: flow-pale-green),
-    arrow((-3, -.7), (-1.7, 0)),
-    arrow((-3, .7), (-1.7, 0)),
-    arrow((-1.7, 0), (-.3, 0)),
-    arrow((-.3, 0), (1.1, -1), label: [[utente assente]]),
-    arrow((-.3, 0), (1.1, 0), label: [[PWD errata]]),
-    arrow((-.3, 0), (1.1, 1), label: [[presente]]),
-    arrow((1.1, -1), (2.4, 0)),
-    arrow((1.1, 0), (2.4, 0)),
-    arrow((1.1, 1), (2.4, 0)),
-    arrow((2.4, 0), (3.7, 0)),
-  ),
+  image("../fotodaaggiungere/sostituiscicongraficoapagina107.png", width: 90%),
   caption: [Parametri e valore restituito dell'operazione `authenticateUser`.],
 )
 
@@ -568,31 +488,7 @@ L'esempio delle slide modella l'operazione del bancomat `authenticateUser(login:
 La ricerca binaria combina decision e merge per aggiornare gli estremi dell'intervallo finché il valore centrale coincide con il target oppure l'intervallo diventa vuoto.
 
 #figure(
-  diagram(
-    spacing: 13mm,
-    initial((0, 0)),
-    action((0, 1), [`low = 0; high = n − 1`], width: 48mm),
-    decision((0, 2)),
-    action((0, 3), [`middle = (low + high) / 2`], width: 55mm),
-    decision((0, 4)),
-    action((-2.4, 5), [`high = middle − 1`], width: 43mm, fill: flow-pale-gold, stroke: flow-gold),
-    action((2.4, 5), [`low = middle + 1`], width: 43mm, fill: flow-pale-gold, stroke: flow-gold),
-    action((0, 6), [`return middle`], width: 38mm, fill: flow-pale-green, stroke: flow-green),
-    action((-2.4, 6), [`return −1`], width: 32mm, fill: rgb("#f6e9e9"), stroke: flow-red),
-    activity-final((0, 7)),
-    arrow((0, 0), (0, 1)),
-    arrow((0, 1), (0, 2)),
-    arrow((0, 2), (0, 3), label: [[continua]]),
-    arrow((0, 2), (-2.4, 6), label: [[vuoto]]),
-    arrow((0, 3), (0, 4)),
-    arrow((0, 4), (-2.4, 5), label: [[>]]),
-    arrow((0, 4), (2.4, 5), label: [[<]]),
-    arrow((0, 4), (0, 6), label: [[=]]),
-    arrow((-2.4, 5), (0, 2)),
-    arrow((2.4, 5), (0, 2)),
-    arrow((-2.4, 6), (0, 7)),
-    arrow((0, 6), (0, 7)),
-  ),
+  image("../fotodaaggiungere/sostituiscicongraficodi12.2.png", width: 96%),
   caption: [Activity Diagram dell'algoritmo di ricerca binaria.],
 )
 
