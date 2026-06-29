@@ -328,17 +328,20 @@ $ g approx 9.81 " m/s"^2. $
 
 #align(center, graph-card([Approssimazione locale del campo gravitazionale], cetz.canvas({
   import cetz.draw: *
-  // superficie terrestre vista localmente
-  arc((3.5, -2.35), start: 42deg, stop: 138deg, radius: 4.3, stroke: 1.6pt + blue)
-  // piccolo corpo sopra la superficie
-  rect((2.85, 2.35), (4.15, 2.72), fill: rgb("#eef1f3"), stroke: 0.9pt + ink)
-  circle((3.5, 2.54), radius: 0.08, fill: ink, stroke: none)
-  line((3.5, 2.30), (3.5, 1.25), stroke: 1.4pt + red, mark: (end: ">"))
-  line((3.5, 1.10), (3.5, 0.20), stroke: 1.2pt + green, mark: (end: ">"))
-  axis-label((3.68, 1.75), [$vec(F)_g$], placement: "west")
-  axis-label((3.68, 0.65), [$a_y=-g$], placement: "west")
-  axis-label((4.3, 2.55), [$m$], placement: "west")
-  axis-label((3.5, -0.05), [superficie terrestre], placement: "north")
+  // superficie terrestre vista localmente come piano tangente
+  line((1.15, 0.30), (5.85, 0.30), stroke: 1.5pt + blue)
+  for x in range(0, 10) {
+    line((1.25 + x*0.45, 0.30), (1.47 + x*0.45, 0.05), stroke: 0.6pt + blue)
+  }
+  axis-label((3.5, 0.00), [superficie terrestre], placement: "north")
+  // piccolo corpo e vettori centrati rispetto al piano
+  rect((2.85, 2.40), (4.15, 2.77), fill: rgb("#eef1f3"), stroke: 0.9pt + ink)
+  circle((3.5, 2.59), radius: 0.08, fill: ink, stroke: none)
+  line((3.5, 2.35), (3.5, 1.45), stroke: 1.4pt + red, mark: (end: ">"))
+  line((3.5, 1.25), (3.5, 0.55), stroke: 1.2pt + green, mark: (end: ">"))
+  axis-label((3.68, 1.90), [$vec(F)_g$], placement: "west")
+  axis-label((3.68, 0.90), [$a_y=-g$], placement: "west")
+  axis-label((4.3, 2.60), [$m$], placement: "west")
 })))
 
 La curvatura della Terra è trascurabile nella regione studiata: localmente la superficie appare piana e $vec(g)$ può essere trattato come costante. La forza di gravità e l'accelerazione sono dirette verso il centro della Terra.
@@ -1256,12 +1259,14 @@ Una molla ideale esercita una forza proporzionale e contraria allo spostamento d
   for y in range(0, 6) { line((0.35, 0.25 + y*0.34), (0.6, 0.48 + y*0.34), stroke: 0.7pt + ink) }
   line((0.6, 1.15), (6.5, 1.15), stroke: 0.8pt + grid-color, mark: (end: ">"))
   // molla e punto materiale spostato a destra
-  cetz.decorations.coil(line((0.6, 1.15), (3.65, 1.15)), amplitude: 0.18, start: 5%, stop: 95%, stroke: 1.4pt + blue)
-  circle((3.65, 1.15), radius: 0.13, fill: ink, stroke: none)
-  line((3.65, 1.15), (2.35, 1.15), stroke: 1.5pt + red, mark: (end: ">"))
+  line((0.6, 1.15), (0.92, 1.15), stroke: 1.25pt + blue)
+  line((0.92, 1.15), (1.08, 1.38), (1.32, 0.92), (1.56, 1.38), (1.80, 0.92), (2.04, 1.38), (2.28, 0.92), (2.52, 1.38), (2.76, 0.92), (3.00, 1.38), (3.24, 0.92), (3.40, 1.15), stroke: 1.25pt + blue)
+  line((3.40, 1.15), (3.70, 1.15), stroke: 1.25pt + blue)
+  circle((3.70, 1.15), radius: 0.13, fill: ink, stroke: none)
+  line((3.70, 1.52), (2.45, 1.52), stroke: 1.5pt + red, mark: (end: ">"))
   axis-label((6.5, 0.97), [$x$], placement: "north")
-  axis-label((2.85, 1.43), [$vec(F)_"el"$], placement: "south")
-  axis-label((3.65, 0.9), [$x>0$], placement: "north")
+  axis-label((3.08, 1.82), [$vec(F)_"el"$], placement: "south")
+  axis-label((3.70, 0.88), [$x>0$], placement: "north")
 })))
 
 Applicando la seconda legge lungo $x$:
